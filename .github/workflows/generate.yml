@@ -30,7 +30,7 @@ jobs:
 
       - name: Commit and push SVG using PAT
         env:
-          PAT_TOKEN: ${{ secrets.MY_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
