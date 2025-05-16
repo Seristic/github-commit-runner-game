@@ -1,6 +1,7 @@
 {
   "name": "github-commit-runner-game",
   "version": "1.0.0",
+  "type": "module",
   "description": "Generate a commit runner game SVG based on GitHub commits",
   "main": "index.js",
   "scripts": {
