@@ -1,0 +1,3822 @@
+
+  <svg width="760" height="180" viewBox="0 0 760 180" 
+    xmlns="http://www.w3.org/2000/svg" style="background:#111;border-radius:12px;">
+
+    <defs>
+      <!-- Pulse animation for fill -->
+      <linearGradient id="transPulse" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#55CDFC"/>
+        <stop offset="33%" stop-color="#F7A8B8"/>
+        <stop offset="66%" stop-color="#FFFFFF"/>
+        <stop offset="100%" stop-color="#F7A8B8"/>
+      </linearGradient>
+
+      <!-- Glitch filter -->
+      <filter id="glitch" x="0" y="0" width="100%" height="100%">
+        <feColorMatrix in="SourceGraphic" type="matrix" values="
+          1 0 0 0 0
+          0 1 0 0 0
+          0 0 1 0 0
+          0 0 0 20 -10" result="glow"/>
+        <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="2" result="turb" seed="2">
+          <animate attributeName="baseFrequency" values="0.02;0.06;0.02" dur="2s" repeatCount="indefinite"/>
+        </feTurbulence>
+        <feDisplacementMap in="glow" in2="turb" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+
+      <!-- Pixelate Union Jack pattern -->
+      <pattern id="unionJack" patternUnits="userSpaceOnUse" width="60" height="40" patternTransform="scale(2)">
+        <rect width="60" height="40" fill="#00247d" />
+        <path d="M0 0 L60 40 M60 0 L0 40" stroke="#cf142b" stroke-width="8"/>
+        <rect x="27" width="6" height="40" fill="#cf142b"/>
+        <rect y="17" width="60" height="6" fill="#cf142b"/>
+        <rect x="28" y="0" width="4" height="40" fill="white"/>
+        <rect y="18" width="60" height="4" fill="white"/>
+      </pattern>
+
+      <filter id="pixelate" x="0" y="0" width="100%" height="100%" primitiveUnits="userSpaceOnUse">
+        <feFlood x="0" y="0" height="5" width="5" flood-color="black" result="flood"/>
+        <feMorphology operator="dilate" radius="1" in="SourceAlpha" result="dilated"/>
+        <feComposite in="flood" in2="dilated" operator="in" result="pixel"/>
+        <feTile in="pixel" result="tiled" />
+        <feComposite in="SourceGraphic" in2="tiled" operator="in" result="composite"/>
+      </filter>
+    </defs>
+
+    <!-- Background Union Jack with pixelate filter & opacity fade -->
+    <rect width="760" height="180" fill="url(#unionJack)" opacity="0.05" filter="url(#pixelate)">
+      <animate attributeName="opacity" values="0.05;0;0.05" dur="10s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- Commit Blocks as jagged polygons pulsing -->
+  
+        <polygon points="25.480982048308974,25.4325969405394 36.77701536681806,26.317236246352778 37.861894881474576,39.82875737608492 25.762932481147303,37.83803609563978" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="0s"
+          />
+        </polygon>
+      
+        <polygon points="20.41614864535207,46.35000339372516 38.6670884554143,49.67646384949659 38.51129795068913,66.67729769840295 21.732535692740907,66.06654533046253" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="0.3s"
+          />
+        </polygon>
+      
+        <polygon points="20.43658266639427,77.88957482673146 36.44250243856646,74.19879208167549 36.03002190455394,88.03622887069608 22.32570616546636,88.89649623529716" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="0.6s"
+          />
+        </polygon>
+      
+        <polygon points="22.89275564986159,104.54385078645797 35.61288533757026,101.34617898468994 41.81183775436883,117.79460649000605 24.926658503123903,114.22286385637899" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="0.8999999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="22.921144484604056,125.34361921084384 37.07734695820699,125.09251400700629 39.81665137333848,140.04296508266 22.958778260450902,141.18758036828316" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.2s"
+          />
+        </polygon>
+      
+        <polygon points="22.361957289554752,153.55443910418546 35.58144422756857,153.2897270415749 36.3236935671646,168.74048236372727 21.793798372336838,165.59421715243872" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.5s"
+          />
+        </polygon>
+      
+        <polygon points="21.171688548046834,181.61958712755336 40.78167475860053,178.09344934456547 38.19009180921737,197.40399204313908 22.449973162229934,194.1574270606568" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.7999999999999998s"
+          />
+        </polygon>
+      
+        <polygon points="51.69609377296695,25.629579664080243 63.906335457696315,21.3285466993907 63.295445787672094,40.467654691426254 46.157433007365235,37.60694707695119" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="0.3s"
+          />
+        </polygon>
+      
+        <polygon points="50.64777987425951,49.118538989864376 62.02185607949637,47.87210666619373 61.54168095387193,62.86258282359074 51.082320072260536,64.0787129422644" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="0.6s"
+          />
+        </polygon>
+      
+        <polygon points="50.931071524518174,73.67038660892294 62.148503522885164,78.261937628378 65.01902220600519,91.57428250814978 52.07956837594949,91.96086663408427" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="0.8999999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="49.48996767018153,100.78090737072061 65.19382682928533,99.82062474387341 62.24834934164594,115.82966548793328 47.003506001741606,119.81788254900984" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.2s"
+          />
+        </polygon>
+      
+        <polygon points="49.93872301285679,128.2722659713013 67.53747473390806,125.10978306615517 63.824112868748934,141.56388924090294 50.0727227585519,141.9848113308779" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.5s"
+          />
+        </polygon>
+      
+        <polygon points="47.01320999285591,156.48414824507498 65.50446993737704,152.97208835871754 66.57142611131282,169.7271082970328 47.327267310359346,166.22199878792742" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.7999999999999998s"
+          />
+        </polygon>
+      
+        <polygon points="46.123950190533066,181.8423414185916 63.24461636223584,180.22878195905133 63.73983984266602,192.38799367144517 47.15224541020464,195.5721001370544" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.1s"
+          />
+        </polygon>
+      
+        <polygon points="74.34148176184001,20.16398647640894 90.21543177152053,20.498347699666216 93.79663707408031,37.973758730649166 72.58058918034345,35.783711291646604" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="0.6s"
+          />
+        </polygon>
+      
+        <polygon points="73.22730392891178,46.98691878475683 91.16032890314403,50.67944557017904 93.37779936303308,64.71799776100569 73.93191411174408,65.9954657431052" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="0.8999999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="74.3557497784807,73.37218998758863 88.75581173235514,72.88489991094698 89.3414054141591,93.10850855679638 77.66219310806567,92.65208484029723" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.2s"
+          />
+        </polygon>
+      
+        <polygon points="72.03134846193224,103.51991675644278 90.49568208671498,99.61528991101355 92.7645805736355,118.28012805402294 76.6517350196201,114.44781557754135" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.5s"
+          />
+        </polygon>
+      
+        <polygon points="77.98931808398552,127.09330962663087 88.71274987061976,129.99025496631006 88.90967686401169,143.5510798709022 76.1116569910122,143.7955854396336" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.7999999999999998s"
+          />
+        </polygon>
+      
+        <polygon points="75.6840124316621,150.3585093653718 89.74770574219397,154.342741732371 92.69195227601543,168.96896989686795 74.76529018230994,168.7344693794982" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.1s"
+          />
+        </polygon>
+      
+        <polygon points="78.13726872138437,177.7450383235214 91.25643079869488,179.28496251522176 92.63978325481325,196.14345022504773 75.25342491578006,192.9262401265151" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.4s"
+          />
+        </polygon>
+      
+        <polygon points="99.14288607648393,25.6296399484702 114.46210667551294,25.230657305282715 117.2824404688316,41.261313256175576 102.96318858553492,37.715057212476786" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="0.8999999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="98.6605339858833,49.27536804274488 116.30319320781688,48.53356451611122 119.47328455119552,62.27951712264535 101.1738747840286,67.54482284456502" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.2s"
+          />
+        </polygon>
+      
+        <polygon points="99.09597240165712,77.90145139322863 115.49689148712989,75.40745922580125 115.38693548083214,89.76101775388247 101.00179995897646,93.31038949172193" fill="#F7A8B8" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.5s"
+          />
+        </polygon>
+      
+        <polygon points="103.68726788878224,99.88290049154442 115.60451383016355,102.40333434358206 119.74949981782673,114.05038311510724 101.32226940148205,114.13342611265361" fill="#F7A8B8" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.7999999999999998s"
+          />
+        </polygon>
+      
+        <polygon points="103.68119422501458,127.3165473861766 114.01955902306835,125.51397838846505 117.51107732147038,143.30962947610345 99.81677506302891,144.49222167436872" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.1s"
+          />
+        </polygon>
+      
+        <polygon points="103.87064870805358,150.93369855257887 116.89830763998272,151.18420535666098 114.40358633668954,169.10259322892765 104.25543334093844,171.6967095455723" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.4s"
+          />
+        </polygon>
+      
+        <polygon points="98.9912821949791,176.6596981936066 116.343417573686,178.64936013842603 115.51384277569032,194.29431251965934 104.11535356923048,192.17606809281997" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.6999999999999997s"
+          />
+        </polygon>
+      
+        <polygon points="130.1274897352583,26.4600661950463 139.99940068723834,20.117689178801058 144.483523997024,39.45974800685124 129.65731837549714,36.097283863953585" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.2s"
+          />
+        </polygon>
+      
+        <polygon points="124.66398374900743,51.916445258402845 142.30290010131907,50.49286335262448 142.83897283489597,61.648134196380624 126.96192871947233,67.99494845616825" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.5s"
+          />
+        </polygon>
+      
+        <polygon points="125.8360424744602,72.349833097793 144.30471047234371,78.15468699933635 142.05677384951792,91.308685400753 127.48999467953716,88.43101064868476" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.7999999999999998s"
+          />
+        </polygon>
+      
+        <polygon points="124.4789132363882,98.00621147456428 145.8866278901531,100.37471948571563 141.90753043597422,119.58880227880638 129.07570273984524,118.00630597330456" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.1s"
+          />
+        </polygon>
+      
+        <polygon points="129.63209822140172,124.77377700854885 143.22084239358247,129.77797528059995 144.71335942736198,140.68761865808733 126.67162970616413,142.8770314482886" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.4s"
+          />
+        </polygon>
+      
+        <polygon points="129.37738968285387,153.10819830830235 142.14484298376973,153.927932885377 140.05306395640733,167.60428363359563 127.1690058006675,169.76094113914652" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.6999999999999997s"
+          />
+        </polygon>
+      
+        <polygon points="128.1427903440657,178.4267480061793 143.78979308451537,181.36014025982564 140.08142932725536,196.4712036080768 129.1746937963879,194.2609151420561" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3s"
+          />
+        </polygon>
+      
+        <polygon points="150.5941995179594,23.03317488220531 170.3556779135892,25.533630924399098 169.38620583891506,41.87864786030863 151.52747167871584,40.59166063827931" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.5s"
+          />
+        </polygon>
+      
+        <polygon points="154.88441681400104,52.19303538726121 169.33013852793496,52.50679192311369 167.4818546579027,62.160261513498746 155.50460890829766,62.31796456947496" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.7999999999999998s"
+          />
+        </polygon>
+      
+        <polygon points="150.6653668423461,76.72258829507017 170.10922532394278,75.97523963281391 169.93278677646455,90.85628096594169 154.4841896781911,88.97425649270343" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.1s"
+          />
+        </polygon>
+      
+        <polygon points="152.24324744303217,103.82309551183681 166.51287117867182,98.452236502323 166.9364037237792,114.47505246478772 153.62554699032023,116.60592782471744" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.4s"
+          />
+        </polygon>
+      
+        <polygon points="151.78127468937993,126.76428035187817 170.42101324897072,126.55875932838525 170.079054483314,141.21556509528713 155.94989289799818,143.65275124178112" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.6999999999999997s"
+          />
+        </polygon>
+      
+        <polygon points="151.4490722574461,150.71780116829325 165.50818884688874,155.3833081554096 170.37824223465498,168.03266824621858 154.11513157599276,169.63021519030355" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3s"
+          />
+        </polygon>
+      
+        <polygon points="153.39401035921915,182.13288731385362 169.88746838064594,179.55706601022976 171.66961099059097,192.11716030818775 155.00598670296105,192.60084545861096" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.3s"
+          />
+        </polygon>
+      
+        <polygon points="176.18231774853624,20.943245323088295 195.5420428731333,25.190711570294063 193.0554561999659,41.45497424944725 182.22669615236507,38.214110248699065" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="1.7999999999999998s"
+          />
+        </polygon>
+      
+        <polygon points="180.0395067690202,50.235795067406315 197.6785697751537,52.06553179504294 197.8878034993485,61.89994758477741 179.48746987283747,63.44114529524926" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.1s"
+          />
+        </polygon>
+      
+        <polygon points="179.41789736928575,73.74581853059766 194.75466971217244,74.29871724466608 195.15805598112513,92.64049774475095 176.8470035021817,89.71604366342349" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.4s"
+          />
+        </polygon>
+      
+        <polygon points="180.19811412477353,100.62256428095638 197.82723560357428,103.08531745494477 196.2242947469478,113.49455656568604 176.2903614091454,118.67395502741925" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.6999999999999997s"
+          />
+        </polygon>
+      
+        <polygon points="181.53404580950513,125.13321277105997 194.4554365402019,126.64213577242836 193.88333324137844,143.41961330567895 177.1105637049076,139.7236261774394" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3s"
+          />
+        </polygon>
+      
+        <polygon points="177.49591823065248,152.30207377896838 197.4153156949153,152.50499303421392 194.38859039716291,166.79212522368246 177.25054913249065,170.3371166681106" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.3s"
+          />
+        </polygon>
+      
+        <polygon points="179.04013257460883,178.12443310177326 195.07466971368214,176.51213498807593 193.62745830553666,194.0296496352922 181.61938796565016,191.6635963562701" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.5999999999999996s"
+          />
+        </polygon>
+      
+        <polygon points="206.28500341871717,22.145041229668873 219.09941671664183,20.854209883194798 220.50546903160222,35.97919747351778 206.2116803282244,36.58659713260384" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.1s"
+          />
+        </polygon>
+      
+        <polygon points="204.2558217258332,49.31026437015498 221.5551356610218,49.345880658767946 223.62287540359978,64.97271572989672 204.48832107823154,65.93028500120367" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.4s"
+          />
+        </polygon>
+      
+        <polygon points="202.1981006895231,72.73632368374541 221.7979090191796,73.44963154026897 219.43290060952648,92.19140549391994 206.99021256045046,91.28287361184586" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.6999999999999997s"
+          />
+        </polygon>
+      
+        <polygon points="205.18355386905756,101.73528716291433 221.90861904514566,101.58473717364785 223.47640663145836,117.79413365980162 207.4598182159384,117.5171692454677" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3s"
+          />
+        </polygon>
+      
+        <polygon points="204.09762497523047,129.95140726125004 218.15973072150635,127.16909728843297 220.71555159620507,139.91421358338576 207.68662031434363,145.0671935875945" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.3s"
+          />
+        </polygon>
+      
+        <polygon points="205.08155296952893,154.79043517627727 221.8936443180515,155.4369517220746 220.60736593960456,168.12092676988365 204.60018984308235,168.7075794174958" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.5999999999999996s"
+          />
+        </polygon>
+      
+        <polygon points="206.47802618916393,180.53376002850078 219.0095446762406,178.67914224245246 221.43864935845232,193.5145458502277 206.22831494203967,197.88953271471186" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.9s"
+          />
+        </polygon>
+      
+        <polygon points="231.10306299038567,21.87385789516087 249.8287269829689,22.493650794507175 246.77898882690735,37.17776175559587 232.80264175415164,41.9137357170239" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.4s"
+          />
+        </polygon>
+      
+        <polygon points="231.41547293465004,51.906772796253016 249.87301082398633,51.19824614995751 249.1334642999741,63.895394579313475 231.98430236956062,62.43244683484198" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.6999999999999997s"
+          />
+        </polygon>
+      
+        <polygon points="228.5981696519987,77.81591745126215 249.2428654570666,76.32501031722015 247.8974300789388,87.57070396047922 233.54759541673963,93.5330144220661" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3s"
+          />
+        </polygon>
+      
+        <polygon points="232.3393659853727,101.0804194081589 244.95315027886244,104.58668553269878 245.44583003370923,114.7752012680929 233.32709460951057,114.53828936051035" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.3s"
+          />
+        </polygon>
+      
+        <polygon points="229.21229089518118,130.4279805115839 246.0758146737821,127.72489884093072 244.38935954459458,142.77007215523187 233.98241703290137,143.98314680358015" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.5999999999999996s"
+          />
+        </polygon>
+      
+        <polygon points="232.0604675923562,156.01587406362802 249.0420077457055,155.56627487080522 249.17894104570055,170.9118248906539 233.9775834583693,168.5368960675402" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.9s"
+          />
+        </polygon>
+      
+        <polygon points="233.34686561939725,182.10631648039114 249.7597026935944,180.81565502356213 245.18038458314004,194.49787625019485 228.94492207258617,192.03903773304444" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.2s"
+          />
+        </polygon>
+      
+        <polygon points="255.04766140743638,21.878319631629957 275.7403933115834,23.198465277944692 273.80377539308347,37.21171615981706 256.93104017394336,40.873812333472806" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="2.6999999999999997s"
+          />
+        </polygon>
+      
+        <polygon points="259.8121770933794,48.53179043901219 270.1866323074276,47.08358091883397 273.2160737588451,65.5171194948272 257.9079023391309,62.10340996970691" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3s"
+          />
+        </polygon>
+      
+        <polygon points="260.40963790450337,74.56300974858004 273.90290066905976,77.44749825147535 270.08317684279274,91.48665909042509 257.54023978145113,88.21303696447981" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.3s"
+          />
+        </polygon>
+      
+        <polygon points="259.55270732708806,101.86268289046497 275.104199614967,102.3731194493764 275.5439299363104,117.66736738262597 257.70583577932234,119.73275881233536" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.5999999999999996s"
+          />
+        </polygon>
+      
+        <polygon points="256.70937265268196,126.45380193677612 273.17102444660287,125.05414305710839 275.5908601139291,142.65036224118046 257.7171004029066,140.42314710656967" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.9s"
+          />
+        </polygon>
+      
+        <polygon points="255.69083712761946,154.1682644908711 270.3255001127306,150.61551114837226 272.8324485819527,165.53263827384725 258.89499552187687,171.887261112183" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.2s"
+          />
+        </polygon>
+      
+        <polygon points="256.27352094868064,180.38184630035627 272.13153444802595,179.86169314241667 272.9074896101823,193.64242721318956 260.1576118994804,194.9097486687859" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.5s"
+          />
+        </polygon>
+      
+        <polygon points="285.78922773995055,23.632782615975984 295.7254413724227,21.169457833225813 299.7812267170566,39.53329177454107 282.5492268521014,39.733317333494824" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3s"
+          />
+        </polygon>
+      
+        <polygon points="282.0575625378025,52.20792398516478 297.5032103717892,50.06586690301349 299.3878283463242,63.40373428773284 281.57671361434785,64.10628137238952" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.3s"
+          />
+        </polygon>
+      
+        <polygon points="280.519840203926,76.71472103715952 298.1148572030695,77.57920315203539 296.9393726141559,88.35488282122137 282.99157182587106,89.67643446448253" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.5999999999999996s"
+          />
+        </polygon>
+      
+        <polygon points="283.44872789739617,101.8374673974358 299.3054050284728,103.94240668699378 295.54423553866604,116.82816557185986 286.42993365460813,116.25144804830367" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.9s"
+          />
+        </polygon>
+      
+        <polygon points="280.1955453964409,128.0843194987733 301.9360216129707,126.59963636557393 296.3760755942941,144.3985416503243 281.4119450139153,141.16312207915348" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.2s"
+          />
+        </polygon>
+      
+        <polygon points="280.4898206372316,153.287947170842 297.71320881384065,155.90395993800695 296.2802402151484,171.10212508783945 281.4033053389048,171.22762619979886" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.5s"
+          />
+        </polygon>
+      
+        <polygon points="280.9227631109338,182.03279270676884 296.5782246075827,176.9087214747496 298.62063465720394,192.05119428397782 285.0851270365626,197.4759885264343" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.8s"
+          />
+        </polygon>
+      
+        <polygon points="307.2282930813823,22.760985026968157 324.2188227748983,26.00410762400944 326.99994638146495,38.19683496772439 306.86461725660484,41.86043702028895" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.3s"
+          />
+        </polygon>
+      
+        <polygon points="311.3093009243672,51.29869991886055 325.99716217456717,51.92411032039935 323.26969599698145,65.39103929627437 307.11648986579917,62.18814741212205" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.5999999999999996s"
+          />
+        </polygon>
+      
+        <polygon points="312.4347304502812,73.55106157652563 326.3605184973004,74.19543168934423 324.3360358362581,90.69795880905242 312.3110443192369,92.63971785867489" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.9s"
+          />
+        </polygon>
+      
+        <polygon points="310.3020456537897,103.48843088900281 324.9657448059661,102.73938107262086 321.5302994657697,119.45672880721145 307.38906386140894,118.15129334179566" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.2s"
+          />
+        </polygon>
+      
+        <polygon points="308.90690990288357,124.5658917772912 327.7681179009894,127.44766751972067 326.98712239454613,145.32532895021637 308.66738404302436,141.3569408668302" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.5s"
+          />
+        </polygon>
+      
+        <polygon points="311.01519668838864,155.05590682058923 326.2889085802197,152.3538906453226 327.7475792605388,169.5218110198459 311.045585011549,165.49885877821896" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.8s"
+          />
+        </polygon>
+      
+        <polygon points="308.12238383661247,181.65461967239844 325.09079980366226,180.9449567942049 322.7834211663293,196.8684846597137 310.4423004878004,195.69875918059316" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.1s"
+          />
+        </polygon>
+      
+        <polygon points="334.13448471134564,20.631228412913007 347.73268203894975,23.6717159276862 352.07032188950046,41.09207961930304 338.4210777205441,37.30053837350762" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.5999999999999996s"
+          />
+        </polygon>
+      
+        <polygon points="335.66452581714907,49.16949049439793 353.63270296225886,50.005970952409626 350.645477557251,67.50783521314465 335.4553925268997,66.2317099330593" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.9s"
+          />
+        </polygon>
+      
+        <polygon points="336.77571258407517,74.24410617339632 347.4231085011009,75.78045369546098 352.6133212709248,88.09759865487382 337.7071787023201,89.36716528406673" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.2s"
+          />
+        </polygon>
+      
+        <polygon points="332.99640525146884,99.01209478350127 349.7857942353169,100.57204310660721 347.62493981812315,116.68114157653245 332.5786921161653,116.54898592332277" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.5s"
+          />
+        </polygon>
+      
+        <polygon points="337.70218185479894,129.01135179379264 348.8473480721225,125.76420701707346 347.7034053228147,143.8014860503825 334.3748191276072,143.73819226669428" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.8s"
+          />
+        </polygon>
+      
+        <polygon points="334.4361450687837,156.24958489996695 351.7362507947826,154.77938184046565 350.99088359203665,170.82311136886062 332.3267906678305,165.67384645029222" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.1s"
+          />
+        </polygon>
+      
+        <polygon points="337.58945661198624,181.25762826639712 351.22105735334884,178.57431600725738 350.3552941755226,192.81031167201266 334.3793345484382,192.4702733588561" fill="#F7A8B8" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.3999999999999995s"
+          />
+        </polygon>
+      
+        <polygon points="364.02114090575657,24.93368255108264 378.05684912656835,21.532361882644675 374.05271173914696,35.71141891595525 358.58535980005485,39.24362689196159" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="3.9s"
+          />
+        </polygon>
+      
+        <polygon points="359.79194968840005,48.60245801795747 374.31667655434336,48.314272285422255 376.2367832276444,65.03607227621517 364.1139375644462,65.54691362682583" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.2s"
+          />
+        </polygon>
+      
+        <polygon points="358.26834885532185,74.91546940056448 378.65680198110965,72.00353050037027 376.3991389585835,91.00054888764159 359.8366329626141,91.71761553495465" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.5s"
+          />
+        </polygon>
+      
+        <polygon points="360.30300274237203,101.52032279264566 377.75673579252265,104.36600113716513 377.67452071983786,113.92358228663153 360.8756682782633,119.44176483701379" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.8s"
+          />
+        </polygon>
+      
+        <polygon points="361.5213726828039,127.9355477981785 378.57120659176223,128.09796083802763 379.13976515219974,142.65286767354914 362.78121109840333,145.11776000423706" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.1s"
+          />
+        </polygon>
+      
+        <polygon points="362.08403410258364,153.1287891026208 376.2468537260979,155.8575223814148 376.0266073226428,168.6074241800138 363.80723362136655,166.0075694112357" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.3999999999999995s"
+          />
+        </polygon>
+      
+        <polygon points="364.0623513254651,178.85753498386046 375.92531300523507,180.9960669833659 379.3062482853535,193.58738702677036 363.1271048390555,197.62683639940656" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.7s"
+          />
+        </polygon>
+      
+        <polygon points="387.73648057891774,23.944917582924614 403.87500725279904,22.0551770478395 403.5412389618203,35.77867479115297 389.2071322535133,37.93135427662879" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.2s"
+          />
+        </polygon>
+      
+        <polygon points="388.33676375151543,50.858540242558426 402.85139212057663,49.59186620536728 403.7366735579617,65.505851524981 388.00975909935414,66.12382263657553" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.5s"
+          />
+        </polygon>
+      
+        <polygon points="386.45616881967567,77.33781776221659 401.38941971158084,77.56481740278882 402.5999608333738,93.95828223129529 386.2861951877442,88.60438867584155" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.8s"
+          />
+        </polygon>
+      
+        <polygon points="389.89854781805747,100.05258693081005 405.5702854339288,102.87410540966073 399.4334261487084,113.92891479119932 388.3205054758148,118.02256522070356" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.1s"
+          />
+        </polygon>
+      
+        <polygon points="385.8822654223695,129.50184433270866 404.43415048754974,129.9596245748291 399.7042206491852,144.90166255444865 384.50387583835175,140.94283173937515" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.3999999999999995s"
+          />
+        </polygon>
+      
+        <polygon points="386.62369828218186,155.88486242251847 400.2550169876027,150.10595839172032 401.54005345732475,171.64042863179262 390.46436783839573,170.89072107323156" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.7s"
+          />
+        </polygon>
+      
+        <polygon points="388.06341623851205,176.96742726006167 405.8462851647801,178.8679857068776 402.7587182039839,192.93897505552786 386.39708732428164,197.15711668201078" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6s"
+          />
+        </polygon>
+      
+        <polygon points="410.54116188283194,20.74315913287273 431.59002869121707,25.97542857112277 427.37400491786485,40.513410996158925 412.5503208620224,38.70808091735443" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.5s"
+          />
+        </polygon>
+      
+        <polygon points="411.26423968579684,50.35982818300334 428.99914139551925,50.08500496490531 429.2444743007602,63.31284927304615 410.73421390486567,64.82955784228253" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.8s"
+          />
+        </polygon>
+      
+        <polygon points="414.1753711393432,73.51463182195607 427.4180128923429,76.71208302883593 428.70178719657673,91.9228779836507 410.411487512464,87.95533644340705" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.1s"
+          />
+        </polygon>
+      
+        <polygon points="411.1589704029228,98.48743055776349 431.93977327891076,98.10113056875768 429.3109448037172,113.64401816703858 414.44160095480106,118.15018263468893" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.3999999999999995s"
+          />
+        </polygon>
+      
+        <polygon points="416.3863417538285,130.12199838137875 431.9642910584977,127.72162940558341 425.7149521886322,145.2772819650457 414.0657808960289,143.89744589710526" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.7s"
+          />
+        </polygon>
+      
+        <polygon points="411.30810417671813,152.90732695036712 426.49474671873963,156.3431012090182 426.29021394569656,168.09631864433163 412.2940836295581,171.2680747909231" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6s"
+          />
+        </polygon>
+      
+        <polygon points="412.83307531708647,177.4189068101056 428.91559760956926,177.16435327809384 429.60210611888635,192.64548445464627 413.7066582393261,195.65714062601475" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.3s"
+          />
+        </polygon>
+      
+        <polygon points="439.84384441867905,26.04044098077912 451.86297550829715,24.81229576134522 451.4319538125303,41.14428059898679 438.07530373345764,36.0125426106236" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="4.8s"
+          />
+        </polygon>
+      
+        <polygon points="441.4035530005133,50.34501203796617 456.1185752050255,46.75142728461648 456.7922045503062,65.95250117634262 441.44078922366236,64.50663188470921" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.1s"
+          />
+        </polygon>
+      
+        <polygon points="438.1864660510085,77.63465634005746 457.85993046900904,74.7618539404886 453.2759700052649,87.57953866052213 437.84057419779674,92.16365165372747" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.3999999999999995s"
+          />
+        </polygon>
+      
+        <polygon points="436.2629690967554,98.61684705535359 452.1333848289424,98.17934203791353 455.7708064536716,119.42501763993441 439.0965605553548,113.78006209119603" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.7s"
+          />
+        </polygon>
+      
+        <polygon points="439.79409559749956,124.92633606067821 457.78767705336423,126.13725954589702 453.5648311657275,141.17978723580904 439.44970920039543,141.44868603890734" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6s"
+          />
+        </polygon>
+      
+        <polygon points="436.3835930511887,156.47053691959712 453.7716591757537,152.96386276910354 456.086294812837,165.9072191617841 442.2464435540367,168.90936532827345" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.3s"
+          />
+        </polygon>
+      
+        <polygon points="438.98632993159316,181.85970086670937 456.9334331763817,179.76469534284095 455.12792183495645,191.6160737176591 439.49934372973684,194.36173518553997" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.6s"
+          />
+        </polygon>
+      
+        <polygon points="463.2992050723061,20.639553800065762 482.1341210661764,23.985385490449726 481.68846833783147,39.846911915339554 468.063668394484,38.69277559894031" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.1s"
+          />
+        </polygon>
+      
+        <polygon points="464.4531885357003,50.46243437568437 482.257576253436,50.10558337357702 480.67958903532343,65.08286082061831 466.86423556705705,63.379764048129516" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.3999999999999995s"
+          />
+        </polygon>
+      
+        <polygon points="466.79335161495345,72.96329899132756 483.4413124639204,72.84480254859638 478.27060584222613,90.31279624240699 466.7056610553513,90.79696271445032" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.7s"
+          />
+        </polygon>
+      
+        <polygon points="466.4962202549619,101.32604665147014 478.6649792176682,103.46749093792289 480.55455433032046,116.76560011459401 466.12581459171577,114.93748547459367" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6s"
+          />
+        </polygon>
+      
+        <polygon points="462.4310857074918,130.43102941220525 481.4422773857632,125.85126012700819 481.0075431244389,141.69496981556006 467.7997216095847,144.17552730793983" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.3s"
+          />
+        </polygon>
+      
+        <polygon points="465.48099992943145,150.64675142651058 478.49006403086076,151.6546432285106 478.93095816504353,170.7281288993978 465.0436607595974,169.03984844918637" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.6s"
+          />
+        </polygon>
+      
+        <polygon points="463.55088933333576,179.47007283775355 480.67155216482456,179.1313247052882 481.4911813082889,191.9862307995092 467.52367322816804,196.05599677552308" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.8999999999999995s"
+          />
+        </polygon>
+      
+        <polygon points="492.69688392991833,22.9194799448326 504.6521466947883,20.232108917996978 509.6293537905583,41.038021268671706 489.7631544435213,38.2970429240809" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.3999999999999995s"
+          />
+        </polygon>
+      
+        <polygon points="494.53271699052067,46.70571090256022 508.0515670206725,51.2509364611846 503.6960615146793,62.83200180801043 493.3353520678705,63.417557701627885" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.7s"
+          />
+        </polygon>
+      
+        <polygon points="491.902903966356,77.4668029081467 509.8530062166798,76.26811745119082 508.04147321237764,91.80780403212299 491.2841041702656,89.03549575119256" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6s"
+          />
+        </polygon>
+      
+        <polygon points="490.21912999507356,103.1552864432461 506.26691937089794,98.2903469781959 508.5373399963777,118.60658982353499 488.8938120290355,115.51216578321323" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.3s"
+          />
+        </polygon>
+      
+        <polygon points="492.50235694399635,127.0708691937207 507.78581678643326,124.40228063705818 507.5016867027968,145.62677110414947 492.9464782231751,145.4325019929394" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.6s"
+          />
+        </polygon>
+      
+        <polygon points="490.2280773391945,155.07695071892365 504.5121781094061,150.68771220130245 504.6766132591793,167.20043617946882 491.9820897745732,168.83082729121898" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.8999999999999995s"
+          />
+        </polygon>
+      
+        <polygon points="492.10230568501873,178.75516697067357 506.68062987127854,179.40819378384668 507.9403778153242,194.69916971260471 492.20196957737465,192.46775983567233" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.199999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="514.5826000631736,24.40123295207512 531.9351414603927,23.471247432451435 533.3586559492052,38.228442268973076 516.4764528538276,37.29456918558316" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="5.7s"
+          />
+        </polygon>
+      
+        <polygon points="516.157288674379,46.89445530730716 535.1967022369872,51.4877342717352 534.738432374707,63.11438046540833 517.8170389240033,65.02440224369556" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6s"
+          />
+        </polygon>
+      
+        <polygon points="516.1979536048005,72.48942219752976 530.5307223074642,76.70991481527965 530.5979094007245,88.29266340681356 518.7194327407376,91.05924505812142" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.3s"
+          />
+        </polygon>
+      
+        <polygon points="518.8698951408833,102.2071081471906 531.2160142795362,100.0979895774119 529.4919943417759,119.91728435850526 517.6808780347301,118.7818834308188" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.6s"
+          />
+        </polygon>
+      
+        <polygon points="515.662114764909,128.94480945784503 532.1379010742878,126.67294969588916 535.6458555702702,144.95646892641528 517.4307659085588,143.75415558131527" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.8999999999999995s"
+          />
+        </polygon>
+      
+        <polygon points="514.7414035477439,151.69803460335567 533.1616052251599,153.50423871699982 535.7391687064288,166.10573700484733 514.8324530286649,167.82254103988154" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.199999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="520.3274994459689,182.52477085522432 535.4621467663488,179.31537953795674 530.2420162754611,197.19354423716942 518.2993038476569,195.03933186030048" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.5s"
+          />
+        </polygon>
+      
+        <polygon points="544.4810110499395,25.91811806086426 557.2107827393643,20.180567378284866 558.2026116640598,39.25477760393486 546.0857173141894,39.483214905391776" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6s"
+          />
+        </polygon>
+      
+        <polygon points="540.1663283593887,52.43145226109676 561.560368688485,51.303190967331254 558.9825830012361,63.05716519586676 546.4891615466439,64.63988457747647" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.3s"
+          />
+        </polygon>
+      
+        <polygon points="541.8669031712564,72.72777179693857 560.2472549425809,75.96901413322412 559.3342741866838,92.39353359081086 540.9635187397816,93.29311318248755" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.6s"
+          />
+        </polygon>
+      
+        <polygon points="544.1357793906967,104.58437709370388 559.6917417563969,98.06721129896313 556.8671861621967,117.6871488538171 542.6661359119388,117.6279822887342" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.8999999999999995s"
+          />
+        </polygon>
+      
+        <polygon points="543.3937687344139,127.45497539540412 560.7324227625531,126.54539319350634 555.5622550265191,144.77163082863473 542.780910598427,142.97653617028908" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.199999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="542.3562229877228,150.66797829131355 558.1961044801385,151.69747894427303 557.8277479197133,171.53955752424451 545.2079340393724,171.0483659768726" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.5s"
+          />
+        </polygon>
+      
+        <polygon points="544.2015587760205,181.32847822612595 558.3435425264545,178.54087100926805 556.8269977294423,194.49840996440687 542.7800486021663,195.86382835853973" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.8s"
+          />
+        </polygon>
+      
+        <polygon points="571.0908684622043,24.111411527110256 583.7047877416649,26.024495288178993 581.705357119708,38.38914225678469 567.9030636415994,37.59926585280959" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.3s"
+          />
+        </polygon>
+      
+        <polygon points="568.7273636787896,50.660172162859624 581.5703144384228,50.56255661632281 585.4410534494951,62.63618212992135 569.7250642189014,67.94360173842868" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.6s"
+          />
+        </polygon>
+      
+        <polygon points="566.0722183138788,72.99556722514932 586.1054664594366,72.72140564839079 585.3882619573624,92.85421326944791 570.830453258606,91.82682601955923" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.8999999999999995s"
+          />
+        </polygon>
+      
+        <polygon points="570.4900738098831,98.08270721772655 582.8530690965541,103.12898488783148 584.7390074397431,114.7563327326322 566.5371715034757,118.73220739939443" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.199999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="567.6724314460627,124.37409287519361 586.4245424542323,129.6768733714481 583.2881804625478,142.84302656347046 569.6695010333725,142.23097495650006" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.5s"
+          />
+        </polygon>
+      
+        <polygon points="570.9826678034153,152.26925049406822 581.9577851095416,152.64537027897705 581.8008851510048,170.88707836958991 569.757566276914,166.12656236869717" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.8s"
+          />
+        </polygon>
+      
+        <polygon points="572.4334317453594,181.9141320443821 584.3188598670959,181.2058059195434 584.823673182818,193.515928649386 569.1404357807013,193.4848969255201" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.1s"
+          />
+        </polygon>
+      
+        <polygon points="595.1663610030125,22.688423668285054 610.2693092161364,23.444932584000846 610.3042768499993,39.82796558754374 593.8774321804127,36.068088284649576" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.6s"
+          />
+        </polygon>
+      
+        <polygon points="595.8897368248188,49.258796307870334 608.1154839369188,50.57827507606041 610.9464591354847,62.56611605349502 595.2511612222145,66.50455643062338" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.8999999999999995s"
+          />
+        </polygon>
+      
+        <polygon points="592.2873319915666,74.0438284943569 613.5476642114178,72.25035880269186 611.3021926280238,90.09645143099559 594.8943950057696,90.99591901221024" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.199999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="595.3381380614966,100.02820320481872 609.5920526733453,104.23965344142653 613.6357845020967,115.38629133319324 598.5506147290583,119.4610340750894" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.5s"
+          />
+        </polygon>
+      
+        <polygon points="593.526830030526,126.13068914830292 612.7065823835715,129.5114886133442 610.649410434681,140.15050541002756 594.1794921915194,142.17381235637203" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.8s"
+          />
+        </polygon>
+      
+        <polygon points="592.0322192905219,154.85294278476346 610.1453772730563,154.7507724718501 608.6460516169558,171.29150309569178 593.663881638603,165.8131217906793" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.1s"
+          />
+        </polygon>
+      
+        <polygon points="593.3696040170472,182.21980019967006 609.9001672798327,182.56138915210323 611.7242553366127,194.90092988637065 596.7493389756535,194.2007476628574" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.4s"
+          />
+        </polygon>
+      
+        <polygon points="620.8972949203526,20.218835290086894 638.3453294934061,25.62185818833359 635.0959982716606,39.160231630701205 618.3925998393986,41.85951359399946" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="6.8999999999999995s"
+          />
+        </polygon>
+      
+        <polygon points="621.7937159723882,46.34265711297875 634.4801104702722,51.58956903139387 633.4220897152982,64.52820187120193 619.7160103465675,64.76010244085708" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.199999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="621.2259121539558,72.18661510930556 637.1926635036108,72.8526469383633 639.2891050544628,92.8307044249788 622.0922932318259,89.8470456017665" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.5s"
+          />
+        </polygon>
+      
+        <polygon points="620.5291867036651,103.19103914100258 639.8249949128493,98.30437875541098 633.4275570525691,119.79289949814016 621.6527742360128,115.1135528745171" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.8s"
+          />
+        </polygon>
+      
+        <polygon points="619.374184386694,127.28008418008338 636.7064443606316,128.61059725211717 637.1024113078,140.28164973118345 622.0069420590163,140.25536220902544" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.1s"
+          />
+        </polygon>
+      
+        <polygon points="621.5334410044662,153.65496571339628 639.0593367524971,152.01948108426407 638.6970253604542,168.86687551286346 621.7277941300533,169.67412361875614" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.4s"
+          />
+        </polygon>
+      
+        <polygon points="620.8939513943105,179.61894749209068 634.837055903674,177.81696837683896 635.4739766753808,191.9898428650597 622.3757943589798,193.21340505829528" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.7s"
+          />
+        </polygon>
+      
+        <polygon points="648.1734780302261,24.088158060139058 663.5991679981316,20.14583367210607 662.3363671142274,35.86662079833134 650.5660776205112,39.5824481695821" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.199999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="645.9026464282939,50.99549707315502 664.2773204529009,51.27101646024679 663.259008204624,67.12814832865972 650.0228979801593,66.31952675081149" fill="#F7A8B8" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.5s"
+          />
+        </polygon>
+      
+        <polygon points="648.6371986517004,78.28619542476122 661.1996293006723,78.23031484505282 661.3471531394698,87.53225577763085 644.8665604910498,93.40409750116112" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.8s"
+          />
+        </polygon>
+      
+        <polygon points="644.2053689569531,104.46093869736407 664.5928409983344,98.85013917794191 660.406039318301,118.2937854766968 649.2658347406503,119.18701763611526" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.1s"
+          />
+        </polygon>
+      
+        <polygon points="647.968939007965,124.24422601307455 665.3873133077861,128.62678526410173 662.6285632859469,141.24516540117688 650.1269051246987,142.81206426654524" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.4s"
+          />
+        </polygon>
+      
+        <polygon points="646.7289572711024,152.9692319285092 661.6174064616616,153.94047952911313 663.6361372532401,170.3250554809707 648.7867244959446,167.80309341414605" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.7s"
+          />
+        </polygon>
+      
+        <polygon points="650.1394055990146,179.33269768983945 661.9330172942969,180.62753507198556 659.8656126460645,197.3761750431413 646.8352865129348,192.68214532905313" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9s"
+          />
+        </polygon>
+      
+        <polygon points="674.8981087184028,20.92285066534707 689.029161821431,22.527685393614448 688.0661953033527,38.731828831127324 671.5257561099306,39.845137312490344" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.5s"
+          />
+        </polygon>
+      
+        <polygon points="673.3177095191918,48.068992111928935 685.7924456323244,48.356376182289665 691.4771202864976,67.6233730919231 672.8139866701031,61.814147875587366" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.8s"
+          />
+        </polygon>
+      
+        <polygon points="673.5854702537197,72.06993337121914 691.7187654036272,75.16747490790459 689.3200394614859,88.1032440382455 672.7541224029478,91.47627311044786" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.1s"
+          />
+        </polygon>
+      
+        <polygon points="674.0936739762373,102.40782375486579 687.3449300862166,101.8155892430443 686.2163337785746,113.80328323820554 671.9917639261866,115.12636656737219" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.4s"
+          />
+        </polygon>
+      
+        <polygon points="671.8427698520483,125.5622076187655 687.2785058404414,125.75195095112603 688.6388258152103,143.2779902770884 670.1770800247624,145.46908667166696" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.7s"
+          />
+        </polygon>
+      
+        <polygon points="672.1794064789,151.77459155601025 686.9813503219285,153.3060739709365 688.4190106668557,166.4298716979265 675.4233705185065,168.27791180946613" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9s"
+          />
+        </polygon>
+      
+        <polygon points="676.5911005126545,178.06669138017787 691.4512375574836,181.8141153396569 689.9643695830146,195.83740018469416 673.668051242607,193.75903671487444" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="696.731864142579,20.804397071629946 711.5439031093712,21.035463845327218 717.4130904357236,41.910183216650815 696.5039979648565,36.80331427992694" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="7.8s"
+          />
+        </polygon>
+      
+        <polygon points="700.1789696329605,49.990617706932866 714.1072281969543,47.92788586961424 711.8303235856596,63.666048938042664 701.9170192478049,62.04528839369592" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.1s"
+          />
+        </polygon>
+      
+        <polygon points="700.8449082402747,72.9435634676619 711.9506002142982,78.59371219738313 711.7447621374871,92.59336858450139 701.6559640177525,88.70252737519262" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.4s"
+          />
+        </polygon>
+      
+        <polygon points="700.9778810434626,101.05653640841994 712.9413986465662,99.99456064668827 711.7244068687545,119.37293950440146 701.9005239260074,113.94274449588156" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.7s"
+          />
+        </polygon>
+      
+        <polygon points="699.3498044855937,128.66557924425138 717.8189331421913,126.58744036680511 714.505119860203,143.35655049823043 696.8106349421,139.90179764595734" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9s"
+          />
+        </polygon>
+      
+        <polygon points="701.2591084533065,153.5316423327244 711.6300747582366,155.22359274364274 717.346847087131,169.73687980136125 697.5014953859826,168.03449870414778" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="698.8310073750454,180.92054471106908 714.2558058850495,178.74697399019684 713.7044640777121,197.6605410359221 697.0018720204868,194.93023631630416" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.6s"
+          />
+        </polygon>
+      
+        <polygon points="727.0076376931909,25.07148253070702 743.2739400283352,20.36393107536877 742.958888303762,36.895261456064446 728.1655401507284,41.5738365786164" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.1s"
+          />
+        </polygon>
+      
+        <polygon points="726.1906485321385,48.40136901925134 740.7724062958332,46.921586858576745 742.3743553026104,63.9933472272855 725.0445233137011,67.16774760594879" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.4s"
+          />
+        </polygon>
+      
+        <polygon points="723.4040524577271,73.31437966205348 740.4322806972508,74.99366811192063 743.557085446121,93.89033340070785 728.4243329156582,89.5781801890135" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.7s"
+          />
+        </polygon>
+      
+        <polygon points="725.5779371724558,100.63010898024635 743.2274704910916,102.09701803998992 740.9260131961596,119.18378050870768 723.7385161798182,118.61353679810114" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9s"
+          />
+        </polygon>
+      
+        <polygon points="722.6567180493778,128.84189671329455 742.2256768298228,125.20757148368962 738.3123738637453,141.95390123668943 726.8444391113629,140.583818731708" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="722.7067164367111,156.0051682550244 740.9622707768117,154.13780190697247 743.6267140784648,169.6191816987469 722.2830393422253,171.7962139492945" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.6s"
+          />
+        </polygon>
+      
+        <polygon points="728.1399350474131,177.62774576426466 739.9222522686293,179.67269373230005 738.0089648246615,197.8219920039901 722.0597984678782,195.60518769295572" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.9s"
+          />
+        </polygon>
+      
+        <polygon points="752.5356643942526,20.49530784853274 766.5628292222729,21.782307368145027 767.6558798090925,40.32354340030057 750.4021725922382,39.55371023157145" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.4s"
+          />
+        </polygon>
+      
+        <polygon points="750.7778662792055,48.0186263052109 764.8325746147565,50.59834196011937 769.9008651801165,63.823890635329306 748.0646707703202,64.36642424755244" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.7s"
+          />
+        </polygon>
+      
+        <polygon points="754.2562611363791,72.81352666881043 765.6919094664903,72.2688169734645 763.5713764464629,93.23779464331183 753.4293537618654,93.2879040383044" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9s"
+          />
+        </polygon>
+      
+        <polygon points="752.1995124557293,100.52553484231271 767.7932699344723,103.23846707149096 766.028945550825,118.56849357514851 750.2113503457241,114.61655139880195" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="752.8956902945467,124.89605157236485 764.636386461091,128.8486738244308 764.1838335933373,143.14822679557068 751.3676294029577,145.76697591483307" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.6s"
+          />
+        </polygon>
+      
+        <polygon points="751.366066841202,154.5524671223647 769.3249965863838,151.65425563422758 768.6085304871664,167.00234095552054 750.596820941905,168.2217493007479" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.9s"
+          />
+        </polygon>
+      
+        <polygon points="754.1600980568871,177.53893187661475 767.2496637167391,179.42381092460138 768.3979615486828,196.5996673073149 753.9568353384112,195.4795990283976" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.2s"
+          />
+        </polygon>
+      
+        <polygon points="775.8509209366075,26.42064837807367 794.4237493276241,25.336211309311523 794.6307937712287,39.870740298142564 774.1940724940315,38.10463254425882" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="8.7s"
+          />
+        </polygon>
+      
+        <polygon points="777.458561680986,51.39803399541425 791.8051511596575,46.51504779812763 792.9780754488304,67.87639792831432 780.5057676377136,61.85799319925015" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9s"
+          />
+        </polygon>
+      
+        <polygon points="775.0919818222641,74.07956967787796 792.3181695584307,72.31524818221907 792.8701029198228,87.79707946195528 774.6682020085559,87.61513738692385" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="780.2688816020241,101.18320506801052 789.4229524045437,99.56860410712488 790.5341687901874,119.47988406157863 777.6717685720841,119.37753441791497" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.6s"
+          />
+        </polygon>
+      
+        <polygon points="778.8691898223863,130.15321701957498 793.4884263136667,129.85656516645523 795.7284640399611,140.8706632828368 778.4860086130004,143.539862914885" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.9s"
+          />
+        </polygon>
+      
+        <polygon points="777.8402923704983,153.87269703881864 794.0681070493679,156.19848832518923 790.4839640052696,167.9262582258387 778.3242113938567,167.78746931642496" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.2s"
+          />
+        </polygon>
+      
+        <polygon points="774.3906959663146,177.3626569192573 790.200401395906,177.62987170945297 794.6046143021152,193.35620447655216 778.9380300982643,194.5874056450251" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.5s"
+          />
+        </polygon>
+      
+        <polygon points="805.7379991663842,20.603641677141482 818.0043898653903,23.734315962210548 821.9008041551887,41.268215835495894 802.0430085272649,40.47753220922124" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9s"
+          />
+        </polygon>
+      
+        <polygon points="803.5974639168958,51.355317864460226 819.3815090814726,47.32265617308332 816.1217233882771,62.46675822174091 802.3266700145658,62.91552468570908" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="801.208888457659,77.60297907622845 816.9544271539237,73.30287142306855 816.8745035359361,89.75833739256824 800.2671204427863,88.17470712174558" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.6s"
+          />
+        </polygon>
+      
+        <polygon points="800.311525985505,100.2207750130913 815.9651200841704,98.3105218820044 821.77592945652,114.53644357310338 805.8822274727625,116.37000839440294" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.9s"
+          />
+        </polygon>
+      
+        <polygon points="806.5134969976176,128.1561320063604 815.4219113594371,125.52805156858125 818.8740936658436,143.72686046617474 805.4426092434702,145.00480135949363" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.2s"
+          />
+        </polygon>
+      
+        <polygon points="805.7422739642185,150.33998862717985 818.4353445868223,152.7178974314584 821.2547198303276,166.5785467474582 805.2812915877968,170.4192445133039" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.5s"
+          />
+        </polygon>
+      
+        <polygon points="801.4811974899443,178.39317325917244 817.6218831693133,179.0734278389027 819.7965004921421,193.35124000664882 806.1476684565629,193.33931212915638" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.799999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="827.1900739677167,22.211981217879973 846.5457895349848,25.491956777734288 846.3569474177357,37.85084951924666 830.1581598760409,36.59372363513363" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="827.9752618738597,49.751445713860726 847.1228104380662,50.604383495891035 847.947264745335,62.621438351121796 830.5617127104664,63.33502031783658" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.6s"
+          />
+        </polygon>
+      
+        <polygon points="826.2266654407764,75.24380238049346 842.9850120861648,72.42641162087386 846.4206514394856,93.65065090275833 826.3129219974062,90.2292281611275" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.9s"
+          />
+        </polygon>
+      
+        <polygon points="826.8574899348962,103.33893470753746 845.6379804507699,98.02707124409262 844.1836741297409,118.45987504669185 827.1512675977176,118.40361429368537" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.2s"
+          />
+        </polygon>
+      
+        <polygon points="828.9589361150464,129.37159568201915 846.616952073711,130.09728217659506 843.0994197773542,145.9898243024035 832.0957387345004,139.8476510202851" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.5s"
+          />
+        </polygon>
+      
+        <polygon points="826.0235759088071,153.7367670854343 844.3395816838427,151.15597151344647 846.5563085450536,166.35468063391863 826.948552823392,169.36964405488806" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.799999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="831.1742732251365,179.78739232484116 845.6806607373031,181.60456670231432 841.5739435981476,195.83929832116976 829.0583179803699,193.7803513676499" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.1s"
+          />
+        </polygon>
+      
+        <polygon points="857.5271740385172,21.251963692203823 867.9380340628775,20.694502685704478 867.4005632918709,37.674761590677605 854.6131023386554,37.97250945086112" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.6s"
+          />
+        </polygon>
+      
+        <polygon points="857.0892431673898,47.512684151869244 871.4850436114638,48.55871606432859 868.1890355260424,63.38088938300758 856.1296160041102,67.09382605065372" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.9s"
+          />
+        </polygon>
+      
+        <polygon points="856.5986464347616,73.35138474177054 868.2856133507538,74.31713365817357 869.8414853626499,90.42932248588173 857.369343409828,87.48170987330325" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.2s"
+          />
+        </polygon>
+      
+        <polygon points="852.831590119713,100.08983164438636 869.5585236193501,98.34995555992096 870.7384611179946,116.09220758778923 853.7248108426957,119.63561808408198" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.5s"
+          />
+        </polygon>
+      
+        <polygon points="852.9721661947337,126.0244924790516 871.4648300835662,125.6324107769733 873.8072571834332,139.41976648182944 858.2078336024676,139.59890542187998" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.799999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="853.8604083379446,153.25820208919555 871.752882252871,150.52852289592917 870.9449665560705,170.55460770792112 857.0575793939408,166.3574749705425" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.1s"
+          />
+        </polygon>
+      
+        <polygon points="855.2423906037226,179.4654145792287 867.7796809575947,177.21859313005663 867.7837618810419,194.8892140979895 856.3829550171623,195.56315846277153" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.4s"
+          />
+        </polygon>
+      
+        <polygon points="883.2733735853749,21.485303595468732 895.9735078438642,26.239364893544213 898.2988960464917,36.15684245852995 881.6662586415954,38.87112486814986" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="9.9s"
+          />
+        </polygon>
+      
+        <polygon points="880.6207448310389,49.24348247996788 894.3352416219286,48.78825130653881 893.5796518294587,63.970612783172996 882.1569982130433,67.05969318793753" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.2s"
+          />
+        </polygon>
+      
+        <polygon points="878.7359061438219,77.55128812527018 899.4273688647999,72.23356766308521 896.5104607667026,88.99477637162383 880.2504920088513,93.96267306584772" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.5s"
+          />
+        </polygon>
+      
+        <polygon points="878.5238289728363,99.29754255027132 893.7639808933748,103.12808324555736 899.6647342090394,117.01154201697264 878.6571719969105,119.1614010441899" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.799999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="879.8902196293841,126.22790208377371 898.1171990128421,128.89931289684802 894.4530948842673,140.43191739081507 883.3002685895485,142.7852057394844" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.1s"
+          />
+        </polygon>
+      
+        <polygon points="878.8833379268664,155.6850193694643 899.1957907885349,151.0337102026721 897.6603386361948,170.08458937900585 880.3562489697597,168.59794299768257" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.4s"
+          />
+        </polygon>
+      
+        <polygon points="882.8688296539505,179.4051617654636 897.7937893367366,176.8752823590269 893.6624045439106,196.2038258132697 881.4380716287923,193.60117145252195" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.7s"
+          />
+        </polygon>
+      
+        <polygon points="904.3736984097458,22.11846451313085 920.759678805426,20.32360204033998 921.5738410241372,41.62150652751331 904.3513251241986,38.710080646049605" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.2s"
+          />
+        </polygon>
+      
+        <polygon points="908.0994059462608,51.188887391021666 924.1505666180338,48.641157125846796 925.4661183621188,62.24808441608583 907.5397828250444,63.252828341959116" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.5s"
+          />
+        </polygon>
+      
+        <polygon points="909.7659520725043,75.09888441000236 921.4180554423568,73.27785713631103 924.6930447573219,93.77380269684095 907.3694088415798,91.67444689639927" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.799999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="909.5277406436045,101.63407521451661 925.5584156092797,100.27652321986031 919.7570557321695,114.18907533465227 905.938852081375,119.56792509435797" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.1s"
+          />
+        </polygon>
+      
+        <polygon points="908.8099190010053,125.63477073281113 924.3629050005864,124.14231380744387 920.9608065564677,140.96223216722547 906.3359272401482,144.3218286284847" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.4s"
+          />
+        </polygon>
+      
+        <polygon points="909.6615427913906,150.47038549471014 924.3902800810692,150.054505204485 924.1090014431882,170.19299774843373 907.3530224134633,168.04577531697694" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.7s"
+          />
+        </polygon>
+      
+        <polygon points="909.2394197191422,177.66842962361576 924.4800441771047,182.46080776715127 923.3847565106287,194.12465984216226 904.5205171295567,194.46857689937318" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12s"
+          />
+        </polygon>
+      
+        <polygon points="932.7749021266126,25.670220573220014 947.1269369432179,24.28877148245399 951.5633544324022,37.37311611789965 932.4512336863262,35.85915769816019" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.5s"
+          />
+        </polygon>
+      
+        <polygon points="931.4791988514238,46.208029599423725 950.2997833363381,49.54584850796305 946.1287749376316,64.30368889392487 936.0377145619539,66.8682707041686" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.799999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="935.0664050981562,77.81881983070295 950.194736271176,73.45682994184084 948.0155845309527,89.15242388551513 933.6945194217125,92.71853150400588" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.1s"
+          />
+        </polygon>
+      
+        <polygon points="935.186932840259,103.2822600104051 949.5563128294033,98.93368180932255 946.7114191126673,116.60475586063632 932.6389771523669,118.64490466139465" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.4s"
+          />
+        </polygon>
+      
+        <polygon points="934.595339345808,127.9030419659382 948.231701692429,126.16781879633933 950.0574530308776,141.28127620950463 932.4758085049064,141.0633875497659" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.7s"
+          />
+        </polygon>
+      
+        <polygon points="930.0523082625092,155.36125881117775 948.8664800103493,153.75858977118327 947.1358832134014,165.66687398093399 933.8664312954652,171.47414019147655" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12s"
+          />
+        </polygon>
+      
+        <polygon points="932.9749459820058,180.4626785052197 945.965139347166,176.7831112510625 949.4262970317479,192.58317142374824 930.4449135231245,193.37657998930206" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="961.0965430586758,21.008229030487136 972.2550603679756,25.97999281639908 974.782784914605,41.54462864724782 960.9109888843001,37.955936823396776" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="10.799999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="959.2128178393542,49.19616029439931 975.5474229960447,48.88060173314583 972.0382166672313,67.4121235989692 956.4676603643063,66.82523938776215" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.1s"
+          />
+        </polygon>
+      
+        <polygon points="956.3461705579305,77.5689388059721 971.9472235153409,72.28029966905552 974.3928119202736,88.7740653339436 962.4254153673431,88.5952735387238" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.4s"
+          />
+        </polygon>
+      
+        <polygon points="957.78475473244,102.27358694939554 976.0454309209881,99.39852332751194 975.4317482250858,113.7249307275174 960.896757073702,117.08779487475206" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.7s"
+          />
+        </polygon>
+      
+        <polygon points="959.3585814428765,128.77063259635153 974.7871381698111,126.80366267698211 974.9948735242214,145.1204333901514 956.1311889592653,142.43154811023422" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12s"
+          />
+        </polygon>
+      
+        <polygon points="958.4636985286148,154.90611052223878 973.6508646615118,155.35066196997136 977.1896046516509,168.92483011222814 959.0877139119058,165.57025634732352" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="958.0924723342637,179.03484593904093 977.1715279195129,179.4037550691472 977.3378308908124,191.85323288626122 962.2057903280114,196.5373993885659" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.6s"
+          />
+        </polygon>
+      
+        <polygon points="986.8066023769179,20.506205314261518 1003.9410160512617,20.212727649428125 1002.7744463721693,40.31483292047979 985.6211490920462,36.7805997622489" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.1s"
+          />
+        </polygon>
+      
+        <polygon points="986.5141514075103,50.4404180992597 1002.8909403521387,50.10303313990491 999.9391799839121,66.90329832602059 988.2561106914583,61.769255224311756" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.4s"
+          />
+        </polygon>
+      
+        <polygon points="982.8371590274445,73.86653999836628 1001.3273392433102,72.26908404473778 1000.5787161566705,92.11254485196326 987.7197577740689,93.43076961316963" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.7s"
+          />
+        </polygon>
+      
+        <polygon points="988.3924944821597,103.78550510886565 1000.5576959887541,102.02225814384998 997.5230141347022,114.59946800485623 986.1816203496019,119.40327484735315" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12s"
+          />
+        </polygon>
+      
+        <polygon points="987.4676339508618,130.50709548385643 1000.4028967110409,124.17555958243916 997.9181589070072,145.9366240297494 986.9893171588681,140.07225651944802" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="983.1460712407375,156.17989426875414 998.9285925397489,154.06214617568133 997.5577357832009,170.3409684260199 985.1018284796709,168.27664268718377" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.6s"
+          />
+        </polygon>
+      
+        <polygon points="984.1275555866354,180.12097432650657 997.7764030751093,176.54612574406235 1000.5020305662861,192.3171499448927 984.2280144396227,195.52698124466943" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.9s"
+          />
+        </polygon>
+      
+        <polygon points="1013.1044591750747,23.83448891379288 1027.693515156373,20.965176820469814 1026.5582070791888,40.93775196843066 1008.4767223958323,39.126022151559376" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.4s"
+          />
+        </polygon>
+      
+        <polygon points="1012.1900391772149,51.05347436162926 1024.6749290308549,50.57688527368597 1027.0238965845685,64.67809029739882 1013.4297817057407,67.88284012818018" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.7s"
+          />
+        </polygon>
+      
+        <polygon points="1010.8109561947331,77.69298411318934 1029.6299848153203,77.74340998139157 1024.9539724953613,93.07068127617673 1014.0233373359357,89.43862630965216" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12s"
+          />
+        </polygon>
+      
+        <polygon points="1014.1777499811086,102.31378421748109 1029.504011205396,98.51582140160818 1025.7374126926284,116.0241720296861 1010.3141735608807,116.80174754271565" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1009.0887488140248,129.05840711168855 1027.279274404732,126.10238744059814 1026.6098350724162,143.00105506229775 1010.984282377596,141.18574437171924" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.6s"
+          />
+        </polygon>
+      
+        <polygon points="1011.0053966160785,152.3747778855679 1028.5612451785005,154.60827243392856 1027.6398347677316,167.64259404474285 1011.2151987871093,165.9337239237242" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.9s"
+          />
+        </polygon>
+      
+        <polygon points="1011.742320172573,176.38431951099764 1028.8061311986858,176.59365814138607 1028.1158629778793,197.57292935560952 1012.806974873219,191.73084126533658" fill="#FFFFFF" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.2s"
+          />
+        </polygon>
+      
+        <polygon points="1036.0806125722158,20.114125505695633 1051.0224142000359,22.29377485049146 1052.2951765565558,39.99645226051534 1038.1181749601708,41.06521020537292" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="11.7s"
+          />
+        </polygon>
+      
+        <polygon points="1040.3600398055455,49.19262454044082 1051.4694062591689,51.622079655379416 1051.6926045617113,62.74097376849917 1038.8090896996966,64.01757978679781" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12s"
+          />
+        </polygon>
+      
+        <polygon points="1037.1366503123645,76.3370354362769 1054.7347644819922,75.01258007697592 1050.6756285677836,88.33065813547364 1034.6942275525453,89.71504153467744" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1040.5653338330178,104.2103777578579 1054.9171260195947,102.74590923206851 1053.1434936858668,118.54975360019067 1037.4395197943452,115.82757273345163" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.6s"
+          />
+        </polygon>
+      
+        <polygon points="1040.5273256789708,124.40884093563376 1052.7350129106499,127.09364616485877 1050.7931711712624,142.34479325583666 1040.36492366911,141.28163329802638" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.9s"
+          />
+        </polygon>
+      
+        <polygon points="1037.5719059520075,150.61755894366735 1053.4666043066632,153.22346980876583 1054.3636694395318,166.31687196771622 1036.6802197248835,165.7902039598501" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.2s"
+          />
+        </polygon>
+      
+        <polygon points="1037.1875625966093,176.23903085679055 1054.676326001446,180.40822283464763 1050.4226786015713,191.66842025674566 1034.700254418355,192.40599493990354" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.5s"
+          />
+        </polygon>
+      
+        <polygon points="1061.2816505459734,22.461960627738126 1077.7834723124497,24.45543030095689 1080.426895916689,37.605945785060044 1063.3645751434613,36.241616059988885" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12s"
+          />
+        </polygon>
+      
+        <polygon points="1060.8551443363638,46.669509907863414 1076.77665333194,48.12845155592177 1076.7431211990856,65.69039972121698 1065.4293663827275,67.1855668031417" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1060.2712835960256,72.64348959427652 1076.5193130340763,72.56062090598854 1078.701692567088,91.579454536921 1066.2829285630721,87.67146287557843" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.6s"
+          />
+        </polygon>
+      
+        <polygon points="1061.5524872923766,98.79515332678329 1080.3580565505365,99.11523814936507 1076.4742422797476,117.63302534796928 1061.9727461551288,119.01977419004292" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.9s"
+          />
+        </polygon>
+      
+        <polygon points="1065.0425149869147,124.57561152985052 1081.3314823074659,124.68899940750714 1080.9294666643227,144.30933406872595 1060.743502403531,142.3267306272721" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.2s"
+          />
+        </polygon>
+      
+        <polygon points="1062.084656359308,153.92123565958653 1081.532762951565,154.7832450067128 1077.0327565712078,167.15906145277737 1061.3440721326342,171.7808243404796" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.5s"
+          />
+        </polygon>
+      
+        <polygon points="1066.472288697666,176.4541749273295 1078.4663264315295,179.51549945283602 1076.2543273729725,193.84870972858877 1063.8243204442338,197.0533210680489" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.799999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1089.3541330711853,21.19914168235899 1105.1837369450877,22.743892082946324 1102.7094521023985,39.86120742154579 1091.959310974712,41.59482829505655" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1087.1294039656998,52.296316029551086 1101.9873399482142,51.414876668152 1101.9076251322865,66.05709197293096 1091.9901762776806,66.67978602438907" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.6s"
+          />
+        </polygon>
+      
+        <polygon points="1086.9063004495247,73.9897411112856 1104.701624648409,77.07034053238992 1107.1605306128831,88.37971091333593 1092.545507540456,91.851229062679" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.9s"
+          />
+        </polygon>
+      
+        <polygon points="1087.9215102771723,99.17799353009048 1104.0556017167196,98.3892677073525 1105.1546730711077,116.85898325045542 1091.6167671107603,113.81191989616049" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.2s"
+          />
+        </polygon>
+      
+        <polygon points="1087.2313552567357,126.3785465229489 1103.295146285962,125.30822601101627 1105.1605708294496,145.3226668326152 1090.0007852755953,144.75169537504934" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.5s"
+          />
+        </polygon>
+      
+        <polygon points="1092.321591429164,155.7353919387836 1105.0065950085266,155.54780469323066 1102.0339260149215,171.3747180183144 1089.1187928797656,166.47595277814847" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.799999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1091.389362680028,177.54349596040953 1103.6716451179034,182.56344723028278 1105.6997047891628,196.60522590201032 1089.1150427362347,196.6301102883217" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.1s"
+          />
+        </polygon>
+      
+        <polygon points="1115.678938082949,25.856254325764496 1129.7231616057961,22.440396646230397 1128.231202871561,41.29452812959151 1117.8718985336848,39.931494766728896" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.6s"
+          />
+        </polygon>
+      
+        <polygon points="1116.451398683472,46.98031995716989 1133.534630973904,52.4988866280084 1127.449220989546,63.572488358461264 1117.2573597527287,63.87796065900321" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.9s"
+          />
+        </polygon>
+      
+        <polygon points="1114.4033943124805,76.03586165940594 1130.349667291274,77.63501964186744 1133.5060883810934,91.00095900342687 1114.9268312683935,91.15155391983622" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.2s"
+          />
+        </polygon>
+      
+        <polygon points="1117.5099961536494,104.18092984890164 1128.2306342214729,100.38692646113635 1128.3313371553663,116.23242917653717 1113.113023632769,114.67415813403946" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.5s"
+          />
+        </polygon>
+      
+        <polygon points="1117.2693837736956,125.10797310259177 1132.6063059595317,128.99599040795013 1128.9841155560416,139.92150390214394 1117.192917058348,141.7228620423739" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.799999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1117.7290706167382,150.4759691862914 1129.3003384892377,152.40897329177687 1130.4458441556346,167.38960675694918 1117.4464235292223,171.6360141663656" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.1s"
+          />
+        </polygon>
+      
+        <polygon points="1115.735489202024,181.48967713235461 1129.5264221165742,181.2089578181037 1130.2495496312306,195.84127740544392 1112.7300967619633,194.03251925491074" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.399999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1139.7233113218233,20.536148829754516 1156.469713145747,22.06778229011572 1154.7454054247291,41.639606491300185 1139.7337084330377,38.95944252903937" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="12.9s"
+          />
+        </polygon>
+      
+        <polygon points="1138.0055753011127,49.76968712563297 1158.4379317163168,47.75267411700537 1157.1450191903975,63.18753520049789 1143.2637834101774,67.39074772548494" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.2s"
+          />
+        </polygon>
+      
+        <polygon points="1143.3306102453214,78.23676286283933 1155.1583299367055,75.50658969943406 1153.7343177354255,90.00546023534272 1141.022211997669,90.2419780195029" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.5s"
+          />
+        </polygon>
+      
+        <polygon points="1143.9825753733319,100.37176766827372 1155.1586324438842,98.15024997316367 1157.63615339743,115.59941178418671 1139.7243655488119,119.79690425638368" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.799999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1143.0117210496385,126.8062582691232 1156.678343701757,130.16716249978612 1158.0300104241282,139.55521357810142 1139.0330160213464,139.53942774282157" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.1s"
+          />
+        </polygon>
+      
+        <polygon points="1142.9059909349753,150.33774341367229 1159.8880042649419,150.494311175512 1154.5861697770858,171.83858491564337 1142.2616650537784,171.61639243552918" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.399999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1138.3235422979335,176.51636070942408 1158.6704157696747,180.55650202002116 1156.650171557552,197.36560472520728 1141.5460619733494,196.1512064535766" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.7s"
+          />
+        </polygon>
+      
+        <polygon points="1166.0043313014864,21.699815291962054 1179.49980797782,24.973034194344873 1182.3775284833223,36.433631108942556 1168.222567154185,39.36669167704578" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.2s"
+          />
+        </polygon>
+      
+        <polygon points="1165.8976414228307,48.59824008302937 1182.9830317166163,49.367375683716055 1179.5578290733056,65.8538115217693 1168.0380529648069,66.82336077300955" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.5s"
+          />
+        </polygon>
+      
+        <polygon points="1166.9258939460196,73.41163076591502 1180.8609399886739,77.81220379300018 1179.8580115367554,90.192018884779 1168.433028689567,90.66118829373708" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.799999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1164.963913367794,100.78798143574593 1185.3185432738676,101.35014705502633 1184.5184643268653,119.85223166002233 1167.4726306209602,114.68706462527848" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.1s"
+          />
+        </polygon>
+      
+        <polygon points="1166.6535885006904,128.29987941303938 1182.6556859145614,129.79685346453743 1179.5606358843706,140.96040067308516 1165.145681117515,144.1056676994163" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.399999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1165.7919519709449,151.81662084127632 1182.0472629324095,151.2351183662852 1183.4129939512306,170.60752808563313 1165.0125210308204,168.39698171810744" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.7s"
+          />
+        </polygon>
+      
+        <polygon points="1165.6099611507323,177.97043240571028 1181.4774969447383,181.411583508468 1183.6617582160957,196.16753927868416 1168.1354317298685,197.35824294224344" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15s"
+          />
+        </polygon>
+      
+        <polygon points="1196.545517967778,22.730569819619205 1210.8451154037452,20.513042263622967 1211.081765539692,35.858917840629786 1194.6350313733567,37.055769558810695" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.5s"
+          />
+        </polygon>
+      
+        <polygon points="1191.562699681806,51.12318494352359 1205.8574998943225,47.341171115213314 1206.3216867486058,67.18396618560791 1195.649735049941,65.60093257919486" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.799999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1196.3433987011158,73.24730455947737 1209.57547548661,75.47218937888549 1205.7228036485997,91.31583488367002 1191.0655502789198,93.31135757306795" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.1s"
+          />
+        </polygon>
+      
+        <polygon points="1193.0802309475857,100.04537581110856 1211.416506314252,101.05774309907251 1209.4167742843586,114.55106439587891 1196.098085733499,114.56599658581976" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.399999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1190.5212167853203,125.39187668158509 1206.83684921008,126.4934560119151 1208.9188936757223,141.29270422849402 1191.7055526712577,144.98817104646886" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.7s"
+          />
+        </polygon>
+      
+        <polygon points="1191.9717049927149,151.15830099192942 1207.7779357629042,152.99822686687884 1205.6821436059329,171.55119353328715 1195.1459440622386,170.62587708574952" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15s"
+          />
+        </polygon>
+      
+        <polygon points="1196.1125757002703,182.0909557989607 1210.077898531554,181.2472801468033 1210.0032412443632,193.1239438840655 1193.8689934774009,196.7959137985461" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1218.4589668959784,22.291139561903226 1234.4567283532633,22.787865744527117 1233.2242827912364,37.397845927308474 1218.5889459471061,37.828157034636945" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="13.799999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1219.1872099758477,48.55927586256633 1232.2529002301555,46.9025267709649 1236.9612253537518,63.237898559527586 1216.2732275939666,66.43468948885264" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.1s"
+          />
+        </polygon>
+      
+        <polygon points="1220.0226308330289,74.89058167696611 1236.0839265719317,76.09442067669876 1233.536763914191,90.63777370689864 1220.6900510771502,92.37700466592273" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.399999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1220.4083444444925,104.45180929229869 1232.7658495170247,99.63779392011857 1236.3014794258625,114.98728429700917 1220.4712995777911,114.52528080580272" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.7s"
+          />
+        </polygon>
+      
+        <polygon points="1221.2870254092797,124.68046120187977 1233.961999683956,126.94224499615203 1231.4340951187178,142.57377192794212 1216.1252559737363,141.33489728434552" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15s"
+          />
+        </polygon>
+      
+        <polygon points="1216.4202912015023,151.50310291027367 1234.501936712534,152.10645583787144 1233.9538415513596,171.7053623785048 1218.6694749820113,170.70966340934993" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1219.7244811313396,181.8974103565689 1234.8316827576693,178.397616722364 1232.3820147992737,195.1799901731936 1221.5857322201466,192.828726812372" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.6s"
+          />
+        </polygon>
+      
+        <polygon points="1247.7497150591016,24.285236427793762 1261.7545881521319,22.248015675858593 1262.4183380622555,36.13895481369636 1243.6945559164824,38.551764772665656" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.1s"
+          />
+        </polygon>
+      
+        <polygon points="1248.321361549926,51.60124773712258 1261.0656154139062,48.42487098670376 1257.9873788442535,66.35339139347269 1242.2277612840523,66.69062200206687" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.399999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1247.5536374475982,73.27994120909666 1261.7406152993972,74.8657919450619 1260.4124568423986,87.72342998917294 1247.5310589919054,90.23329098924489" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.7s"
+          />
+        </polygon>
+      
+        <polygon points="1245.83436677059,101.46024257126484 1263.630064780323,102.50102179110823 1261.8206110838037,116.44858760987009 1247.381041331219,114.69688186216617" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15s"
+          />
+        </polygon>
+      
+        <polygon points="1245.6536429085277,127.81608591863794 1262.6530680210085,129.96011097818987 1258.3703853559803,141.23015284364777 1244.3528138216457,144.20401063813426" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1246.632672747282,151.782548811553 1259.0633561723205,155.93297554668447 1261.87928129599,170.98413033599718 1243.5143174472105,168.06329288011193" fill="#F7A8B8" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.6s"
+          />
+        </polygon>
+      
+        <polygon points="1243.0703180548933,176.53781274292956 1259.7298320836526,182.0821927470605 1257.7405584979178,192.63131685435863 1246.6822792415278,194.12163473539215" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.899999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1268.772774370035,22.180837888245787 1285.2756252817296,26.341335484599885 1289.352514103939,39.48328678048862 1273.0634088122802,39.67354037831969" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.399999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1272.0520008669703,49.09407316760803 1287.6144800678292,46.14970491627696 1288.7479096020572,62.8369742482185 1269.42037457901,61.65460712437742" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.7s"
+          />
+        </polygon>
+      
+        <polygon points="1268.47701278372,72.61379795945764 1287.4449848129484,76.56021419269473 1283.6199383090302,93.5626350815078 1272.405446075947,87.45000682405356" fill="#FFFFFF" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15s"
+          />
+        </polygon>
+      
+        <polygon points="1268.4920682019758,101.91663078902664 1285.1742357199855,101.38911139124386 1287.073558032061,118.88293351997561 1268.7301403544009,114.19825113788026" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1273.9086813009374,130.1306872404715 1285.3736938433483,126.29137155578174 1285.8972718466832,143.092198119267 1271.0190251343972,145.0435971921109" fill="#F7A8B8" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.6s"
+          />
+        </polygon>
+      
+        <polygon points="1268.637633761754,153.1671002677514 1284.4225877522538,155.13556032453673 1286.7938154985811,168.25127567246844 1268.93660161415,170.24638488068197" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.899999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1268.9871204384815,180.7716578072287 1284.602589486651,178.06361425526867 1289.4228026034757,192.55996224259684 1270.7563401610569,197.13718839468973" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="16.2s"
+          />
+        </polygon>
+      
+        <polygon points="1299.476843419499,24.05091463171347 1311.010440215305,21.085297520150633 1313.190088809549,39.15420636598834 1296.3420837969347,36.97583881006159" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="14.7s"
+          />
+        </polygon>
+      
+        <polygon points="1297.7584363615993,46.61652559580287 1310.9798000134836,50.02578631567263 1313.977209587562,66.35364757490967 1296.4716437336572,63.46939786005747" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15s"
+          />
+        </polygon>
+      
+        <polygon points="1299.939396449055,74.58315975472236 1313.349368465656,74.22628609921607 1311.5743349788002,88.95386063983536 1294.7023560964344,88.90677502766314" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1300.5017791139533,99.3267407033465 1314.0861249397672,102.89163008665184 1310.2393798761927,114.18643236214756 1294.1436932011734,119.73696647185702" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.6s"
+          />
+        </polygon>
+      
+        <polygon points="1295.5748641141988,124.43525777168222 1314.2506040047804,128.7001504320635 1314.289720185087,143.6720850832157 1294.316864433819,142.28821451429107" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.899999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1294.4245043766216,154.5950846646211 1311.0770313571534,156.0547966637027 1311.3861224946734,167.76686242820344 1300.386912776618,168.4143214006203" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="16.2s"
+          />
+        </polygon>
+      
+        <polygon points="1297.577850217021,177.422007467437 1313.715582905328,179.26851935983262 1312.343339702793,191.72834272287105 1295.9459802139124,194.63611475204303" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="16.5s"
+          />
+        </polygon>
+      
+        <polygon points="1323.5261250848391,20.99884733372955 1339.6431171514917,25.909246604602743 1337.7548938160924,35.92384004735562 1322.0841885114098,39.684982628286924" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15s"
+          />
+        </polygon>
+      
+        <polygon points="1324.1595465110333,52.47972868652932 1335.4362370677345,46.24317447254804 1337.0687259585768,66.85597307892905 1325.9004038676946,62.634651775987294" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1321.3659386871664,76.20260621577522 1341.9488036790162,75.01601115673078 1336.3914564313402,90.86802515185768 1324.9112613425143,93.24477896352597" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.6s"
+          />
+        </polygon>
+      
+        <polygon points="1323.1675885221973,103.74408321126792 1338.2063763828994,102.87639262774191 1337.8335770961746,115.11189165655072 1323.5936642292522,116.99063130520979" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.899999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1321.522007021204,125.80714464775124 1339.2417570809225,125.64153507921722 1340.7893123403226,141.06117647805118 1320.2387288001278,142.78686160810506" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="16.2s"
+          />
+        </polygon>
+      
+        <polygon points="1323.6873827777395,156.3431780751296 1340.4440854564139,154.95660663361755 1339.4264409876325,171.88373995933688 1322.2347910987,170.27722031616034" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="16.5s"
+          />
+        </polygon>
+      
+        <polygon points="1323.5668743464018,177.6150944169585 1339.46530230826,179.72320478862122 1340.590114823799,192.5558498334272 1320.7814540018433,195.791439087434" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="16.8s"
+          />
+        </polygon>
+      
+        <polygon points="1351.9639098707112,26.410265555010973 1365.1237765911599,22.527699365871463 1361.669565463619,41.16972485350226 1350.3427767328408,37.55737784737196" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.299999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1349.9793310744449,47.24437176732685 1362.4862873204213,46.675653957314886 1361.4277771635402,63.89834971540273 1351.4746019463346,65.5301690900468" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.6s"
+          />
+        </polygon>
+      
+        <polygon points="1348.8328343560052,72.30302349250852 1364.1624875707503,77.25650586972816 1363.9991346054912,92.96584797922276 1352.487261542212,92.30644569810634" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.899999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1349.9971364664432,102.55043305658079 1363.7193112792452,102.0260791985922 1361.5836845134586,117.5618589515044 1347.4849314120831,119.41440776202394" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="16.2s"
+          />
+        </polygon>
+      
+        <polygon points="1346.9397843471834,126.76535483694674 1363.5232104967045,126.61509163572651 1363.4709520738397,143.63196326006027 1351.5666903159927,140.13551744589392" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="16.5s"
+          />
+        </polygon>
+      
+        <polygon points="1351.627470583593,155.28945046576908 1366.1232642810323,155.78293028134718 1363.7824052470326,169.9341254335806 1348.853571325568,169.7857547319531" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="16.8s"
+          />
+        </polygon>
+      
+        <polygon points="1348.4381773741748,178.02183069965835 1362.3094076315654,180.202047281456 1365.1491183241005,197.24898119025514 1347.3860083361546,197.31295486735013" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="17.099999999999998s"
+          />
+        </polygon>
+      
+        <polygon points="1375.4452875617476,24.048358065102835 1388.3809654254258,20.064064671820905 1393.4963767341328,37.7003748985641 1377.701256882238,41.921817169457654" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.6s"
+          />
+        </polygon>
+      
+        <polygon points="1375.9615117840412,48.07467449064324 1392.237433976004,47.27826168200861 1389.6892434311367,66.32840534101585 1374.262686817748,63.87218512065223" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="15.899999999999999s"
+          />
+        </polygon>
+      
+        <polygon points="1373.2883597264336,72.53186457583357 1391.0299144472958,74.36092554897085 1391.070963966788,87.87523496789956 1377.2804806571864,90.1702886954686" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="16.2s"
+          />
+        </polygon>
+      
+        <polygon points="1376.6394274563986,101.91839413055847 1388.857767383468,98.19025500613544 1391.2188274582222,114.05771963796562 1375.3264736563024,119.591063797701" fill="#F7A8B8" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="16.5s"
+          />
+        </polygon>
+      
+      <circle cx="1383" cy="109" r="2.551005085991355" fill="#F7A8B8" opacity="0">
+        <animate attributeName="opacity" values="0;1;0" dur="1.1016313724205935s" begin="0s" repeatCount="indefinite"/>
+        <animate attributeName="cx" values="1383;1386.624510476085" dur="1.1016313724205935s" begin="0s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="109;99.78299733716732" dur="1.1016313724205935s" begin="0s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2.551005085991355;0" dur="1.1016313724205935s" begin="0s" repeatCount="indefinite"/>
+      </circle>
+    
+      <circle cx="1383" cy="109" r="3.562331877631764" fill="#F7A8B8" opacity="0">
+        <animate attributeName="opacity" values="0;1;0" dur="1.974313965454741s" begin="0.3s" repeatCount="indefinite"/>
+        <animate attributeName="cx" values="1383;1384.6927964271015" dur="1.974313965454741s" begin="0.3s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="109;109.00590520226888" dur="1.974313965454741s" begin="0.3s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="3.562331877631764;0" dur="1.974313965454741s" begin="0.3s" repeatCount="indefinite"/>
+      </circle>
+    
+      <circle cx="1383" cy="109" r="2.8418750937465638" fill="#F7A8B8" opacity="0">
+        <animate attributeName="opacity" values="0;1;0" dur="1.7804157080800942s" begin="0.6s" repeatCount="indefinite"/>
+        <animate attributeName="cx" values="1383;1384.211803231151" dur="1.7804157080800942s" begin="0.6s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="109;103.68424290147249" dur="1.7804157080800942s" begin="0.6s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2.8418750937465638;0" dur="1.7804157080800942s" begin="0.6s" repeatCount="indefinite"/>
+      </circle>
+    
+      <circle cx="1383" cy="109" r="3.817081709080829" fill="#F7A8B8" opacity="0">
+        <animate attributeName="opacity" values="0;1;0" dur="1.8891076714813615s" begin="0.8999999999999999s" repeatCount="indefinite"/>
+        <animate attributeName="cx" values="1383;1389.4880823746812" dur="1.8891076714813615s" begin="0.8999999999999999s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="109;109.72320389429724" dur="1.8891076714813615s" begin="0.8999999999999999s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="3.817081709080829;0" dur="1.8891076714813615s" begin="0.8999999999999999s" repeatCount="indefinite"/>
+      </circle>
+    
+        <polygon points="1377.96371937386,126.82987016540818 1387.470516480317,124.37301350812672 1389.064805416071,140.8111336108839 1372.5706889720436,140.23509518799196" fill="#55CDFC" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="16.8s"
+          />
+        </polygon>
+      
+        <polygon points="1376.5126986083385,156.30285592398783 1388.6301290047863,151.0167338951786 1390.476922716229,168.5837088684965 1373.8111566445875,170.58626259649375" fill="#F7A8B8" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="#55CDFC;#F7A8B8;#FFFFFF;#F7A8B8" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="17.099999999999998s"
+          />
+        </polygon>
+      
+      <circle cx="1383" cy="161" r="2.0948339670084657" fill="#F7A8B8" opacity="0">
+        <animate attributeName="opacity" values="0;1;0" dur="1.9716356998660145s" begin="0s" repeatCount="indefinite"/>
+        <animate attributeName="cx" values="1383;1385.7022280579256" dur="1.9716356998660145s" begin="0s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="161;158.1428512581331" dur="1.9716356998660145s" begin="0s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2.0948339670084657;0" dur="1.9716356998660145s" begin="0s" repeatCount="indefinite"/>
+      </circle>
+    
+      <circle cx="1383" cy="161" r="2.0049175354137883" fill="#F7A8B8" opacity="0">
+        <animate attributeName="opacity" values="0;1;0" dur="1.7830270587351649s" begin="0.3s" repeatCount="indefinite"/>
+        <animate attributeName="cx" values="1383;1383.017186330081" dur="1.7830270587351649s" begin="0.3s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="161;156.38055841135025" dur="1.7830270587351649s" begin="0.3s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2.0049175354137883;0" dur="1.7830270587351649s" begin="0.3s" repeatCount="indefinite"/>
+      </circle>
+    
+      <circle cx="1383" cy="161" r="2.9614782256340404" fill="#F7A8B8" opacity="0">
+        <animate attributeName="opacity" values="0;1;0" dur="1.4396610838244284s" begin="0.6s" repeatCount="indefinite"/>
+        <animate attributeName="cx" values="1383;1376.0312289824774" dur="1.4396610838244284s" begin="0.6s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="161;154.31477515111953" dur="1.4396610838244284s" begin="0.6s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2.9614782256340404;0" dur="1.4396610838244284s" begin="0.6s" repeatCount="indefinite"/>
+      </circle>
+    
+      <circle cx="1383" cy="161" r="2.71862053974322" fill="#F7A8B8" opacity="0">
+        <animate attributeName="opacity" values="0;1;0" dur="1.4604175606572278s" begin="0.8999999999999999s" repeatCount="indefinite"/>
+        <animate attributeName="cx" values="1383;1380.0597945262853" dur="1.4604175606572278s" begin="0.8999999999999999s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="161;156.0986009919624" dur="1.4604175606572278s" begin="0.8999999999999999s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2.71862053974322;0" dur="1.4604175606572278s" begin="0.8999999999999999s" repeatCount="indefinite"/>
+      </circle>
+    
+    <text x="380" y="30" text-anchor="middle" fill="#F7A8B8" font-size="18" font-weight="bold" font-family="monospace" filter="url(#glitch)" opacity="0.7">
+      TRANS RIGHTS = HUMAN RIGHTS
+    </text>
+    <text x="382" y="32" text-anchor="middle" fill="#55CDFC" font-size="18" font-weight="bold" font-family="monospace" opacity="0.6" style="mix-blend-mode: screen;">
+      TRANS RIGHTS = HUMAN RIGHTS
+    </text>
+
+    <text x="380" y="160" text-anchor="middle" fill="#cf142b" font-size="14" font-weight="bold" font-family="monospace" filter="url(#glitch)" opacity="0.4">
+      NO REFORM UK
+    </text>
+    <text x="382" y="162" text-anchor="middle" fill="#cf142b" font-size="14" font-weight="bold" font-family="monospace" opacity="0.3" style="mix-blend-mode: screen;">
+      NO REFORM UK
+    </text>
+  </svg>
