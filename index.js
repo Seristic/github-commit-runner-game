@@ -46,143 +46,158 @@ function getColor(count) {
 }
 
 function buildSVG(weeks) {
-  // Increase width so animation won't cut off
-  const width = 1300;
-  const height = 170;
-  const squareSize = 24;
-  const padding = 2;
-  const xStart = 10;
-  const yStart = 10;
+  const width = 760;
+  const height = 180;
+  const squareSize = 22;
+  const padding = 4;
+  const xStart = 20;
+  const yStart = 20;
 
-  // Flatten days for easy access if needed
+  // Flatten all days
   const days = weeks.flatMap(w => w.contributionDays);
 
-  let svg = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" style="background:#121212;border-radius:8px;">\n`;
+  // Utility to generate jagged polygon points around a square base
+  function jaggedSquare(x, y, size) {
+    const jitter = size * 0.3;
+    // 4 corners with small random offsets
+    const points = [
+      [x + Math.random() * jitter, y + Math.random() * jitter],
+      [x + size - Math.random() * jitter, y + Math.random() * jitter],
+      [x + size - Math.random() * jitter, y + size - Math.random() * jitter],
+      [x + Math.random() * jitter, y + size - Math.random() * jitter],
+    ];
+    return points.map(p => p.join(',')).join(' ');
+  }
 
-  svg += `
-  <defs>
-    <!-- Trans-themed gradient -->
-    <linearGradient id="transGradient" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#55CDFC"/>
-      <stop offset="33%" stop-color="#F7A8B8"/>
-      <stop offset="66%" stop-color="#FFFFFF"/>
-      <stop offset="100%" stop-color="#F7A8B8"/>
-    </linearGradient>
+  // Colors for pulse animation cycling in trans flag colors
+  const pulseColors = ['#55CDFC', '#F7A8B8', '#FFFFFF', '#F7A8B8'];
 
-    <!-- Runner gradient for snakes -->
-    <linearGradient id="runnerGradient" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#55CDFC"/>
-      <stop offset="50%" stop-color="#FFFFFF"/>
-      <stop offset="100%" stop-color="#F7A8B8"/>
-    </linearGradient>
+  // Generate particle circles for bursts
+  function particle(cx, cy, delay) {
+    const r = 2 + Math.random() * 2;
+    const dx = (Math.random() - 0.5) * 20;
+    const dy = (Math.random() - 0.5) * 20;
+    const dur = 1 + Math.random();
 
-    <!-- Glow filter for snakes -->
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#F7A8B8" flood-opacity="0.6"/>
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#55CDFC" flood-opacity="0.4"/>
-    </filter>
+    return `
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="#F7A8B8" opacity="0">
+        <animate attributeName="opacity" values="0;1;0" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
+        <animate attributeName="cx" values="${cx};${cx + dx}" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="${cy};${cy + dy}" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="${r};0" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
+      </circle>
+    `;
+  }
 
-    <!-- Mask for particle fade effect -->
-    <mask id="fadeMask" x="0" y="0" width="${width}" height="${height}">
-      <rect width="${width}" height="${height}" fill="white" />
-      <!-- Gradient fade at right edge -->
-      <linearGradient id="fadeGradient" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="80%" stop-color="black" stop-opacity="0" />
-        <stop offset="100%" stop-color="black" stop-opacity="1" />
+  // Start SVG
+  let svg = `
+  <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" 
+    xmlns="http://www.w3.org/2000/svg" style="background:#111;border-radius:12px;">
+
+    <defs>
+      <!-- Pulse animation for fill -->
+      <linearGradient id="transPulse" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#55CDFC"/>
+        <stop offset="33%" stop-color="#F7A8B8"/>
+        <stop offset="66%" stop-color="#FFFFFF"/>
+        <stop offset="100%" stop-color="#F7A8B8"/>
       </linearGradient>
-      <rect x="${width * 0.8}" y="0" width="${width * 0.2}" height="${height}" fill="url(#fadeGradient)" />
-    </mask>
-  </defs>\n`;
 
-  // Background with slight trans gradient overlay
-  svg += `<rect width="${width}" height="${height}" fill="url(#transGradient)" opacity="0.05"/>\n`;
+      <!-- Glitch filter -->
+      <filter id="glitch" x="0" y="0" width="100%" height="100%">
+        <feColorMatrix in="SourceGraphic" type="matrix" values="
+          1 0 0 0 0
+          0 1 0 0 0
+          0 0 1 0 0
+          0 0 0 20 -10" result="glow"/>
+        <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="2" result="turb" seed="2">
+          <animate attributeName="baseFrequency" values="0.02;0.06;0.02" dur="2s" repeatCount="indefinite"/>
+        </feTurbulence>
+        <feDisplacementMap in="glow" in2="turb" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
 
-  // Draw static contribution squares
+      <!-- Pixelate Union Jack pattern -->
+      <pattern id="unionJack" patternUnits="userSpaceOnUse" width="60" height="40" patternTransform="scale(2)">
+        <rect width="60" height="40" fill="#00247d" />
+        <path d="M0 0 L60 40 M60 0 L0 40" stroke="#cf142b" stroke-width="8"/>
+        <rect x="27" width="6" height="40" fill="#cf142b"/>
+        <rect y="17" width="60" height="6" fill="#cf142b"/>
+        <rect x="28" y="0" width="4" height="40" fill="white"/>
+        <rect y="18" width="60" height="4" fill="white"/>
+      </pattern>
+
+      <filter id="pixelate" x="0" y="0" width="100%" height="100%" primitiveUnits="userSpaceOnUse">
+        <feFlood x="0" y="0" height="5" width="5" flood-color="black" result="flood"/>
+        <feMorphology operator="dilate" radius="1" in="SourceAlpha" result="dilated"/>
+        <feComposite in="flood" in2="dilated" operator="in" result="pixel"/>
+        <feTile in="pixel" result="tiled" />
+        <feComposite in="SourceGraphic" in2="tiled" operator="in" result="composite"/>
+      </filter>
+    </defs>
+
+    <!-- Background Union Jack with pixelate filter & opacity fade -->
+    <rect width="${width}" height="${height}" fill="url(#unionJack)" opacity="0.05" filter="url(#pixelate)">
+      <animate attributeName="opacity" values="0.05;0;0.05" dur="10s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- Commit Blocks as jagged polygons pulsing -->
+  `;
+
+  // Draw commit blocks
   for (let w = 0; w < weeks.length; w++) {
     for (let d = 0; d < 7; d++) {
       const day = weeks[w].contributionDays[d];
       if (!day) continue;
-      const color = getColor(day.contributionCount);
+
       const x = xStart + w * (squareSize + padding);
       const y = yStart + d * (squareSize + padding);
-      svg += `<rect x="${x}" y="${y}" width="${squareSize}" height="${squareSize}" fill="${color}" />\n`;
-    }
-  }
 
-  // Add multi-snake trails - multiple rectangles moving independently with glow filter and gradient fill
-  const snakeCount = 6;
-  const snakeDuration = 56; // seconds
-  for (let s = 0; s < snakeCount; s++) {
-    // Calculate row based on s, spread out vertically but loop around 7 days
-    const row = s % 7;
-    const y = yStart + row * (squareSize + padding) + 2;
-    // Stagger start time so snakes are spaced out
-    const begin = (s * snakeDuration) / snakeCount;
+      // Get color index for pulse cycle depending on contributionCount
+      const pulseIdx = Math.min(Math.floor(day.contributionCount / 2), pulseColors.length - 1);
 
-    // Snake length in squares
-    const snakeLength = 5;
-    for (let segment = 0; segment < snakeLength; segment++) {
-      const delay = begin + (segment * 0.8);
+      const points = jaggedSquare(x, y, squareSize);
+
+      // Polygon with pulse animation on fill color
       svg += `
-      <rect
-        x="${xStart + 2 - segment * (squareSize + padding)}"
-        y="${y}"
-        width="20"
-        height="20"
-        rx="5"
-        ry="5"
-        fill="url(#runnerGradient)"
-        filter="url(#glow)"
-        opacity="${1 - segment * 0.15}"
-      >
-        <animate
-          attributeName="x"
-          values="${xStart + 2 - segment * (squareSize + padding)};${xStart + (squareSize + padding) * 51 + 2 - segment * (squareSize + padding)}"
-          dur="${snakeDuration}s"
-          begin="${delay}s"
-          repeatCount="indefinite"
-          keyTimes="0;1"
-        />
-      </rect>\n`;
+        <polygon points="${points}" fill="${pulseColors[pulseIdx]}" fill-opacity="0.9">
+          <animate 
+            attributeName="fill" 
+            values="${pulseColors.join(';')}" 
+            dur="4s" 
+            repeatCount="indefinite" 
+            begin="${(w + d) * 0.3}s"
+          />
+        </polygon>
+      `;
+
+      // If commit count high, add particle bursts
+      if (day.contributionCount >= 7) {
+        for (let i = 0; i < 4; i++) {
+          svg += particle(x + squareSize / 2, y + squareSize / 2, i * 0.3);
+        }
+      }
     }
   }
 
-  // Add particle-like dots that fade and follow snakes (using circles with opacity animation)
-  const particleCount = 30;
-  for (let p = 0; p < particleCount; p++) {
-    const row = p % 7;
-    const y = yStart + row * (squareSize + padding) + 12;
-    const startX = xStart + Math.random() * (squareSize + padding) * 51;
-    const duration = 15 + Math.random() * 10;
-    const delay = Math.random() * snakeDuration;
+  // Glitchy Text overlays
+  svg += `
+    <text x="${width/2}" y="30" text-anchor="middle" fill="#F7A8B8" font-size="18" font-weight="bold" font-family="monospace" filter="url(#glitch)" opacity="0.7">
+      TRANS RIGHTS = HUMAN RIGHTS
+    </text>
+    <text x="${width/2 + 2}" y="32" text-anchor="middle" fill="#55CDFC" font-size="18" font-weight="bold" font-family="monospace" opacity="0.6" style="mix-blend-mode: screen;">
+      TRANS RIGHTS = HUMAN RIGHTS
+    </text>
 
-    svg += `
-    <circle
-      cx="${startX}"
-      cy="${y}"
-      r="3"
-      fill="#FFFFFF"
-      fill-opacity="0.8"
-      mask="url(#fadeMask)"
-    >
-      <animate
-        attributeName="cx"
-        values="${startX};${width + 10}"
-        dur="${duration}s"
-        begin="${delay}s"
-        repeatCount="indefinite"
-      />
-      <animate
-        attributeName="fill-opacity"
-        values="0.8;0;0.8"
-        dur="${duration}s"
-        begin="${delay}s"
-        repeatCount="indefinite"
-      />
-    </circle>\n`;
-  }
+    <text x="${width/2}" y="${height - 20}" text-anchor="middle" fill="#cf142b" font-size="14" font-weight="bold" font-family="monospace" filter="url(#glitch)" opacity="0.4">
+      NO REFORM UK
+    </text>
+    <text x="${width/2 + 2}" y="${height - 18}" text-anchor="middle" fill="#cf142b" font-size="14" font-weight="bold" font-family="monospace" opacity="0.3" style="mix-blend-mode: screen;">
+      NO REFORM UK
+    </text>
+  `;
 
   svg += '</svg>';
+
   return svg;
 }
 
