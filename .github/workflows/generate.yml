@@ -24,13 +24,13 @@ jobs:
 
       - name: Generate SVG
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
           USERNAME: Seristic
         run: npm run generate
 
       - name: Commit and push SVG using PAT
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
