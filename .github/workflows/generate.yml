@@ -2,7 +2,7 @@ name: Generate Commit Runner Game
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # runs daily at midnight UTC
+    - cron: '0 0 * * *'  # Every day at midnight UTC
   workflow_dispatch:
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
       - name: Generate SVG
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: ${{ secrets.GITHUB_USERNAME }}
+          USERNAME: Seristic
         run: npm run generate
 
       - name: Commit and push SVG
