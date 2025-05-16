@@ -3,7 +3,7 @@ import fs from 'fs';
 
 const username = process.env.USERNAME || "Seristic";
 const GITHUB_API = 'https://api.github.com/graphql';
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
+const GITHUB_TOKEN = process.env.PAT_TOKEN || '';
 
 const query = `
 query($login: String!) {
