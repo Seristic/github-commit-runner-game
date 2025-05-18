@@ -2,6 +2,7 @@
   "name": "github-rpg-profile",
   "version": "1.0.0",
   "description": "Generate RPG-style GitHub profile README",
+  "type": "module",
   "main": "update-readme.js",
   "scripts": {
     "start": "node update-readme.js"
