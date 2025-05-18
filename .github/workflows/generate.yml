@@ -1,40 +1,25 @@
-name: Generate Commit Runner Game
+name: Update GitHub Profile RPG Stats
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * *' # every day
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
-  build:
+  update-readme:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Fetch GitHub Stats
+        uses: jayrajroham/github-stats-readme@v1.0.0
         with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Generate SVG
-        env:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-          USERNAME: Seristic
-        run: npm run generate
 
-      - name: Commit and push SVG using PAT
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+      - name: Commit & Push
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add runner-game.svg
-          git commit -m "Update commit runner game SVG" || echo "No changes to commit"
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
-          git push origin HEAD:master
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add README.md
+          git commit -m "update RPG stats"
+          git push
