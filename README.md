@@ -11,7 +11,7 @@ This profile is not just a showcase of code but a celebration of identity, resil
 |-------|------------|
 | 2020 | Was in College studying in Computing Science  |
 | 2022 | Came out as trans and started integrating my identity into my work and community. |
-| 2025 |  Endured the impact of a [devastating ruling](https://example-link-to-news) undermining trans rights — a stark reminder of the ongoing fight for dignity and existence. |
+| 2025 | **Recent:** Endured the impact of a [devastating ruling](https://example-link-to-news) undermining trans rights — a stark reminder of the ongoing fight for dignity and existence. |
 
 > *“Coding my story, one commit at a time — proud, visible, unstoppable.”*
 
