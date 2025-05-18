@@ -44,4 +44,4 @@ jobs:
           git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${GITHUB_USERNAME}/${GITHUB_USERNAME}.git
           git add README.md
           git diff --cached --quiet || git commit -m "Update RPG stats"
-          git push origin HEAD:main
+          git push origin HEAD:master
