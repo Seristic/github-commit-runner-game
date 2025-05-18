@@ -1,6 +1,8 @@
 # Welcome to my GitHub Profile!
 
-{{TRANS_FLAG}}
+<p align="center">
+  <img src="trans-flag.svg" alt="Transgender Pride Flag" width="300" />
+</p>
 
 <h1 align="center">🎮 GitHub RPG Profile: <span style="color:#ffb347">{{USERNAME}}</span></h1>
 
