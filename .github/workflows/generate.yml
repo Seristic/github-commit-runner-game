@@ -37,4 +37,4 @@ jobs:
           git remote set-url origin https://x-access-token:$PAT_TOKEN@github.com/$GITHUB_USERNAME/gamer-style-profile.git
           git add README.md
           git diff --cached --quiet || git commit -m "Update RPG stats"
-          git push origin HEAD:master
+          git push https://x-access-token:$PAT_TOKEN@github.com/$GITHUB_USERNAME/gamer-style-profile.git HEAD:master
