@@ -1,3 +1,7 @@
+# Welcome to my GitHub Profile!
+
+{{TRANS_FLAG}}
+
 <h1 align="center">🎮 GitHub RPG Profile: <span style="color:#ffb347">{{USERNAME}}</span></h1>
 
 <p align="center">
