@@ -174,4 +174,9 @@ async function main() {
       .replace(/{{COMMITS}}/g, stats.commits.toString())
       .replace(/{{ISSUES}}/g, stats.issues.toString())
       .replace(/{{PRS}}/g, stats.prs.toString())
-      .replace(/{{MERGEDPRS}}/g, stat
+      .replace(/{{MERGEDPRS}}/g, stats.mergedPRs.toString())
+      .replace(/{{COMMENTS}}/g, stats.comments.toString())
+      .replace(/{{STARS}}/g, stats.stars.toString())
+      .replace(/{{FOLLOWERS}}/g, stats.followers.toString())
+      .replace(/{{REPOS}}/g, stats.repos.toString())
+      .replace(/{{TRANS_FLAG}}/g, transFlag);
