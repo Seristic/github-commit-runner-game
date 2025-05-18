@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300" viewBox="0 0 600 300">
+  <!-- Light blue stripe -->
+  <rect width="600" height="60" y="0" fill="#55CDFC"></rect>
+  <!-- Pink stripe -->
+  <rect width="600" height="60" y="60" fill="#F7A8B8"></rect>
+  <!-- White stripe -->
+  <rect width="600" height="60" y="120" fill="white"></rect>
+  <!-- Pink stripe -->
+  <rect width="600" height="60" y="180" fill="#F7A8B8"></rect>
+  <!-- Light blue stripe -->
+  <rect width="600" height="60" y="240" fill="#55CDFC"></rect>
+</svg>
