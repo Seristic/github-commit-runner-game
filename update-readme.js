@@ -1,4 +1,5 @@
 import { graphql } from "@octokit/graphql";
+import fs from "fs";
 
 const token = process.env.PAT_TOKEN;
 if (!token) {
@@ -11,7 +12,6 @@ const graphqlWithAuth = graphql.defaults({
   },
 });
 
-// Helper function to get user ID needed for commit queries
 async function getUserId(username) {
   const query = `
     query($username: String!) {
@@ -24,7 +24,6 @@ async function getUserId(username) {
   return response.user.id;
 }
 
-// Fetch stats via GitHub GraphQL API
 async function getStatsGraphQL(username) {
   let afterCursor = null;
   let totalCommits = 0;
@@ -69,9 +68,6 @@ async function getStatsGraphQL(username) {
             }
           }
         }
-        viewer {
-          id
-        }
       }
     `;
 
@@ -82,6 +78,7 @@ async function getStatsGraphQL(username) {
     };
 
     const response = await graphqlWithAuth(query, variables);
+
     const user = response.user;
 
     if (!user) {
@@ -94,11 +91,7 @@ async function getStatsGraphQL(username) {
     for (const repo of user.repositories.nodes) {
       totalStars += repo.stargazerCount || 0;
 
-      if (
-        repo.defaultBranchRef &&
-        repo.defaultBranchRef.target &&
-        repo.defaultBranchRef.target.history
-      ) {
+      if (repo.defaultBranchRef && repo.defaultBranchRef.target && repo.defaultBranchRef.target.history) {
         totalCommits += repo.defaultBranchRef.target.history.totalCount || 0;
       }
 
@@ -106,9 +99,7 @@ async function getStatsGraphQL(username) {
       totalIssues += repo.issues.totalCount || 0;
     }
 
-    afterCursor = user.repositories.pageInfo.hasNextPage
-      ? user.repositories.pageInfo.endCursor
-      : null;
+    afterCursor = user.repositories.pageInfo.hasNextPage ? user.repositories.pageInfo.endCursor : null;
   } while (afterCursor);
 
   return {
@@ -121,48 +112,46 @@ async function getStatsGraphQL(username) {
   };
 }
 
-// 30-day recent check
-function shouldShowRecentLabel(eventTimestamp) {
-  const now = Date.now();
-  const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000; // milliseconds
-  return now - eventTimestamp <= THIRTY_DAYS;
-}
-
 async function main() {
   try {
-    const username = "Seristic"; // Change this to your GitHub username
+    const username = "Seristic"; // Change to your GitHub username
     console.log(`Fetching GitHub stats for ${username}...`);
-
     const stats = await getStatsGraphQL(username);
     console.log("GitHub stats:", stats);
 
-    // Example event date for your "Recent" label
-    // Update this to your actual event date (UTC ISO string recommended)
-    const eventTimestamp = new Date("2025-04-18T00:00:00Z").getTime();
-
-    const recentLabel = shouldShowRecentLabel(eventTimestamp) ? "**Recent:**" : "";
-
-    // Prepare your README content
-    const readmeContent = `
-| 2025 | ${recentLabel} Important update affecting trans rights — this is a significant moment. |
-
-Attributes:
-💻 Commits: ${stats.totalCommits}
-🛠 Repositories: ${stats.totalRepos}
-⭐ Stars: ${stats.totalStars}
-👥 Followers: ${stats.totalFollowers}
-
+    // Your README template with placeholders
+    const template = `
+Attribute    Value
+💻 Commits   {{COMMITS}}
+🛠 Repositories  {{REPOS}}
+⭐ Stars     {{STARS}}
+👥 Followers {{FOLLOWERS}}
 ⚔️ Combat Log
-Action              Count      XP Value
-🔧 Issues Opened     ${stats.totalIssues}        🪙 +5 XP each
-🛡 Pull Requests     ${stats.totalPRs}         🪙 +10 XP each
-⚔ Merged Pull Requests (estimate)   TODO        🪙 +20 XP each
-💬 Code Comments     TODO       🪙 +2 XP each
+Action    Count    XP Value
+🔧 Issues Opened    {{ISSUES}}    🪙 +5 XP each
+🛡 Pull Requests    {{PRS}}    🪙 +10 XP each
+⚔ Merged Pull Requests    {{MERGEDPRS}}    🪙 +20 XP each
+💬 Code Comments    {{COMMENTS}}    🪙 +2 XP each
 `;
 
-    console.log(readmeContent);
+    // Replace placeholders with actual data
+    // NOTE: You might want to add calculation for MERGEDPRS and COMMENTS if you track those
+    const filledTemplate = template
+      .replace(/{{COMMITS}}/g, stats.totalCommits)
+      .replace(/{{REPOS}}/g, stats.totalRepos)
+      .replace(/{{STARS}}/g, stats.totalStars)
+      .replace(/{{FOLLOWERS}}/g, stats.totalFollowers)
+      .replace(/{{ISSUES}}/g, stats.totalIssues)
+      .replace(/{{PRS}}/g, stats.totalPRs)
+      .replace(/{{MERGEDPRS}}/g, "N/A") // Placeholder - implement if you fetch merged PRs count
+      .replace(/{{COMMENTS}}/g, "N/A"); // Placeholder - implement if you fetch comments count
 
-    // Here you would write readmeContent to your README.md file as needed.
+    // Output the filled template to console or write to a file
+    console.log("\n===== README OUTPUT =====\n");
+    console.log(filledTemplate);
+
+    // Optionally write to README.md file:
+    // fs.writeFileSync('README.md', filledTemplate, 'utf8');
 
   } catch (error) {
     console.error("Error fetching GitHub stats:", error);
