@@ -180,3 +180,14 @@ async function main() {
       .replace(/{{FOLLOWERS}}/g, stats.followers.toString())
       .replace(/{{REPOS}}/g, stats.repos.toString())
       .replace(/{{TRANS_FLAG}}/g, transFlag);
+
+        writeFileSync('README.md', template);
+
+    console.log('README.md updated!');
+  } catch (err) {
+    console.error('Error:', err);
+    process.exit(1);
+  }
+}
+
+main();
