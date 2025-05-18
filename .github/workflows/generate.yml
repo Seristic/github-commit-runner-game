@@ -30,7 +30,11 @@ jobs:
       - name: Commit & push updated README
         run: |
           git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.email "action@github.com"
+          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${{ env.GITHUB_USERNAME }}/gamer-style-profile.git
           git add README.md
-          git diff --quiet && echo "No changes to commit" || git commit -m "Update RPG stats"
-          git push
+          git commit -m "Update RPG stats" || echo "No changes to commit"
+          git push origin HEAD:master
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_USERNAME: ${{ env.GITHUB_USERNAME }}
