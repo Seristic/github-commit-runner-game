@@ -116,37 +116,42 @@ async function getStatsGraphQL(username) {
   };
 }
 
-// Function to determine if the "Recent" label should show based on maxSeconds (20 seconds here)
-function shouldShowRecentLabel(eventDateTimestamp, maxSeconds) {
+// Check if "Recent" label should appear within maxSeconds after eventTimestamp
+function shouldShowRecentLabel(eventTimestamp, maxSeconds) {
   const now = Date.now();
-  const diffSeconds = (now - eventDateTimestamp) / 1000;
-  return diffSeconds <= maxSeconds;
+  const diffSeconds = (now - eventTimestamp) / 1000;
+
+  console.log(`Current time (ms): ${now}`);
+  console.log(`Event time (ms): ${eventTimestamp}`);
+  console.log(`Time difference (seconds): ${diffSeconds}`);
+
+  return diffSeconds >= 0 && diffSeconds <= maxSeconds;
 }
 
 async function main() {
   try {
-    const username = "Seristic"; // Change to your GitHub username
+    const username = "Seristic"; // Your GitHub username
     console.log(`Fetching GitHub stats for ${username}...`);
     const stats = await getStatsGraphQL(username);
     console.log("GitHub stats:", stats);
 
-    // Example event date/time for the recent event (ISO 8601 string)
-    const eventDateStr = "2025-05-18T19:00:00Z"; // Adjust to your event time UTC
+    // Replace with the actual event timestamp (ISO 8601 string)
+    // Make sure this timestamp is in the past or right now (UTC)
+    const eventDateStr = new Date().toISOString(); // For testing, use current time
     const eventTimestamp = new Date(eventDateStr).getTime();
 
-    // Set maxSeconds to 20 for demo/testing
-    const maxSeconds = 60;
+    const maxSeconds = 20; // Show "Recent" if within 20 seconds
 
     const recentLabel = shouldShowRecentLabel(eventTimestamp, maxSeconds)
       ? "**Recent:**"
       : "";
 
-    // Read your README template file
+    // Read README template
     const readmeTemplatePath = path.join(process.cwd(), "README.template.md");
     const readmeOutputPath = path.join(process.cwd(), "README.md");
     let readmeContent = fs.readFileSync(readmeTemplatePath, "utf-8");
 
-    // Replace placeholders in your README template
+    // Replace placeholders
     readmeContent = readmeContent
       .replace(/{{RECENT_LABEL}}/g, recentLabel)
       .replace(/{{TOTAL_COMMITS}}/g, stats.totalCommits)
@@ -155,7 +160,6 @@ async function main() {
       .replace(/{{TOTAL_STARS}}/g, stats.totalStars)
       .replace(/{{TOTAL_FOLLOWERS}}/g, stats.totalFollowers);
 
-    // Write updated README file
     fs.writeFileSync(readmeOutputPath, readmeContent, "utf-8");
 
     console.log("README.md updated successfully!");
