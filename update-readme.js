@@ -4,12 +4,12 @@ import { Octokit } from '@octokit/rest';
 const PAT = process.env.PAT_TOKEN;
 const USERNAME = process.env.GITHUB_USERNAME;
 
-if (!PAT_TOKEN || !USERNAME) {
+if (!PAT || !USERNAME) {
   console.error('Missing PAT_TOKEN or GITHUB_USERNAME environment variables');
   process.exit(1);
 }
 
-const octokit = new Octokit({ auth: GITHUB_TOKEN });
+const octokit = new Octokit({ auth: PAT });
 
 function xpBar(xp) {
   const fullBlocks = Math.floor(xp / 10);
@@ -25,7 +25,6 @@ async function getStats() {
   });
 
   // Approximate commits: repos * 100 (GitHub API limits full count for commits)
-  // For a more accurate count, GraphQL or local git clone is needed.
   const totalCommits = repos.length * 100;
 
   // Get issues opened by the user (all states)
