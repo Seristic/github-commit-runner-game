@@ -18,16 +18,14 @@ function xpBar(xp) {
 }
 
 async function getStats() {
-  // Fetch all public repos for the user (max 100)
   const repos = await octokit.paginate(octokit.repos.listForUser, {
     username: USERNAME,
     per_page: 100,
   });
 
-  // Approximate commits as repos * 100 (GitHub doesn't expose total commits directly easily)
+  // Approximate commits as repos * 100 (API limits)
   const totalCommits = repos.length * 100;
 
-  // Fetch all issues created by the user
   const issues = await octokit.paginate(octokit.issues.listForUser, {
     username: USERNAME,
     filter: 'created',
@@ -35,34 +33,28 @@ async function getStats() {
     per_page: 100,
   });
 
-  // Fetch total PRs created by the user using search API
   const prsResult = await octokit.search.issuesAndPullRequests({
     q: `is:pr author:${USERNAME}`,
     per_page: 1,
   });
   const totalPRs = prsResult.data.total_count;
 
-  // Fetch merged PRs count (bonus XP)
   const mergedPRsResult = await octokit.search.issuesAndPullRequests({
     q: `is:pr author:${USERNAME} is:merged`,
     per_page: 1,
   });
   const mergedPRs = mergedPRsResult.data.total_count;
 
-  // Fetch user details to get followers count
   const userData = await octokit.users.getByUsername({ username: USERNAME });
   const followers = userData.data.followers;
 
-  // Calculate total stars across all repos
   let totalStars = 0;
   for (const repo of repos) {
     totalStars += repo.stargazers_count;
   }
 
-  // Count comments made by the user on issues and PR reviews in their own repos
   let totalComments = 0;
   for (const repo of repos) {
-    // Issue comments
     const issueComments = await octokit.paginate(octokit.issues.listCommentsForRepo, {
       owner: USERNAME,
       repo: repo.name,
@@ -70,7 +62,6 @@ async function getStats() {
     });
     totalComments += issueComments.filter(c => c.user.login === USERNAME).length;
 
-    // PR review comments
     const prReviewComments = await octokit.paginate(octokit.pulls.listReviewCommentsForRepo, {
       owner: USERNAME,
       repo: repo.name,
@@ -99,7 +90,6 @@ function calculateXP(xp) {
   return xp % 100;
 }
 
-// Calculate total XP with weights for different activities
 function calculateTotalXP(stats) {
   return (
     stats.commits * 1 +         // 1 XP per commit
@@ -121,16 +111,26 @@ async function main() {
     const level = calculateLevel(totalXP);
     const xp = calculateXP(totalXP);
     const bar = xpBar(xp);
+    const nextXP = 100 - xp;
 
     console.log(`Level: ${level}, XP: ${xp}, Total XP: ${totalXP}`);
 
     let template = readFileSync('README.template.md', 'utf-8');
+
+    // Trans pride flag HTML snippet
+    const transFlag = `
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Transgender_Pride_flag.svg/320px-Transgender_Pride_flag.svg.png" alt="Trans Pride Flag" width="200" />
+</p>
+`;
 
     // Replace placeholders in the README template
     template = template
       .replace(/{{USERNAME}}/g, USERNAME)
       .replace(/{{LEVEL}}/g, level)
       .replace(/{{XP_BAR}}/g, bar)
+      .replace(/{{XP}}/g, xp)
+      .replace(/{{NEXT_XP}}/g, nextXP)
       .replace(/{{COMMITS}}/g, stats.commits)
       .replace(/{{ISSUES}}/g, stats.issues)
       .replace(/{{PRS}}/g, stats.prs)
@@ -138,7 +138,9 @@ async function main() {
       .replace(/{{COMMENTS}}/g, stats.comments)
       .replace(/{{STARS}}/g, stats.stars)
       .replace(/{{FOLLOWERS}}/g, stats.followers)
-      .replace(/{{REPOS}}/g, stats.repos);
+      .replace(/{{REPOS}}/g, stats.repos)
+      // Insert trans flag HTML at placeholder {{TRANS_FLAG}}
+      .replace(/{{TRANS_FLAG}}/g, transFlag);
 
     writeFileSync('README.md', template);
 
