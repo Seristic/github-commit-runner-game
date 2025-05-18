@@ -24,7 +24,7 @@ This profile is not just a showcase of code but a celebration of identity, resil
 <h1 align="center">🎮 GitHub RPG Profile: <span style="color:#ffb347">Seristic</span></h1>
 
 <p align="center">
-  <b>Level 18</b><br>
+  <b>Level 6</b><br>
   <code>░░░░░░░░░░</code><br>
   <i>XP to next level: 9/100</i>
 </p>
@@ -35,7 +35,7 @@ This profile is not just a showcase of code but a celebration of identity, resil
 
 | Attribute        | Value        |
 |------------------|--------------|
-| 💻 Commits       | 1200  |
+| 💻 Commits       | 0  |
 | 🛠 Repositories  | 12    |
 | ⭐ Stars         | 4    |
 | 👥 Followers     | 2|
@@ -56,7 +56,7 @@ This profile is not just a showcase of code but a celebration of identity, resil
 ### 📈 Progression Summary
 
 - **Total XP:** *(hidden, used for level calculation)*
-- **Current Level:** `18`
+- **Current Level:** `6`
 - **Progress:** `░░░░░░░░░░` (9/100 XP)
 - **Next Level In:** 91 XP
 
