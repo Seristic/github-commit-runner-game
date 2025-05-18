@@ -11,40 +11,60 @@ if (!PAT || !USERNAME) {
 
 const octokit = new Octokit({ auth: PAT });
 
-// Simple Unicode block-based XP bar
 function xpBar(xp) {
   const fullBlocks = Math.floor(xp / 10);
   const emptyBlocks = 10 - fullBlocks;
   return '█'.repeat(fullBlocks) + '░'.repeat(emptyBlocks);
 }
 
-// Fetch commit count for a single repo using contributors stats
+// Fetch commit count for a single repo using the contributors stats API
 async function getCommitCountForRepo(owner, repoName) {
   try {
-    const stats = await octokit.repos.getContributorsStats({
-      owner,
-      repo: repoName,
-    });
+    const stats = await octokit.repos.getContributorsStats({ owner, repo: repoName });
+    if (!Array.isArray(stats.data)) return 0;
 
-    if (!Array.isArray(stats.data)) {
-      console.warn(`Commit stats for "${repoName}" not ready or invalid.`);
-      return 0;
-    }
-
-    const userStats = stats.data.find(
-      contributor =>
-        contributor.author?.login?.toLowerCase() === USERNAME.toLowerCase()
+    const userStats = stats.data.find(contributor =>
+      contributor.author?.login?.toLowerCase() === USERNAME.toLowerCase()
     );
     return userStats ? userStats.total : 0;
-
   } catch (e) {
     if (e.status === 202) {
-      console.warn(`Stats for "${repoName}" are being generated, returning 0.`);
+      console.warn(`Stats for repo "${repoName}" are being generated, returning 0 commits for now.`);
       return 0;
     }
-    console.error(`Error fetching commit stats for "${repoName}":`, e);
+    console.error(`Error fetching commit stats for repo "${repoName}":`, e);
     return 0;
   }
+}
+
+// ✅ New GraphQL-based PR stats
+async function getPRStatsWithGraphQL(username) {
+  const result = await octokit.graphql(
+    `
+    query($username: String!) {
+      user(login: $username) {
+        pullRequests {
+          totalCount
+        }
+        contributionsCollection {
+          pullRequestContributions(first: 100) {
+            nodes {
+              pullRequest {
+                merged
+              }
+            }
+          }
+        }
+      }
+    }`,
+    { username }
+  );
+
+  const totalPRs = result.user.pullRequests.totalCount;
+  const mergedPRs = result.user.contributionsCollection.pullRequestContributions.nodes
+    .filter(pr => pr.pullRequest.merged).length;
+
+  return { totalPRs, mergedPRs };
 }
 
 async function getStats() {
@@ -66,51 +86,30 @@ async function getStats() {
     per_page: 100,
   });
 
-  const prsResult = await octokit.search.issuesAndPullRequests({
-    q: `is:pr author:${USERNAME}`,
-    per_page: 1,
-  });
-  const totalPRs = prsResult.data.total_count;
-
-  const mergedPRsResult = await octokit.search.issuesAndPullRequests({
-    q: `is:pr author:${USERNAME} is:merged`,
-    per_page: 1,
-  });
-  const mergedPRs = mergedPRsResult.data.total_count;
+  const { totalPRs, mergedPRs } = await getPRStatsWithGraphQL(USERNAME);
 
   const userData = await octokit.users.getByUsername({ username: USERNAME });
   const followers = userData.data.followers;
 
   let totalStars = 0;
+  let totalComments = 0;
+
   for (const repo of repos) {
     totalStars += repo.stargazers_count;
-  }
 
-  let totalComments = 0;
-  for (const repo of repos) {
-    const issueComments = await octokit.paginate(
-      octokit.issues.listCommentsForRepo,
-      {
-        owner: USERNAME,
-        repo: repo.name,
-        per_page: 100,
-      }
-    );
-    totalComments += issueComments.filter(
-      c => c.user.login === USERNAME
-    ).length;
+    const issueComments = await octokit.paginate(octokit.issues.listCommentsForRepo, {
+      owner: USERNAME,
+      repo: repo.name,
+      per_page: 100,
+    });
+    totalComments += issueComments.filter(c => c.user.login === USERNAME).length;
 
-    const prReviewComments = await octokit.paginate(
-      octokit.pulls.listReviewCommentsForRepo,
-      {
-        owner: USERNAME,
-        repo: repo.name,
-        per_page: 100,
-      }
-    );
-    totalComments += prReviewComments.filter(
-      c => c.user.login === USERNAME
-    ).length;
+    const prReviewComments = await octokit.paginate(octokit.pulls.listReviewCommentsForRepo, {
+      owner: USERNAME,
+      repo: repo.name,
+      per_page: 100,
+    });
+    totalComments += prReviewComments.filter(c => c.user.login === USERNAME).length;
   }
 
   return {
@@ -125,6 +124,14 @@ async function getStats() {
   };
 }
 
+function calculateLevel(xp) {
+  return Math.floor(xp / 100);
+}
+
+function calculateXP(xp) {
+  return xp % 100;
+}
+
 function calculateTotalXP(stats) {
   return (
     stats.commits * 1 +
@@ -135,14 +142,6 @@ function calculateTotalXP(stats) {
     stats.stars * 3 +
     stats.followers * 10
   );
-}
-
-function calculateLevel(xp) {
-  return Math.floor(xp / 100);
-}
-
-function calculateXP(xp) {
-  return xp % 100;
 }
 
 async function main() {
@@ -175,19 +174,4 @@ async function main() {
       .replace(/{{COMMITS}}/g, stats.commits.toString())
       .replace(/{{ISSUES}}/g, stats.issues.toString())
       .replace(/{{PRS}}/g, stats.prs.toString())
-      .replace(/{{MERGEDPRS}}/g, stats.mergedPRs.toString())
-      .replace(/{{COMMENTS}}/g, stats.comments.toString())
-      .replace(/{{STARS}}/g, stats.stars.toString())
-      .replace(/{{FOLLOWERS}}/g, stats.followers.toString())
-      .replace(/{{REPOS}}/g, stats.repos.toString())
-      .replace(/{{TRANS_FLAG}}/g, transFlag);
-
-    writeFileSync('README.md', template);
-    console.log('README.md updated!');
-  } catch (err) {
-    console.error('Error:', err);
-    process.exit(1);
-  }
-}
-
-main();
+      .replace(/{{MERGEDPRS}}/g, stat
