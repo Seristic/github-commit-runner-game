@@ -1,6 +1,6 @@
 # 🧝‍♀️ GitHub Adventurer: @{{Seristic}}
 
-**Level**: 12  
+**Level**: 18  
 **XP**: ░░░░░░░░░░  
 **Commits**: 1200  
 **Issues Opened**: 1  
