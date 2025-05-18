@@ -1,5 +1,5 @@
 import { graphql } from "@octokit/graphql";
-import fs from "fs";
+import fs from "fs/promises";
 
 const token = process.env.PAT_TOKEN;
 if (!token) {
@@ -32,8 +32,8 @@ async function getStatsGraphQL(username) {
   let totalIssues = 0;
   let totalStars = 0;
   let totalFollowers = 0;
-  let totalRepos = 0;
   let totalComments = 0;
+  let totalRepos = 0;
 
   const userId = await getUserId(username);
 
@@ -44,7 +44,7 @@ async function getStatsGraphQL(username) {
           followers {
             totalCount
           }
-          repositories(ownerAffiliations: OWNER, first: 100, after: $afterCursor) {
+          repositories(ownerAffiliations: OWNER, first: 50, after: $afterCursor) {
             totalCount
             pageInfo {
               hasNextPage
@@ -63,14 +63,12 @@ async function getStatsGraphQL(username) {
               }
               pullRequests(states: [OPEN, MERGED, CLOSED]) {
                 totalCount
-                nodes {
-                  state
-                  comments {
-                    totalCount
-                  }
-                }
+                totalMerged: totalCount(states: MERGED)
               }
               issues {
+                totalCount
+              }
+              pullRequestsComments: pullRequests {
                 totalCount
               }
             }
@@ -86,7 +84,6 @@ async function getStatsGraphQL(username) {
     };
 
     const response = await graphqlWithAuth(query, variables);
-
     const user = response.user;
 
     if (!user) {
@@ -104,16 +101,16 @@ async function getStatsGraphQL(username) {
       }
 
       totalPRs += repo.pullRequests.totalCount || 0;
+      totalMergedPRs += repo.pullRequests.totalMerged || 0;
       totalIssues += repo.issues.totalCount || 0;
 
-      // Count merged PRs and sum comments on PRs
-      for (const pr of repo.pullRequests.nodes) {
-        if (pr.state === "MERGED") totalMergedPRs++;
-        totalComments += pr.comments.totalCount || 0;
-      }
+      // Note: GitHub API doesn't directly give comments on PRs/issues here
+      // So just example placeholder, you might want to query comments separately if needed
+      totalComments += repo.pullRequestsComments?.totalCount || 0;
     }
 
     afterCursor = user.repositories.pageInfo.hasNextPage ? user.repositories.pageInfo.endCursor : null;
+
   } while (afterCursor);
 
   return {
@@ -123,50 +120,42 @@ async function getStatsGraphQL(username) {
     totalIssues,
     totalStars,
     totalFollowers,
-    totalRepos,
     totalComments,
+    totalRepos,
   };
 }
 
 async function main() {
   try {
-    const username = "Seristic"; // Change to your GitHub username
+    const username = "Seristic"; // Change this to your GitHub username
     console.log(`Fetching GitHub stats for ${username}...`);
     const stats = await getStatsGraphQL(username);
     console.log("GitHub stats:", stats);
 
-    const template = `
-Attribute    Value
-💻 Commits   {{COMMITS}}
-🛠 Repositories  {{REPOS}}
-⭐ Stars     {{STARS}}
-👥 Followers {{FOLLOWERS}}
-⚔️ Combat Log
-Action    Count    XP Value
-🔧 Issues Opened    {{ISSUES}}    🪙 +5 XP each
-🛡 Pull Requests    {{PRS}}    🪙 +10 XP each
-⚔ Merged Pull Requests    {{MERGEDPRS}}    🪙 +20 XP each
-💬 Code Comments    {{COMMENTS}}    🪙 +2 XP each
-`;
+    // Read the template README file with placeholders
+    const template = await fs.readFile("README-template.md", "utf8");
 
-    const filledTemplate = template
+    // Replace placeholders with actual data
+    const output = template
+      .replace(/{{USERNAME}}/g, username)
       .replace(/{{COMMITS}}/g, stats.totalCommits)
-      .replace(/{{REPOS}}/g, stats.totalRepos)
-      .replace(/{{STARS}}/g, stats.totalStars)
-      .replace(/{{FOLLOWERS}}/g, stats.totalFollowers)
-      .replace(/{{ISSUES}}/g, stats.totalIssues)
       .replace(/{{PRS}}/g, stats.totalPRs)
       .replace(/{{MERGEDPRS}}/g, stats.totalMergedPRs)
-      .replace(/{{COMMENTS}}/g, stats.totalComments);
+      .replace(/{{ISSUES}}/g, stats.totalIssues)
+      .replace(/{{STARS}}/g, stats.totalStars)
+      .replace(/{{FOLLOWERS}}/g, stats.totalFollowers)
+      .replace(/{{COMMENTS}}/g, stats.totalComments)
+      .replace(/{{REPOS}}/g, stats.totalRepos)
+      // Add more replacements here as needed
+      ;
 
-    console.log("\n===== README OUTPUT =====\n");
-    console.log(filledTemplate);
+    // Write to README.md (this will be your public profile README)
+    await fs.writeFile("README.md", output);
 
-    // Optionally write to README.md file:
-    // fs.writeFileSync('README.md', filledTemplate, 'utf8');
-
+    console.log("README.md updated successfully!");
   } catch (error) {
-    console.error("Error fetching GitHub stats:", error);
+    console.error("Error fetching GitHub stats or updating README:", error);
+    process.exit(1);
   }
 }
 
