@@ -1,8 +1,8 @@
 import { graphql } from "@octokit/graphql";
 
-const token = process.env.GITHUB_TOKEN;
+const token = process.env.PAT_TOKEN;
 if (!token) {
-  throw new Error("GITHUB_TOKEN env variable is required");
+  throw new Error("PAT_TOKEN env variable is required");
 }
 
 const graphqlWithAuth = graphql.defaults({
