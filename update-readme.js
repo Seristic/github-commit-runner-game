@@ -1,5 +1,4 @@
 import { graphql } from "@octokit/graphql";
-import fs from "fs/promises";
 
 const token = process.env.PAT_TOKEN;
 if (!token) {
@@ -12,6 +11,7 @@ const graphqlWithAuth = graphql.defaults({
   },
 });
 
+// Get user ID (needed for commit author filtering)
 async function getUserId(username) {
   const query = `
     query($username: String!) {
@@ -26,6 +26,7 @@ async function getUserId(username) {
 
 async function getStatsGraphQL(username) {
   let afterCursor = null;
+
   let totalCommits = 0;
   let totalPRs = 0;
   let totalMergedPRs = 0;
@@ -33,7 +34,6 @@ async function getStatsGraphQL(username) {
   let totalStars = 0;
   let totalFollowers = 0;
   let totalComments = 0;
-  let totalRepos = 0;
 
   const userId = await getUserId(username);
 
@@ -61,15 +61,19 @@ async function getStatsGraphQL(username) {
                   }
                 }
               }
-              pullRequests(states: [OPEN, MERGED, CLOSED]) {
+              pullRequestsAll: pullRequests(states: [OPEN, CLOSED, MERGED]) {
                 totalCount
-                totalMerged: totalCount(states: MERGED)
+              }
+              mergedPullRequests: pullRequests(states: MERGED) {
+                totalCount
               }
               issues {
                 totalCount
               }
-              pullRequestsComments: pullRequests {
-                totalCount
+              pullRequestComments: pullRequests {
+                comments {
+                  totalCount
+                }
               }
             }
           }
@@ -84,6 +88,7 @@ async function getStatsGraphQL(username) {
     };
 
     const response = await graphqlWithAuth(query, variables);
+
     const user = response.user;
 
     if (!user) {
@@ -91,7 +96,6 @@ async function getStatsGraphQL(username) {
     }
 
     totalFollowers = user.followers.totalCount;
-    totalRepos = user.repositories.totalCount;
 
     for (const repo of user.repositories.nodes) {
       totalStars += repo.stargazerCount || 0;
@@ -100,13 +104,14 @@ async function getStatsGraphQL(username) {
         totalCommits += repo.defaultBranchRef.target.history.totalCount || 0;
       }
 
-      totalPRs += repo.pullRequests.totalCount || 0;
-      totalMergedPRs += repo.pullRequests.totalMerged || 0;
+      totalPRs += repo.pullRequestsAll.totalCount || 0;
+      totalMergedPRs += repo.mergedPullRequests.totalCount || 0;
       totalIssues += repo.issues.totalCount || 0;
 
-      // Note: GitHub API doesn't directly give comments on PRs/issues here
-      // So just example placeholder, you might want to query comments separately if needed
-      totalComments += repo.pullRequestsComments?.totalCount || 0;
+      // Sum all comments on pull requests
+      if (repo.pullRequestComments && repo.pullRequestComments.comments) {
+        totalComments += repo.pullRequestComments.comments.totalCount || 0;
+      }
     }
 
     afterCursor = user.repositories.pageInfo.hasNextPage ? user.repositories.pageInfo.endCursor : null;
@@ -121,41 +126,21 @@ async function getStatsGraphQL(username) {
     totalStars,
     totalFollowers,
     totalComments,
-    totalRepos,
   };
 }
 
+// This is your main function where you can also update your README or calculate levels
 async function main() {
   try {
-    const username = "Seristic"; // Change this to your GitHub username
+    const username = "Seristic"; // Change to your GitHub username
     console.log(`Fetching GitHub stats for ${username}...`);
     const stats = await getStatsGraphQL(username);
     console.log("GitHub stats:", stats);
 
-    // Read the template README file with placeholders
-    const template = await fs.readFile("README-template.md", "utf8");
+    // Example: you can replace placeholders here or update README file
 
-    // Replace placeholders with actual data
-    const output = template
-      .replace(/{{USERNAME}}/g, username)
-      .replace(/{{COMMITS}}/g, stats.totalCommits)
-      .replace(/{{PRS}}/g, stats.totalPRs)
-      .replace(/{{MERGEDPRS}}/g, stats.totalMergedPRs)
-      .replace(/{{ISSUES}}/g, stats.totalIssues)
-      .replace(/{{STARS}}/g, stats.totalStars)
-      .replace(/{{FOLLOWERS}}/g, stats.totalFollowers)
-      .replace(/{{COMMENTS}}/g, stats.totalComments)
-      .replace(/{{REPOS}}/g, stats.totalRepos)
-      // Add more replacements here as needed
-      ;
-
-    // Write to README.md (this will be your public profile README)
-    await fs.writeFile("README.md", output);
-
-    console.log("README.md updated successfully!");
   } catch (error) {
     console.error("Error fetching GitHub stats or updating README:", error);
-    process.exit(1);
   }
 }
 
