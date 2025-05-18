@@ -1,0 +1,12 @@
+{
+  "name": "github-rpg-profile",
+  "version": "1.0.0",
+  "description": "Generate RPG-style GitHub profile README",
+  "main": "update-readme.js",
+  "scripts": {
+    "start": "node update-readme.js"
+  },
+  "dependencies": {
+    "@octokit/rest": "^20.0.0"
+  }
+}
