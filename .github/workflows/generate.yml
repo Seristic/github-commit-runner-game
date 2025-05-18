@@ -23,8 +23,8 @@ jobs:
 
       - name: Run update-readme.js script
         env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}  # Use your PAT token here
-          GITHUB_USERNAME: YOUR_GITHUB_USERNAME   # replace with your GitHub username
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_USERNAME: Seristic
         run: node update-readme.js
 
       - name: Commit & push updated README
