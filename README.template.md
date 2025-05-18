@@ -10,32 +10,32 @@
 
 ### 🧠 Character Stats
 
-| Attribute       | Value          |
-|----------------|----------------|
-| 💻 Commits     | {{COMMITS}}    |
-| 🛠 Repositories | {{REPOS}}       |
-| ⭐ Stars        | {{STARS}}       |
-| 👥 Followers    | {{FOLLOWERS}}   |
+| Attribute        | Value        |
+|------------------|--------------|
+| 💻 Commits       | {{COMMITS}}  |
+| 🛠 Repositories  | {{REPOS}}    |
+| ⭐ Stars         | {{STARS}}    |
+| 👥 Followers     | {{FOLLOWERS}}|
 
 ---
 
 ### ⚔️ Combat Log
 
-| Action                | Count        | XP Value |
-|-----------------------|--------------|----------|
-| 🔧 Issues Opened      | {{ISSUES}}   | 🪙 +5 XP each |
-| 🛡 Pull Requests       | {{PRS}}      | 🪙 +10 XP each |
-| ⚔ Merged Pull Requests| {{MERGEDPRS}}| 🪙 +20 XP each |
-| 💬 Code Comments      | {{COMMENTS}} | 🪙 +2 XP each |
+| Action                 | Count         | XP Value      |
+|------------------------|---------------|---------------|
+| 🔧 Issues Opened        | {{ISSUES}}    | 🪙 +5 XP each  |
+| 🛡 Pull Requests        | {{PRS}}       | 🪙 +10 XP each |
+| ⚔ Merged Pull Requests  | {{MERGEDPRS}} | 🪙 +20 XP each |
+| 💬 Code Comments       | {{COMMENTS}}  | 🪙 +2 XP each  |
 
 ---
 
 ### 📈 Progression Summary
 
-- **Total XP:** *(hidden, used for level calc)*
+- **Total XP:** *(hidden, used for level calculation)*
 - **Current Level:** `{{LEVEL}}`
 - **Progress:** `{{XP_BAR}}` ({{XP}}/100 XP)
-- **Next Level In:** {{100 - XP}} XP
+- **Next Level In:** {{NEXT_XP}} XP
 
 ---
 
