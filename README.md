@@ -25,8 +25,8 @@ This profile is not just a showcase of code but a celebration of identity, resil
 
 <p align="center">
   <b>Level 6</b><br>
-  <code>░░░░░░░░░░</code><br>
-  <i>XP to next level: 9/100</i>
+  <code>█░░░░░░░░░</code><br>
+  <i>XP to next level: 19/100</i>
 </p>
 
 ---
@@ -35,7 +35,7 @@ This profile is not just a showcase of code but a celebration of identity, resil
 
 | Attribute        | Value        |
 |------------------|--------------|
-| 💻 Commits       | 0  |
+| 💻 Commits       | 10  |
 | 🛠 Repositories  | 12    |
 | ⭐ Stars         | 4    |
 | 👥 Followers     | 2|
@@ -57,8 +57,8 @@ This profile is not just a showcase of code but a celebration of identity, resil
 
 - **Total XP:** *(hidden, used for level calculation)*
 - **Current Level:** `6`
-- **Progress:** `░░░░░░░░░░` (9/100 XP)
-- **Next Level In:** 91 XP
+- **Progress:** `█░░░░░░░░░` (19/100 XP)
+- **Next Level In:** 81 XP
 
 ---
 
