@@ -36,10 +36,11 @@ async function getStats() {
   });
 
   // Get total PRs created by user using Search API
-  const prsResult = await octokit.search.issuesAndPullRequests({
-    q: `is:pr author:${USERNAME}`,
-    per_page: 1,
-  });
+const issuesResult = await octokit.search.issuesAndPullRequests({
+  q: `is:issue author:${USERNAME}`,
+  per_page: 1,
+});
+const totalIssues = issuesResult.data.total_count;
 
   return {
     commits: totalCommits,
