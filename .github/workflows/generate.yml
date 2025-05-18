@@ -3,7 +3,7 @@ name: Update GitHub Profile RPG Stats
 on:
   push:
     branches:
-      - main        # or 'master', change to your default branch
+      - master        # or 'master', change to your default branch
   pull_request:
     types: [opened, closed, merged]
   issues:
