@@ -1,45 +1,13 @@
-# 🧝‍♀️ GitHub Adventurer: @{{Seristic}}
+# GitHub RPG Profile for Seristic
 
-**Level**: 18  
-**XP**: ░░░░░░░░░░  
-**Commits**: 1200  
-**Issues Opened**: 1  
-**Pull Requests Created**: 19  
-**Public Repos**: 12  
+Level: 18  
+XP Bar: ░░░░░░░░░░
 
----
-
-## 🎯 Stats Summary
-
-| Stat           | Value         |
-|----------------|---------------|
-| 💥 Commits     | 1200    |
-| 🧠 Repos       | 12     |
-| 🏆 Issues      | 1    |
-| 🛡️ PRs         | 19       |
-
----
-
-## 📜 Quest Log
-
-- [x] Build a cool badge plugin  
-- [ ] Add symbol picker GUI  
-- [ ] Improve README RPG theme  
-- [ ] Create a GitHub Action  
-- [ ] Host badge demo on GitHub Pages  
-
----
-
-## 🧙‍♂️ Inventory
-
-🧰 Java | Node.js | GitHub Actions | SVG | Minecraft Plugins  
-
----
-
-## 🔓 Badges Unlocked
-
-🏅 Plugin Architect  
-🎨 Unicode Crafter  
-🔧 Config-Free Master  
-🧩 GUI Designer  
-🕵️‍♀️ Feature Tracker  
+- Commits: 1200  
+- Issues Opened: 1  
+- Pull Requests Created: 19  
+- Merged Pull Requests: 19  
+- Comments Made: 1  
+- Stars Received: 4  
+- Followers: 2  
+- Repositories: 12
