@@ -42,6 +42,10 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "action@github.com"
           git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${GITHUB_USERNAME}/${GITHUB_USERNAME}.git
+
           git add README.md
           git diff --cached --quiet || git commit -m "Update RPG stats"
+
+          # Pull with rebase to avoid push conflicts
+          git pull --rebase origin master
           git push origin HEAD:master
