@@ -10,32 +10,32 @@
 
 ### 🧠 Character Stats
 
-| Attribute       | Value          |
-|----------------|----------------|
-| 💻 Commits     | 1200    |
-| 🛠 Repositories | 12       |
-| ⭐ Stars        | 4       |
-| 👥 Followers    | 2   |
+| Attribute        | Value        |
+|------------------|--------------|
+| 💻 Commits       | 1200  |
+| 🛠 Repositories  | 12    |
+| ⭐ Stars         | 4    |
+| 👥 Followers     | 2|
 
 ---
 
 ### ⚔️ Combat Log
 
-| Action                | Count        | XP Value |
-|-----------------------|--------------|----------|
-| 🔧 Issues Opened      | 1   | 🪙 +5 XP each |
-| 🛡 Pull Requests       | 19      | 🪙 +10 XP each |
-| ⚔ Merged Pull Requests| 19| 🪙 +20 XP each |
-| 💬 Code Comments      | 1 | 🪙 +2 XP each |
+| Action                 | Count         | XP Value      |
+|------------------------|---------------|---------------|
+| 🔧 Issues Opened        | 1    | 🪙 +5 XP each  |
+| 🛡 Pull Requests        | 19       | 🪙 +10 XP each |
+| ⚔ Merged Pull Requests  | 19 | 🪙 +20 XP each |
+| 💬 Code Comments       | 1  | 🪙 +2 XP each  |
 
 ---
 
 ### 📈 Progression Summary
 
-- **Total XP:** *(hidden, used for level calc)*
+- **Total XP:** *(hidden, used for level calculation)*
 - **Current Level:** `18`
 - **Progress:** `░░░░░░░░░░` ({{XP}}/100 XP)
-- **Next Level In:** {{100 - XP}} XP
+- **Next Level In:** {{NEXT_XP}} XP
 
 ---
 
