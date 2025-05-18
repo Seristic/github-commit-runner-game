@@ -1,5 +1,8 @@
-# 🏃‍♂️ Commit Runner Game
+# 🧝‍♀️ GitHub Adventurer: @Seristic
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Seristic/github-commit-runner-game/main/runner-game.svg" alt="Commit Runner Game" />
-</p>
+**Level**: {{LEVEL}}  
+**XP**: {{XP_BAR}}  
+**Commits**: {{COMMITS}}  
+**Issues Opened**: {{ISSUES}}  
+**Pull Requests Merged**: {{PRS}}  
+...
