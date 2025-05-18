@@ -1,4 +1,6 @@
 import { graphql } from "@octokit/graphql";
+import fs from "fs";
+import path from "path";
 
 const token = process.env.PAT_TOKEN;
 if (!token) {
@@ -66,9 +68,6 @@ async function getStatsGraphQL(username) {
             }
           }
         }
-        viewer {
-          id
-        }
       }
     `;
 
@@ -91,7 +90,11 @@ async function getStatsGraphQL(username) {
     for (const repo of user.repositories.nodes) {
       totalStars += repo.stargazerCount || 0;
 
-      if (repo.defaultBranchRef && repo.defaultBranchRef.target && repo.defaultBranchRef.target.history) {
+      if (
+        repo.defaultBranchRef &&
+        repo.defaultBranchRef.target &&
+        repo.defaultBranchRef.target.history
+      ) {
         totalCommits += repo.defaultBranchRef.target.history.totalCount || 0;
       }
 
@@ -99,8 +102,9 @@ async function getStatsGraphQL(username) {
       totalIssues += repo.issues.totalCount || 0;
     }
 
-    afterCursor = user.repositories.pageInfo.hasNextPage ? user.repositories.pageInfo.endCursor : null;
-
+    afterCursor = user.repositories.pageInfo.hasNextPage
+      ? user.repositories.pageInfo.endCursor
+      : null;
   } while (afterCursor);
 
   return {
@@ -112,39 +116,11 @@ async function getStatsGraphQL(username) {
   };
 }
 
-// Function to get today's date in British time (Europe/London) as YYYY-MM-DD
-function getBritishDateISO() {
-  const now = new Date();
-
-  const formatter = new Intl.DateTimeFormat('en-GB', {
-    timeZone: 'Europe/London',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
-  
-  const parts = formatter.formatToParts(now);
-
-  const year = parts.find(p => p.type === 'year').value;
-  const month = parts.find(p => p.type === 'month').value;
-  const day = parts.find(p => p.type === 'day').value;
-
-  return `${year}-${month}-${day}`;
-}
-
-// Function to decide whether to keep "Recent" label based on date string and max age in days
-function shouldShowRecentLabel(dateString, maxDays = 30) {
-  // dateString format: "YYYY-MM-DD"
-  const today = getBritishDateISO();
-
-  const date = new Date(dateString);
-  const now = new Date(today);
-
-  // Difference in ms
-  const diffMs = now - date;
-  const diffDays = diffMs / (1000 * 60 * 60 * 24);
-
-  return diffDays <= maxDays;
+// Function to determine if the "Recent" label should show based on maxSeconds (20 seconds here)
+function shouldShowRecentLabel(eventDateTimestamp, maxSeconds) {
+  const now = Date.now();
+  const diffSeconds = (now - eventDateTimestamp) / 1000;
+  return diffSeconds <= maxSeconds;
 }
 
 async function main() {
@@ -154,20 +130,38 @@ async function main() {
     const stats = await getStatsGraphQL(username);
     console.log("GitHub stats:", stats);
 
-    // Example usage: recent date of your event
-    const recentEventDate = "2025-05-01"; // Example event date
-    const maxRecentDays = 30; // Show "Recent" label only if event is within last 30 days
+    // Example event date/time for the recent event (ISO 8601 string)
+    const eventDateStr = "2025-05-18T19:00:00Z"; // Adjust to your event time UTC
+    const eventTimestamp = new Date(eventDateStr).getTime();
 
-    if (shouldShowRecentLabel(recentEventDate, maxRecentDays)) {
-      console.log(`| 2025 | **Recent:** Important event happened on ${recentEventDate}. |`);
-    } else {
-      console.log(`| 2025 | Important event happened on ${recentEventDate}. |`);
-    }
+    // Set maxSeconds to 20 for demo/testing
+    const maxSeconds = 20;
 
-    // Your further processing and README update logic here...
+    const recentLabel = shouldShowRecentLabel(eventTimestamp, maxSeconds)
+      ? "**Recent:**"
+      : "";
+
+    // Read your README template file
+    const readmeTemplatePath = path.join(process.cwd(), "README.template.md");
+    const readmeOutputPath = path.join(process.cwd(), "README.md");
+    let readmeContent = fs.readFileSync(readmeTemplatePath, "utf-8");
+
+    // Replace placeholders in your README template
+    readmeContent = readmeContent
+      .replace(/{{RECENT_LABEL}}/g, recentLabel)
+      .replace(/{{TOTAL_COMMITS}}/g, stats.totalCommits)
+      .replace(/{{TOTAL_PRS}}/g, stats.totalPRs)
+      .replace(/{{TOTAL_ISSUES}}/g, stats.totalIssues)
+      .replace(/{{TOTAL_STARS}}/g, stats.totalStars)
+      .replace(/{{TOTAL_FOLLOWERS}}/g, stats.totalFollowers);
+
+    // Write updated README file
+    fs.writeFileSync(readmeOutputPath, readmeContent, "utf-8");
+
+    console.log("README.md updated successfully!");
 
   } catch (error) {
-    console.error("Error fetching GitHub stats:", error);
+    console.error("Error:", error);
   }
 }
 
