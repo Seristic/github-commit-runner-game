@@ -26,7 +26,10 @@ async function getCommitCountForRepo(owner, repoName) {
       repo: repoName,
     });
 
-    if (!stats.data) return 0;
+    if (!Array.isArray(stats.data)) {
+      console.warn(`Commit stats for "${repoName}" not ready or invalid.`);
+      return 0;
+    }
 
     const userStats = stats.data.find(
       contributor =>
