@@ -2,24 +2,35 @@ name: Update GitHub Profile RPG Stats
 
 on:
   schedule:
-    - cron: '0 0 * * *' # every day
+    - cron: '0 0 * * *' # every day at midnight UTC
   workflow_dispatch:
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - name: Fetch GitHub Stats
-        uses: jayrajroham/github-stats-readme@v1.0.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          node-version: 18
 
-      - name: Commit & Push
+      - name: Install dependencies
+        run: npm install @octokit/rest
+
+      - name: Run update-readme.js script
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}  # Use your PAT token here
+          GITHUB_USERNAME: YOUR_GITHUB_USERNAME   # replace with your GitHub username
+        run: node update-readme.js
+
+      - name: Commit & push updated README
         run: |
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git commit -m "update RPG stats"
+          git diff --quiet && echo "No changes to commit" || git commit -m "Update RPG stats"
           git push
