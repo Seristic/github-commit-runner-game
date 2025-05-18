@@ -3,14 +3,14 @@ name: Update GitHub Profile RPG Stats
 on:
   push:
     branches:
-      - master        # or 'master', change to your default branch
+      - master
   pull_request:
     types: [opened, closed, merged]
   issues:
     types: [opened, closed]
   schedule:
-    - cron: '0 0 * * *'   # daily at midnight UTC
-  workflow_dispatch:       # manual trigger
+    - cron: '0 0 * * *'  # daily at midnight UTC
+  workflow_dispatch:
 
 jobs:
   update-readme:
@@ -39,18 +39,15 @@ jobs:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
           GITHUB_USERNAME: Seristic
         run: |
-              git config --global user.name "github-actions[bot]"
-              git config --global user.email "action@github.com"
-              git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${GITHUB_USERNAME}/${GITHUB_USERNAME}.git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "action@github.com"
+          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${GITHUB_USERNAME}/${GITHUB_USERNAME}.git
 
-              # Stage and commit changes if any
-              git add README.md
-              if ! git diff --cached --quiet; then
-              git commit -m "Update RPG stats"
+          git add README.md
 
+          if ! git diff --cached --quiet; then
+            git commit -m "Update RPG stats"
+          fi
 
-               # Pull with rebase to avoid conflicts
-              git pull --rebase origin master || exit 0
-
-              # Now push the update
-              git push origin HEAD:master
+          git pull --rebase origin master || true
+          git push origin HEAD:master
