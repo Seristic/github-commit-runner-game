@@ -39,13 +39,18 @@ jobs:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
           GITHUB_USERNAME: Seristic
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "action@github.com"
-          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${GITHUB_USERNAME}/${GITHUB_USERNAME}.git
+              git config --global user.name "github-actions[bot]"
+              git config --global user.email "action@github.com"
+              git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${GITHUB_USERNAME}/${GITHUB_USERNAME}.git
 
-          git add README.md
-          git diff --cached --quiet || git commit -m "Update RPG stats"
+              # Stage and commit changes if any
+              git add README.md
+              if ! git diff --cached --quiet; then
+              git commit -m "Update RPG stats"
 
-          # Pull with rebase to avoid push conflicts
-          git pull --rebase origin master
-          git push origin HEAD:master
+
+               # Pull with rebase to avoid conflicts
+              git pull --rebase origin master || exit 0
+
+              # Now push the update
+              git push origin HEAD:master
