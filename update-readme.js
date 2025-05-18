@@ -1,6 +1,4 @@
 import { graphql } from "@octokit/graphql";
-import fs from 'fs/promises';
-import path from 'path';
 
 const token = process.env.PAT_TOKEN;
 if (!token) {
@@ -12,39 +10,6 @@ const graphqlWithAuth = graphql.defaults({
     authorization: `token ${token}`,
   },
 });
-
-const README_PATH = path.resolve('./README.md');
-const RECENT_LIFETIME_DAYS = 7; // Days to keep **Recent:** label before removing
-
-async function loadReadme() {
-  return fs.readFile(README_PATH, 'utf-8');
-}
-
-async function saveReadme(content) {
-  return fs.writeFile(README_PATH, content, 'utf-8');
-}
-
-function removeOldRecents(readme, days = RECENT_LIFETIME_DAYS) {
-  const lines = readme.split('\n');
-  const now = new Date();
-
-  const updatedLines = lines.map(line => {
-    const timestampMatch = line.match(/<!-- timestamp:(\d{4}-\d{2}-\d{2}) -->/);
-    if (!timestampMatch) return line;
-
-    const timestamp = new Date(timestampMatch[1]);
-    const ageInDays = (now - timestamp) / (1000 * 60 * 60 * 24);
-
-    if (ageInDays >= days && line.includes('**Recent:**')) {
-      // Remove "**Recent:** " from line but keep the rest intact
-      return line.replace('**Recent:** ', '');
-    }
-
-    return line;
-  });
-
-  return updatedLines.join('\n');
-}
 
 async function getUserId(username) {
   const query = `
@@ -147,6 +112,41 @@ async function getStatsGraphQL(username) {
   };
 }
 
+// Function to get today's date in British time (Europe/London) as YYYY-MM-DD
+function getBritishDateISO() {
+  const now = new Date();
+
+  const formatter = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/London',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+  
+  const parts = formatter.formatToParts(now);
+
+  const year = parts.find(p => p.type === 'year').value;
+  const month = parts.find(p => p.type === 'month').value;
+  const day = parts.find(p => p.type === 'day').value;
+
+  return `${year}-${month}-${day}`;
+}
+
+// Function to decide whether to keep "Recent" label based on date string and max age in days
+function shouldShowRecentLabel(dateString, maxDays = 30) {
+  // dateString format: "YYYY-MM-DD"
+  const today = getBritishDateISO();
+
+  const date = new Date(dateString);
+  const now = new Date(today);
+
+  // Difference in ms
+  const diffMs = now - date;
+  const diffDays = diffMs / (1000 * 60 * 60 * 24);
+
+  return diffDays <= maxDays;
+}
+
 async function main() {
   try {
     const username = "Seristic"; // Change to your GitHub username
@@ -154,27 +154,17 @@ async function main() {
     const stats = await getStatsGraphQL(username);
     console.log("GitHub stats:", stats);
 
-    // Load README content
-    let readmeContent = await loadReadme();
+    // Example usage: recent date of your event
+    const recentEventDate = "2025-05-01"; // Example event date
+    const maxRecentDays = 30; // Show "Recent" label only if event is within last 30 days
 
-    // Prepare today's date for timestamp
-    const today = new Date().toISOString().slice(0, 10);
-
-    // Example: New Recent line (customize as needed)
-    const newRecentLine = `| 2025 | **Recent:** Updated GitHub stats for ${username} <!-- timestamp:${today} --> |`;
-
-    // Check if newRecentLine already exists (prevent duplicates)
-    if (!readmeContent.includes(newRecentLine)) {
-      readmeContent += `\n${newRecentLine}`;
+    if (shouldShowRecentLabel(recentEventDate, maxRecentDays)) {
+      console.log(`| 2025 | **Recent:** Important event happened on ${recentEventDate}. |`);
+    } else {
+      console.log(`| 2025 | Important event happened on ${recentEventDate}. |`);
     }
 
-    // Remove old Recent labels older than RECENT_LIFETIME_DAYS
-    readmeContent = removeOldRecents(readmeContent, RECENT_LIFETIME_DAYS);
-
-    // Save updated README
-    await saveReadme(readmeContent);
-
-    console.log("README.md updated with cleaned Recent labels!");
+    // Your further processing and README update logic here...
 
   } catch (error) {
     console.error("Error fetching GitHub stats:", error);
