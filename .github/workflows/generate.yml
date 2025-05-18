@@ -34,7 +34,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "action@github.com"
-          git remote set-url origin https://x-access-token:$PAT_TOKEN@github.com/$GITHUB_USERNAME/gamer-style-profile.git
+          git remote set-url origin https://x-access-token:$PAT_TOKEN@github.com/Seristic/gamer-style-profile.git
           git add README.md
           git diff --cached --quiet || git commit -m "Update RPG stats"
-          git push https://x-access-token:$PAT_TOKEN@github.com/$GITHUB_USERNAME/gamer-style-profile.git HEAD:master
+          git push https://x-access-token:$PAT_TOKEN@github.com/Seristic/gamer-style-profile.git HEAD:master
