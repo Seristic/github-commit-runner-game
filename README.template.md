@@ -1,5 +1,24 @@
 # Welcome to my GitHub Profile!
 
+## 🏳️‍⚧️ My Journey & Recent Milestones
+
+Hello! I’m {{USERNAME}}, a passionate developer and proud member of the trans community.  
+This profile is not just a showcase of code but a celebration of identity, resilience, and growth.
+
+### Timeline of My Journey
+
+| Year | Milestone |
+|-------|------------|
+| 2020 | Was in College studying in Computing Science  |
+| 20XX | Came out as trans and started integrating my identity into my work and community. |
+| 20XX | Launched my first major open-source project focused on inclusivity. |
+| 20XX | Collaborated with trans advocacy groups to raise awareness in tech. |
+| 2025 | **Recent:** Celebrated the [landmark ruling](https://example-link-to-news) affirming trans rights — a powerful moment for us all. |
+
+> *“Coding my story, one commit at a time — proud, visible, unstoppable.”*
+
+---
+
 <p align="center">
   <img src="trans-flag.svg" alt="Transgender Pride Flag" width="300" />
 </p>
