@@ -28,13 +28,13 @@ jobs:
         run: node update-readme.js
 
       - name: Commit & push updated README
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_USERNAME: Seristic
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "action@github.com"
-          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${{ env.GITHUB_USERNAME }}/gamer-style-profile.git
+          git remote set-url origin https://x-access-token:$PAT_TOKEN@github.com/$GITHUB_USERNAME/gamer-style-profile.git
           git add README.md
-          git commit -m "Update RPG stats" || echo "No changes to commit"
+          git diff --cached --quiet || git commit -m "Update RPG stats"
           git push origin HEAD:master
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-          GITHUB_USERNAME: ${{ env.GITHUB_USERNAME }}
