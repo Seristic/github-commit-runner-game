@@ -25,8 +25,34 @@ This profile is not just a showcase of code but a celebration of identity, resil
 
 <p align="center">
   <b>Level 6</b><br>
-  <code>█░░░░░░░░░</code><br>
-  <i>XP to next level: 19/100</i>
+  <code>
+  <div style="
+    width: 200px;
+    height: 20px;
+    border-radius: 10px;
+    background: linear-gradient(
+      to right,
+      #55CDFC 0%,
+      #F7A8B8 25%,
+      #FFFFFF 50%,
+      #F7A8B8 75%,
+      #55CDFC 100%
+    );
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ccc;
+  ">
+    <div style="
+      height: 100%;
+      width: 55%;
+      background-color: rgba(255, 255, 255, 0.8);
+      position: absolute;
+      top: 0;
+      left: 45%;
+      transition: width 0.5s ease;
+    "></div>
+  </div></code><br>
+  <i>XP to next level: 45/100</i>
 </p>
 
 ---
@@ -35,9 +61,9 @@ This profile is not just a showcase of code but a celebration of identity, resil
 
 | Attribute        | Value        |
 |------------------|--------------|
-| 💻 Commits       | 10  |
+| 💻 Commits       | 30  |
 | 🛠 Repositories  | 12    |
-| ⭐ Stars         | 4    |
+| ⭐ Stars         | 6    |
 | 👥 Followers     | 2|
 
 ---
@@ -57,8 +83,34 @@ This profile is not just a showcase of code but a celebration of identity, resil
 
 - **Total XP:** *(hidden, used for level calculation)*
 - **Current Level:** `6`
-- **Progress:** `█░░░░░░░░░` (19/100 XP)
-- **Next Level In:** 81 XP
+- **Progress:** `
+  <div style="
+    width: 200px;
+    height: 20px;
+    border-radius: 10px;
+    background: linear-gradient(
+      to right,
+      #55CDFC 0%,
+      #F7A8B8 25%,
+      #FFFFFF 50%,
+      #F7A8B8 75%,
+      #55CDFC 100%
+    );
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ccc;
+  ">
+    <div style="
+      height: 100%;
+      width: 55%;
+      background-color: rgba(255, 255, 255, 0.8);
+      position: absolute;
+      top: 0;
+      left: 45%;
+      transition: width 0.5s ease;
+    "></div>
+  </div>` (45/100 XP)
+- **Next Level In:** 55 XP
 
 ---
 
