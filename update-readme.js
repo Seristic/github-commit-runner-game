@@ -1,6 +1,4 @@
 import { graphql } from "@octokit/graphql";
-import fs from "fs";
-import path from "path";
 
 const token = process.env.PAT_TOKEN;
 if (!token) {
@@ -13,6 +11,7 @@ const graphqlWithAuth = graphql.defaults({
   },
 });
 
+// Helper function to get user ID needed for commit queries
 async function getUserId(username) {
   const query = `
     query($username: String!) {
@@ -25,6 +24,7 @@ async function getUserId(username) {
   return response.user.id;
 }
 
+// Fetch stats via GitHub GraphQL API
 async function getStatsGraphQL(username) {
   let afterCursor = null;
   let totalCommits = 0;
@@ -32,6 +32,7 @@ async function getStatsGraphQL(username) {
   let totalIssues = 0;
   let totalStars = 0;
   let totalFollowers = 0;
+  let totalRepos = 0;
 
   const userId = await getUserId(username);
 
@@ -68,6 +69,9 @@ async function getStatsGraphQL(username) {
             }
           }
         }
+        viewer {
+          id
+        }
       }
     `;
 
@@ -78,7 +82,6 @@ async function getStatsGraphQL(username) {
     };
 
     const response = await graphqlWithAuth(query, variables);
-
     const user = response.user;
 
     if (!user) {
@@ -86,6 +89,7 @@ async function getStatsGraphQL(username) {
     }
 
     totalFollowers = user.followers.totalCount;
+    totalRepos = user.repositories.totalCount;
 
     for (const repo of user.repositories.nodes) {
       totalStars += repo.stargazerCount || 0;
@@ -113,59 +117,55 @@ async function getStatsGraphQL(username) {
     totalIssues,
     totalStars,
     totalFollowers,
+    totalRepos,
   };
 }
 
-// Check if "Recent" label should appear within maxSeconds after eventTimestamp
-function shouldShowRecentLabel(eventTimestamp, maxSeconds) {
+// 30-day recent check
+function shouldShowRecentLabel(eventTimestamp) {
   const now = Date.now();
-  const diffSeconds = (now - eventTimestamp) / 1000;
-
-  console.log(`Current time (ms): ${now}`);
-  console.log(`Event time (ms): ${eventTimestamp}`);
-  console.log(`Time difference (seconds): ${diffSeconds}`);
-
-  return diffSeconds >= 0 && diffSeconds <= maxSeconds;
+  const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000; // milliseconds
+  return now - eventTimestamp <= THIRTY_DAYS;
 }
 
 async function main() {
   try {
-    const username = "Seristic"; // Your GitHub username
+    const username = "Seristic"; // Change this to your GitHub username
     console.log(`Fetching GitHub stats for ${username}...`);
+
     const stats = await getStatsGraphQL(username);
     console.log("GitHub stats:", stats);
 
-    // Replace with the actual event timestamp (ISO 8601 string)
-    // Make sure this timestamp is in the past or right now (UTC)
-    const eventDateStr = new Date().toISOString(); // For testing, use current time
-    const eventTimestamp = new Date(eventDateStr).getTime();
+    // Example event date for your "Recent" label
+    // Update this to your actual event date (UTC ISO string recommended)
+    const eventTimestamp = new Date("2025-04-18T00:00:00Z").getTime();
 
-    const maxSeconds = 20; // Show "Recent" if within 20 seconds
+    const recentLabel = shouldShowRecentLabel(eventTimestamp) ? "**Recent:**" : "";
 
-    const recentLabel = shouldShowRecentLabel(eventTimestamp, maxSeconds)
-      ? "**Recent:**"
-      : "";
+    // Prepare your README content
+    const readmeContent = `
+| 2025 | ${recentLabel} Important update affecting trans rights — this is a significant moment. |
 
-    // Read README template
-    const readmeTemplatePath = path.join(process.cwd(), "README.template.md");
-    const readmeOutputPath = path.join(process.cwd(), "README.md");
-    let readmeContent = fs.readFileSync(readmeTemplatePath, "utf-8");
+Attributes:
+💻 Commits: ${stats.totalCommits}
+🛠 Repositories: ${stats.totalRepos}
+⭐ Stars: ${stats.totalStars}
+👥 Followers: ${stats.totalFollowers}
 
-    // Replace placeholders
-    readmeContent = readmeContent
-      .replace(/{{RECENT_LABEL}}/g, recentLabel)
-      .replace(/{{TOTAL_COMMITS}}/g, stats.totalCommits)
-      .replace(/{{TOTAL_PRS}}/g, stats.totalPRs)
-      .replace(/{{TOTAL_ISSUES}}/g, stats.totalIssues)
-      .replace(/{{TOTAL_STARS}}/g, stats.totalStars)
-      .replace(/{{TOTAL_FOLLOWERS}}/g, stats.totalFollowers);
+⚔️ Combat Log
+Action              Count      XP Value
+🔧 Issues Opened     ${stats.totalIssues}        🪙 +5 XP each
+🛡 Pull Requests     ${stats.totalPRs}         🪙 +10 XP each
+⚔ Merged Pull Requests (estimate)   TODO        🪙 +20 XP each
+💬 Code Comments     TODO       🪙 +2 XP each
+`;
 
-    fs.writeFileSync(readmeOutputPath, readmeContent, "utf-8");
+    console.log(readmeContent);
 
-    console.log("README.md updated successfully!");
+    // Here you would write readmeContent to your README.md file as needed.
 
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error fetching GitHub stats:", error);
   }
 }
 
