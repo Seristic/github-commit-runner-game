@@ -28,10 +28,12 @@ async function getStatsGraphQL(username) {
   let afterCursor = null;
   let totalCommits = 0;
   let totalPRs = 0;
+  let totalMergedPRs = 0;
   let totalIssues = 0;
   let totalStars = 0;
   let totalFollowers = 0;
   let totalRepos = 0;
+  let totalComments = 0;
 
   const userId = await getUserId(username);
 
@@ -61,6 +63,12 @@ async function getStatsGraphQL(username) {
               }
               pullRequests(states: [OPEN, MERGED, CLOSED]) {
                 totalCount
+                nodes {
+                  state
+                  comments {
+                    totalCount
+                  }
+                }
               }
               issues {
                 totalCount
@@ -97,6 +105,12 @@ async function getStatsGraphQL(username) {
 
       totalPRs += repo.pullRequests.totalCount || 0;
       totalIssues += repo.issues.totalCount || 0;
+
+      // Count merged PRs and sum comments on PRs
+      for (const pr of repo.pullRequests.nodes) {
+        if (pr.state === "MERGED") totalMergedPRs++;
+        totalComments += pr.comments.totalCount || 0;
+      }
     }
 
     afterCursor = user.repositories.pageInfo.hasNextPage ? user.repositories.pageInfo.endCursor : null;
@@ -105,10 +119,12 @@ async function getStatsGraphQL(username) {
   return {
     totalCommits,
     totalPRs,
+    totalMergedPRs,
     totalIssues,
     totalStars,
     totalFollowers,
     totalRepos,
+    totalComments,
   };
 }
 
@@ -119,7 +135,6 @@ async function main() {
     const stats = await getStatsGraphQL(username);
     console.log("GitHub stats:", stats);
 
-    // Your README template with placeholders
     const template = `
 Attribute    Value
 💻 Commits   {{COMMITS}}
@@ -134,8 +149,6 @@ Action    Count    XP Value
 💬 Code Comments    {{COMMENTS}}    🪙 +2 XP each
 `;
 
-    // Replace placeholders with actual data
-    // NOTE: You might want to add calculation for MERGEDPRS and COMMENTS if you track those
     const filledTemplate = template
       .replace(/{{COMMITS}}/g, stats.totalCommits)
       .replace(/{{REPOS}}/g, stats.totalRepos)
@@ -143,10 +156,9 @@ Action    Count    XP Value
       .replace(/{{FOLLOWERS}}/g, stats.totalFollowers)
       .replace(/{{ISSUES}}/g, stats.totalIssues)
       .replace(/{{PRS}}/g, stats.totalPRs)
-      .replace(/{{MERGEDPRS}}/g, "N/A") // Placeholder - implement if you fetch merged PRs count
-      .replace(/{{COMMENTS}}/g, "N/A"); // Placeholder - implement if you fetch comments count
+      .replace(/{{MERGEDPRS}}/g, stats.totalMergedPRs)
+      .replace(/{{COMMENTS}}/g, stats.totalComments);
 
-    // Output the filled template to console or write to a file
     console.log("\n===== README OUTPUT =====\n");
     console.log(filledTemplate);
 
