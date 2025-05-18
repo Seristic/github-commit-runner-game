@@ -135,7 +135,7 @@ async function main() {
     const eventTimestamp = new Date(eventDateStr).getTime();
 
     // Set maxSeconds to 20 for demo/testing
-    const maxSeconds = 20;
+    const maxSeconds = 60;
 
     const recentLabel = shouldShowRecentLabel(eventTimestamp, maxSeconds)
       ? "**Recent:**"
