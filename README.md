@@ -1,13 +1,42 @@
-# GitHub RPG Profile for Seristic
+<h1 align="center">🎮 GitHub RPG Profile: <span style="color:#ffb347">Seristic</span></h1>
 
-Level: 18  
-XP Bar: ░░░░░░░░░░
+<p align="center">
+  <b>Level 18</b><br>
+  <code>░░░░░░░░░░</code><br>
+  <i>XP to next level: {{XP}}/100</i>
+</p>
 
-- Commits: 1200  
-- Issues Opened: 1  
-- Pull Requests Created: 19  
-- Merged Pull Requests: 19  
-- Comments Made: 1  
-- Stars Received: 4  
-- Followers: 2  
-- Repositories: 12
+---
+
+### 🧠 Character Stats
+
+| Attribute       | Value          |
+|----------------|----------------|
+| 💻 Commits     | 1200    |
+| 🛠 Repositories | 12       |
+| ⭐ Stars        | 4       |
+| 👥 Followers    | 2   |
+
+---
+
+### ⚔️ Combat Log
+
+| Action                | Count        | XP Value |
+|-----------------------|--------------|----------|
+| 🔧 Issues Opened      | 1   | 🪙 +5 XP each |
+| 🛡 Pull Requests       | 19      | 🪙 +10 XP each |
+| ⚔ Merged Pull Requests| 19| 🪙 +20 XP each |
+| 💬 Code Comments      | 1 | 🪙 +2 XP each |
+
+---
+
+### 📈 Progression Summary
+
+- **Total XP:** *(hidden, used for level calc)*
+- **Current Level:** `18`
+- **Progress:** `░░░░░░░░░░` ({{XP}}/100 XP)
+- **Next Level In:** {{100 - XP}} XP
+
+---
+
+_Updated daily via automated GitHub Actions._
