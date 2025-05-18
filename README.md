@@ -3,7 +3,7 @@
 <p align="center">
   <b>Level 18</b><br>
   <code>░░░░░░░░░░</code><br>
-  <i>XP to next level: {{XP}}/100</i>
+  <i>XP to next level: 9/100</i>
 </p>
 
 ---
@@ -34,8 +34,8 @@
 
 - **Total XP:** *(hidden, used for level calculation)*
 - **Current Level:** `18`
-- **Progress:** `░░░░░░░░░░` ({{XP}}/100 XP)
-- **Next Level In:** {{NEXT_XP}} XP
+- **Progress:** `░░░░░░░░░░` (9/100 XP)
+- **Next Level In:** 91 XP
 
 ---
 
