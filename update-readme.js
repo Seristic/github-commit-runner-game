@@ -12,9 +12,20 @@ if (!PAT || !USERNAME) {
 const octokit = new Octokit({ auth: PAT });
 
 function xpBar(xp) {
+  const colors = ['#55CDFC', '#F7A8B8', '#FFFFFF', '#F7A8B8', '#55CDFC'];
+  const totalBlocks = 10;
   const fullBlocks = Math.floor(xp / 10);
-  const emptyBlocks = 10 - fullBlocks;
-  return '█'.repeat(fullBlocks) + '░'.repeat(emptyBlocks);
+  let bar = '';
+
+  for (let i = 0; i < fullBlocks; i++) {
+    // Cycle colors for each block
+    const color = colors[i % colors.length];
+    bar += `<span style="color:${color}">█</span>`;
+  }
+  for (let i = fullBlocks; i < totalBlocks; i++) {
+    bar += '░';
+  }
+  return bar;
 }
 
 async function getStats() {
