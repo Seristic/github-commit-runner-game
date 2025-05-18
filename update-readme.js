@@ -4,8 +4,8 @@ import { Octokit } from '@octokit/rest';
 const PAT = process.env.PAT_TOKEN;
 const USERNAME = process.env.GITHUB_USERNAME;
 
-if (!GITHUB_TOKEN || !USERNAME) {
-  console.error('Missing GITHUB_TOKEN or GITHUB_USERNAME environment variables');
+if (!PAT_TOKEN || !USERNAME) {
+  console.error('Missing PAT_TOKEN or GITHUB_USERNAME environment variables');
   process.exit(1);
 }
 
