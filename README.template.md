@@ -7,11 +7,7 @@ This profile is not just a showcase of code but a celebration of identity, resil
 
 ### Timeline of My Journey
 
-| Year | Milestone |
-|-------|------------|
-| 2020 | Was in College studying in Computing Science  |
-| 2022 | Came out as trans and started integrating my identity into my work and community. |
-| 2025 | {{RECENT_LABEL}} Endured the impact of a [devastating ruling](https://example-link-to-news) undermining trans rights — a stark reminder of the ongoing fight for dignity and existence. |
+{{TIMELINE}}
 
 > *“Coding my story, one commit at a time — proud, visible, unstoppable.”*
 

@@ -8,6 +8,19 @@
     "start": "node update-readme.js"
   },
   "dependencies": {
-    "@octokit/rest": "^20.0.0"
-  }
+    "@octokit/graphql": "^8.2.2",
+    "@octokit/rest": "^20.1.2",
+    "dotenv": "^16.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seristic/Seristic.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Seristic/Seristic/issues"
+  },
+  "homepage": "https://github.com/Seristic/Seristic#readme"
 }

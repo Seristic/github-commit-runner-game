@@ -8,10 +8,10 @@ This profile is not just a showcase of code but a celebration of identity, resil
 ### Timeline of My Journey
 
 | Year | Milestone |
-|-------|------------|
-| 2020 | Was in College studying in Computing Science  |
+|------|-----------|
+| 2020 | Was in College studying in Computing Science |
 | 2022 | Came out as trans and started integrating my identity into my work and community. |
-| 2025 | {{RECENT_LABEL}} Endured the impact of a [devastating ruling](https://example-link-to-news) undermining trans rights — a stark reminder of the ongoing fight for dignity and existence. |
+| 2025 |  Endured the impact of a [devastating ruling](https://example-link-to-news) undermining trans rights — a stark reminder of the ongoing fight for dignity and existence. |
 
 > *“Coding my story, one commit at a time — proud, visible, unstoppable.”*
 
@@ -24,9 +24,9 @@ This profile is not just a showcase of code but a celebration of identity, resil
 <h1 align="center">🎮 GitHub RPG Profile: <span style="color:#ffb347">Seristic</span></h1>
 
 <p align="center">
-  <b>Level 2</b><br>
-  <code>█████░░░░░</code><br>
-  <i>XP to next level: 58/100</i>
+  <b>Level 3</b><br>
+  <code>██████░░░░</code><br>
+  <i>XP to next level: 67/100</i>
 </p>
 
 ---
@@ -35,7 +35,7 @@ This profile is not just a showcase of code but a celebration of identity, resil
 
 | Attribute        | Value        |
 |------------------|--------------|
-| 💻 Commits       | 23  |
+| 💻 Commits       | 132  |
 | 🛠 Repositories  | 12    |
 | ⭐ Stars         | 6    |
 | 👥 Followers     | 2|
@@ -56,9 +56,9 @@ This profile is not just a showcase of code but a celebration of identity, resil
 ### 📈 Progression Summary
 
 - **Total XP:** *(hidden, used for level calculation)*
-- **Current Level:** `2`
-- **Progress:** `█████░░░░░` (58/100 XP)
-- **Next Level In:** 42 XP
+- **Current Level:** `3`
+- **Progress:** `██████░░░░` (67/100 XP)
+- **Next Level In:** 33 XP
 
 ---
 
