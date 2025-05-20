@@ -2,13 +2,14 @@ import fs from 'fs';
 import path from 'path';
 import { graphql } from '@octokit/graphql';
 import { config } from 'dotenv';
+import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { Octokit } from "@octokit/rest";
 
 config({ path: './.env' });
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 
 if (!process.env.PAT_TOKEN) {
   throw new Error('PAT_TOKEN environment variable is required!');
@@ -288,17 +289,39 @@ const main = async () => {
 
   const level = calculateLevel(totalXP);
   const xp = totalXP % 100;
-  const bar = generateXPBar(xp);
+  const xpBar = generateXPBar(xp);
+  const timeline = formatTimeline();
 
-  const readme = fs.readFileSync(readmePath, 'utf-8');
+  // Read template README file, NOT the actual README
+  let readme = fs.readFileSync(templatePath, 'utf-8');
 
-  const updatedReadme = readme
-    .replace(/XP: \d+ \| Level: \d+/g, `XP: ${totalXP} | Level: ${level}`)
-    .replace(/XP: \d+% \| \[.+\]/g, `XP: ${xp}% | ${bar}`);
+  // Replace all placeholders with actual stats
+  readme = readme.replace(/{{USERNAME}}/g, username)
+    .replace(/{{LEVEL}}/g, level)
+    .replace(/{{XP}}/g, xp)
+    .replace(/{{XP_BAR}}/g, xpBar)
+    .replace(/{{NEXT_XP}}/g, 100 - xp)
+    .replace(/{{COMMITS}}/g, stats.commits)
+    .replace(/{{REPOS}}/g, stats.repos)
+    .replace(/{{STARS}}/g, stats.stars)
+    .replace(/{{FOLLOWERS}}/g, stats.followers)
+    .replace(/{{ISSUES}}/g, stats.issues)
+    .replace(/{{PRS}}/g, stats.prs)
+    .replace(/{{MERGEDPRS}}/g, stats.mergedPrs)
+    .replace(/{{COMMENTS}}/g, stats.comments)
+    .replace(/{{FORKS}}/g, stats.forks)
+    .replace(/{{STARS_GIVEN}}/g, stats.starsGiven)
+    .replace(/{{GISTS}}/g, stats.gists)
+    .replace(/{{RELEASES}}/g, stats.releases)
+    .replace(/{{TIMELINE}}/g, timeline);
 
-  fs.writeFileSync(readmePath, updatedReadme);
+  // Write the updated content to README.md
+  fs.writeFileSync(readmePath, readme);
 
-  console.log('README.md updated successfully!');
+  console.log('README.md updated successfully.');
 };
 
-main().catch(console.error);
+main().catch((e) => {
+  console.error('Error updating README:', e);
+  process.exit(1);
+});
