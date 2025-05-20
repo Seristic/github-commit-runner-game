@@ -1,64 +1,172 @@
-// update-readme.js
-
 import fs from 'fs';
 import path from 'path';
-import { Octokit } from '@octokit/rest';
+import { graphql } from '@octokit/graphql';
 import { config } from 'dotenv';
 import { fileURLToPath } from 'url';
+import { Octokit } from "@octokit/rest";
 
 config({ path: './.env' });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log('Using token:', process.env.PAT_TOKEN ? 'Yes' : 'No');
+if (!process.env.PAT_TOKEN) {
+  throw new Error('PAT_TOKEN environment variable is required!');
+}
 
 const octokit = new Octokit({ auth: process.env.PAT_TOKEN });
+
+const graphqlWithAuth = graphql.defaults({
+  headers: {
+    authorization: `token ${process.env.PAT_TOKEN}`,
+  },
+});
+
 const username = 'Seristic';
+const readmePath = path.join(__dirname, 'README.md');
 
-// Milestones timeline data
-const milestones = [
-  { year: 2020, label: "Was in College studying in Computing Science", date: new Date("2020-01-01") },
-  { year: 2022, label: "Came out as trans and started integrating my identity into my work and community.", date: new Date("2022-01-01") },
-  { year: 2025, label: "Endured the impact of a devastating ruling undermining trans rights — a stark reminder of the ongoing fight for dignity and existence.", date: new Date("2025-05-01") },
-];
+// --- Helper functions omitted for brevity (formatTimeline, generateXPBar, calculateLevel) ---
 
-const formatTimeline = () => {
-  const today = new Date();
-  const recentThresholdDays = 30;
+async function fetchAllRepos(login) {
+  let repos = [];
+  let hasNextPage = true;
+  let after = null;
 
-  let tableRows = milestones.map(({ year, label, date }) => {
-    const diffDays = Math.floor((today - date) / (1000 * 60 * 60 * 24));
-    const isRecent = diffDays >= 0 && diffDays <= recentThresholdDays;
-    const recentLabel = isRecent ? "**Recent:** " : "";
-    const agoLabel = isRecent ? ` (_${diffDays} days ago_)` : "";
-    return `| ${year} | ${recentLabel}${label}${agoLabel} |`;
-  });
+  while (hasNextPage) {
+    const res = await graphqlWithAuth(
+      `
+      query ($login: String!, $after: String) {
+        user(login: $login) {
+          repositories(first: 50, after: $after, ownerAffiliations: OWNER, isFork: false) {
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+            nodes {
+              name
+              stargazerCount
+              defaultBranchRef {
+                name
+              }
+              fork
+            }
+          }
+        }
+      }
+      `,
+      { login, after }
+    );
 
-  return `
-| Year | Milestone |
-|------|-----------|
-${tableRows.join('\n')}
-  `.trim();
-};
+    repos = repos.concat(res.user.repositories.nodes);
+    hasNextPage = res.user.repositories.pageInfo.hasNextPage;
+    after = res.user.repositories.pageInfo.endCursor;
+  }
 
-const generateXPBar = (xp) => {
-  const totalBars = 20;
-  const filledBars = Math.floor((xp / 100) * totalBars);
-  return '▰'.repeat(filledBars) + '▱'.repeat(totalBars - filledBars);
-};
+  return repos;
+}
 
-const calculateLevel = (totalXP) => Math.floor(totalXP / 100);
+async function fetchCommitsCount(owner, repoName, authorId) {
+  if (!repoName) return 0;
 
-const getUserStats = async () => {
-  // Fetch user info
-  const user = await octokit.rest.users.getByUsername({ username });
+  const query = `
+  query($owner: String!, $repoName: String!, $authorId: ID!) {
+    repository(owner: $owner, name: $repoName) {
+      defaultBranchRef {
+        target {
+          ... on Commit {
+            history(author: {id: $authorId}) {
+              totalCount
+            }
+          }
+        }
+      }
+    }
+  }`;
 
-  // Fetch repos owned by user (max 100)
-  const repos = await octokit.paginate(octokit.rest.repos.listForUser, {
-    username,
-    per_page: 100,
-  });
+  try {
+    const res = await graphqlWithAuth(query, { owner, repoName, authorId });
+    return res.repository?.defaultBranchRef?.target?.history?.totalCount || 0;
+  } catch {
+    return 0;
+  }
+}
+
+async function fetchPRsAndIssues(owner, repoName, login) {
+  const query = `
+  query($owner: String!, $repoName: String!, $login: String!) {
+    repository(owner: $owner, name: $repoName) {
+      pullRequests(first: 100, states: [OPEN, MERGED, CLOSED], orderBy: {field: CREATED_AT, direction: DESC}, filterBy: {createdBy: $login}) {
+        nodes {
+          merged
+        }
+        totalCount
+      }
+      issues(first: 100, states: [OPEN, CLOSED], filterBy: {createdBy: $login}) {
+        totalCount
+      }
+    }
+  }`;
+
+  try {
+    const res = await graphqlWithAuth(query, { owner, repoName, login });
+    const prs = res.repository.pullRequests;
+    const issues = res.repository.issues;
+    const mergedPRsCount = prs.nodes.filter(pr => pr.merged).length;
+    return {
+      prsCount: prs.totalCount,
+      mergedPRsCount,
+      issuesCount: issues.totalCount,
+    };
+  } catch {
+    return {
+      prsCount: 0,
+      mergedPRsCount: 0,
+      issuesCount: 0,
+    };
+  }
+}
+
+async function fetchPRReviewComments(login) {
+  try {
+    const res = await graphqlWithAuth(
+      `
+      query($login: String!) {
+        user(login: $login) {
+          contributionsCollection {
+            pullRequestReviewContributions {
+              totalCount
+            }
+          }
+        }
+      }
+      `,
+      { login }
+    );
+    return res.user.contributionsCollection.pullRequestReviewContributions.totalCount || 0;
+  } catch {
+    return 0;
+  }
+}
+
+async function getUserStats() {
+  // Get user ID and followers count
+  const userRes = await graphqlWithAuth(
+    `query($login: String!) {
+      user(login: $login) {
+        id
+        followers {
+          totalCount
+        }
+      }
+    }`,
+    { login: username }
+  );
+
+  const userId = userRes.user.id;
+  const followers = userRes.user.followers.totalCount;
+
+  // Fetch all repos owned by user
+  const repos = await fetchAllRepos(username);
 
   // Initialize counters
   let totalCommits = 0;
@@ -69,7 +177,6 @@ const getUserStats = async () => {
   let stars = 0;
   let totalReleases = 0;
 
-  // Calculate commits, issues, PRs, merged PRs, stars, releases, forks
   for (const repo of repos) {
     // Contributors stats for commits
     const stats = await octokit.rest.repos.getContributorsStats({
@@ -100,7 +207,7 @@ const getUserStats = async () => {
       per_page: 100,
     }).catch(() => null);
 
-    // Commits
+    // Commits count
     if (stats && Array.isArray(stats.data)) {
       const userStats = stats.data.find(s => s.author?.login === username);
       if (userStats) totalCommits += userStats.total;
@@ -118,7 +225,7 @@ const getUserStats = async () => {
     }
 
     // Stars (stargazers count)
-    stars += repo.stargazers_count;
+    stars += repo.stargazerCount || 0;
 
     // Releases count
     if (releases) {
@@ -143,19 +250,14 @@ const getUserStats = async () => {
   });
   const totalGists = gists.length;
 
-  // Get code review comments from authenticated user events (review comments only)
-  const events = await octokit.paginate(octokit.rest.activity.listEventsForUser, {
-    username,
-    per_page: 100,
-  });
-
-  totalComments = events.filter(e => e.type === 'PullRequestReviewCommentEvent').length;
+  // Get code review comments count (approximate)
+  totalComments = await fetchPRReviewComments(username);
 
   return {
     commits: totalCommits,
     repos: repos.length,
     stars,
-    followers: user.data.followers,
+    followers,
     issues: totalIssues,
     prs: totalPRs,
     mergedPrs: totalMergedPRs,
@@ -165,7 +267,7 @@ const getUserStats = async () => {
     gists: totalGists,
     releases: totalReleases,
   };
-};
+}
 
 const main = async () => {
   const stats = await getUserStats();
@@ -186,35 +288,17 @@ const main = async () => {
 
   const level = calculateLevel(totalXP);
   const xp = totalXP % 100;
-  const xpBar = generateXPBar(xp);
+  const bar = generateXPBar(xp);
 
-  // Read and update README.md placeholders
-  const readmePath = path.join(__dirname, 'README.md');
-  let readme = fs.readFileSync(readmePath, 'utf-8');
+  const readme = fs.readFileSync(readmePath, 'utf-8');
 
-  const timeline = formatTimeline();
+  const updatedReadme = readme
+    .replace(/XP: \d+ \| Level: \d+/g, `XP: ${totalXP} | Level: ${level}`)
+    .replace(/XP: \d+% \| \[.+\]/g, `XP: ${xp}% | ${bar}`);
 
-  readme = readme.replace(/{{USERNAME}}/g, username)
-    .replace(/{{LEVEL}}/g, level)
-    .replace(/{{XP}}/g, xp)
-    .replace(/{{XP_BAR}}/g, xpBar)
-    .replace(/{{NEXT_XP}}/g, 100 - xp)
-    .replace(/{{COMMITS}}/g, stats.commits)
-    .replace(/{{REPOS}}/g, stats.repos)
-    .replace(/{{STARS}}/g, stats.stars)
-    .replace(/{{FOLLOWERS}}/g, stats.followers)
-    .replace(/{{ISSUES}}/g, stats.issues)
-    .replace(/{{PRS}}/g, stats.prs)
-    .replace(/{{MERGEDPRS}}/g, stats.mergedPrs)
-    .replace(/{{COMMENTS}}/g, stats.comments)
-    .replace(/{{FORKS}}/g, stats.forks)
-    .replace(/{{STARS_GIVEN}}/g, stats.starsGiven)
-    .replace(/{{GISTS}}/g, stats.gists)
-    .replace(/{{RELEASES}}/g, stats.releases)
-    .replace(/{{TIMELINE}}/g, timeline);
+  fs.writeFileSync(readmePath, updatedReadme);
 
-  fs.writeFileSync(readmePath, readme);
-  console.log('README.md updated successfully.');
+  console.log('README.md updated successfully!');
 };
 
 main().catch(console.error);

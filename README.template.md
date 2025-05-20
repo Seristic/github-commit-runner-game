@@ -29,12 +29,16 @@ This profile is not just a showcase of code but a celebration of identity, resil
 
 ### 🧠 Character Stats
 
-| Attribute        | Value        |
-|------------------|--------------|
-| 💻 Commits       | {{COMMITS}}  |
-| 🛠 Repositories  | {{REPOS}}    |
-| ⭐ Stars         | {{STARS}}    |
-| 👥 Followers     | {{FOLLOWERS}}|
+| Attribute           | Value        |
+|---------------------|--------------|
+| 💻 Commits          | {{COMMITS}}  |
+| 🛠 Repositories     | {{REPOS}}    |
+| 🍴 Forks Created    | {{FORKS}}    |
+| ⭐ Stars Received   | {{STARS}}    |
+| 🌟 Stars Given      | {{STARS_GIVEN}} |
+| 📜 Gists Created    | {{GISTS}}    |
+| 🚀 Releases Published | {{RELEASES}} |
+| 👥 Followers        | {{FOLLOWERS}} |
 
 ---
 
@@ -45,7 +49,7 @@ This profile is not just a showcase of code but a celebration of identity, resil
 | 🔧 Issues Opened        | {{ISSUES}}    | 🪙 +5 XP each  |
 | 🛡 Pull Requests        | {{PRS}}       | 🪙 +10 XP each |
 | ⚔ Merged Pull Requests  | {{MERGEDPRS}} | 🪙 +20 XP each |
-| 💬 Code Comments       | {{COMMENTS}}  | 🪙 +2 XP each  |
+| 💬 Code Comments        | {{COMMENTS}}  | 🪙 +2 XP each  |
 
 ---
 
