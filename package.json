@@ -1,0 +1,14 @@
+{
+    "name": "github-profile-leveler",
+    "version": "1.0.0",
+    "main": "src/index.js",
+    "type": "module",
+    "license": "MIT",
+    "dependencies": {
+        "@octokit/rest": "^21.1.1",
+        "dotenv": "^16.5.0"
+    },
+    "scripts": {
+        "start": "node src/index.js"
+    }
+}
