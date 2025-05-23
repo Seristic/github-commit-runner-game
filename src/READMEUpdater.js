@@ -1,8 +1,10 @@
 import fs from 'fs';
-
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-// Instead of just 'README.md', do:
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const readmePath = path.resolve(__dirname, '../README.md');
 
 const content = fs.readFileSync(readmePath, 'utf-8');
