@@ -11,7 +11,7 @@ const svgPath = path.resolve(__dirname, 'progress.svg');
 
 const content = fs.readFileSync(readmePath, 'utf-8');
 
-GITHUB_USERNAME = "Seristic"
+GITHUB_USERNAME = Seristic
 
 
 export function generateProgressMarkdown({
