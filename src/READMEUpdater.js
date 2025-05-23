@@ -1,73 +1,81 @@
 import fs from 'fs';
 
+import path from 'path';
+
+// Instead of just 'README.md', do:
+const readmePath = path.resolve(process.cwd(), 'README.md'); // Absolute path to root README.md
+
+const content = fs.readFileSync(readmePath, 'utf-8');
+
+
 export function generateProgressMarkdown({
-    username = process.env.GITHUB_USERNAME,
-    level = 0,
-    currentXP = 0,
-    nextLevelXP = 100,
-    commitXP = 0,
-    prXP = 0,
-    issuesXP = 0,
-    starredXP = 0,
-    reviewsXP = 0,
-    mergedPRXP = 0,
-    forksXP = 0,
-    wikiEditsXP = 0,
-    discussionsStartedXP = 0,
-    discussionsParticipatedXP = 0,
-    projectCardsXP = 0,
-    releasesXP = 0,
-    recentRepos = [],
-    totalRepos = 0,
-    totalGists = 0,
-    followers = 0,
-    starsGiven = 0
+  username = process.env.GITHUB_USERNAME,
+  level = 0,
+  currentXP = 0,
+  nextLevelXP = 100,
+  commitXP = 0,
+  prXP = 0,
+  issuesXP = 0,
+  starredXP = 0,
+  reviewsXP = 0,
+  mergedPRXP = 0,
+  forksXP = 0,
+  wikiEditsXP = 0,
+  discussionsStartedXP = 0,
+  discussionsParticipatedXP = 0,
+  projectCardsXP = 0,
+  releasesXP = 0,
+  recentRepos = [],
+  totalRepos = 0,
+  totalGists = 0,
+  followers = 0,
+  starsGiven = 0
 }) {
-    const progressPercent = Math.min(100, Math.floor((currentXP / nextLevelXP) * 100));
-    const xpToNext = nextLevelXP - currentXP;
+  const progressPercent = Math.min(100, Math.floor((currentXP / nextLevelXP) * 100));
+  const xpToNext = nextLevelXP - currentXP;
 
-    const recentReposList = recentRepos
-        .map(repo =>
-            `<li><a href="${repo.html_url}" style="color:#FF79C6;">${repo.name}</a>: ${repo.description || 'No description'} ★${repo.stargazers_count} - ${repo.language || 'Unknown'}</li>`
-        ).join('\n');
+  const recentReposList = recentRepos
+    .map(repo =>
+      `<li><a href="${repo.html_url}" style="color:#FF79C6;">${repo.name}</a>: ${repo.description || 'No description'} ★${repo.stargazers_count} - ${repo.language || 'Unknown'}</li>`
+    ).join('\n');
 
-    function generateXPAsciiTable(data) {
-        const rows = [
-            ['Commits', data.commitXP],
-            ['Pull Requests', data.prXP],
-            ['Issues Opened', data.issuesXP],
-            ['Repositories Starred', data.starredXP],
-            ['Code Reviews', data.reviewsXP],
-            ['Merged Pull Requests', data.mergedPRXP],
-            ['Repository Forks', data.forksXP],
-            ['Wiki Edits', data.wikiEditsXP],
-            ['Discussions Started', data.discussionsStartedXP],
-            ['Discussions Participated', data.discussionsParticipatedXP],
-            ['Project Cards Created', data.projectCardsXP],
-            ['Releases Published', data.releasesXP],
-        ];
+  function generateXPAsciiTable(data) {
+    const rows = [
+      ['Commits', data.commitXP],
+      ['Pull Requests', data.prXP],
+      ['Issues Opened', data.issuesXP],
+      ['Repositories Starred', data.starredXP],
+      ['Code Reviews', data.reviewsXP],
+      ['Merged Pull Requests', data.mergedPRXP],
+      ['Repository Forks', data.forksXP],
+      ['Wiki Edits', data.wikiEditsXP],
+      ['Discussions Started', data.discussionsStartedXP],
+      ['Discussions Participated', data.discussionsParticipatedXP],
+      ['Project Cards Created', data.projectCardsXP],
+      ['Releases Published', data.releasesXP],
+    ];
 
-        const col1Width = Math.max(...rows.map(r => r[0].length), 'Source'.length);
-        const col2Width = Math.max(...rows.map(r => String(r[1]).length), 'XP'.length);
+    const col1Width = Math.max(...rows.map(r => r[0].length), 'Source'.length);
+    const col2Width = Math.max(...rows.map(r => String(r[1]).length), 'XP'.length);
 
-        const line = `+${'-'.repeat(col1Width + 2)}+${'-'.repeat(col2Width + 2)}+`;
-        const header = `| ${'Source'.padEnd(col1Width)} | ${'XP'.padEnd(col2Width)} |`;
+    const line = `+${'-'.repeat(col1Width + 2)}+${'-'.repeat(col2Width + 2)}+`;
+    const header = `| ${'Source'.padEnd(col1Width)} | ${'XP'.padEnd(col2Width)} |`;
 
-        const tableRows = rows.map(
-            ([name, xp]) => `| ${name.padEnd(col1Width)} | ${String(xp).padEnd(col2Width)} |`
-        );
+    const tableRows = rows.map(
+      ([name, xp]) => `| ${name.padEnd(col1Width)} | ${String(xp).padEnd(col2Width)} |`
+    );
 
-        return [line, header, line, ...tableRows, line].join('\n');
-    }
+    return [line, header, line, ...tableRows, line].join('\n');
+  }
 
-    const xpTable = generateXPAsciiTable({
-        commitXP, prXP, issuesXP, starredXP, reviewsXP,
-        mergedPRXP, forksXP, wikiEditsXP,
-        discussionsStartedXP, discussionsParticipatedXP,
-        projectCardsXP, releasesXP,
-    });
+  const xpTable = generateXPAsciiTable({
+    commitXP, prXP, issuesXP, starredXP, reviewsXP,
+    mergedPRXP, forksXP, wikiEditsXP,
+    discussionsStartedXP, discussionsParticipatedXP,
+    projectCardsXP, releasesXP,
+  });
 
-    return `
+  return `
 <!-- PROGRESS -->
 <div style="background:#1e1e1e; border-radius:12px; padding:20px; max-width:700px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#eee; line-height:1.5;">
 
@@ -133,19 +141,19 @@ ${xpTable}
 }
 
 export function updateReadme(content) {
-    try {
-        let readme = fs.readFileSync('README.md', 'utf-8');
-        const regex = /<!-- PROGRESS -->[\s\S]*?<!-- END_PROGRESS -->/;
+  try {
+    let readme = fs.readFileSync('README.md', 'utf-8');
+    const regex = /<!-- PROGRESS -->[\s\S]*?<!-- END_PROGRESS -->/;
 
-        if (regex.test(readme)) {
-            readme = readme.replace(regex, content);
-        } else {
-            readme = `${content}\n\n${readme}`;
-        }
-
-        fs.writeFileSync('README.md', readme);
-        console.log('✅ README.md successfully updated.');
-    } catch (err) {
-        console.error('❌ Failed to update README.md:', err);
+    if (regex.test(readme)) {
+      readme = readme.replace(regex, content);
+    } else {
+      readme = `${content}\n\n${readme}`;
     }
+
+    fs.writeFileSync('README.md', readme);
+    console.log('✅ README.md successfully updated.');
+  } catch (err) {
+    console.error('❌ Failed to update README.md:', err);
+  }
 }
