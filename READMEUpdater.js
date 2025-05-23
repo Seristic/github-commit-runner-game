@@ -11,9 +11,11 @@ const svgPath = path.resolve(__dirname, 'progress.svg');
 
 const content = fs.readFileSync(readmePath, 'utf-8');
 
+GITHUB_USERNAME = "Seristic"
+
 
 export function generateProgressMarkdown({
-  username = process.env.GITHUB_USERNAME,
+  username = GITHUB_USERNAME,
   level = 0,
   currentXP = 0,
   nextLevelXP = 100,
@@ -37,6 +39,27 @@ export function generateProgressMarkdown({
 }) {
   const progressPercent = Math.min(100, Math.floor((currentXP / nextLevelXP) * 100));
   const xpToNext = nextLevelXP - currentXP;
+
+  const level = 0;
+  const currentXP = 110;
+  const requiredXP = 150;
+  const percentage = Math.round((currentXP / requiredXP) * 100);
+
+  const filledWidth = percentage;
+  const emptyWidth = 100 - filledWidth;
+
+  const svg = `
+<svg width="700" height="40" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="700" height="40" fill="#333" rx="20" />
+  <rect x="0" y="0" width="${(700 * filledWidth) / 100}" height="40" fill="#FF49C6" rx="20" />
+  <text x="350" y="26" fill="#fff" font-weight="bold" font-size="16" text-anchor="middle" font-family="Verdana">
+    Level ${level} — XP ${currentXP} / ${requiredXP}
+  </text>
+</svg>
+`;
+
+  fs.writeFileSync('./progress.svg', svg.trim());
+  console.log('✅ Progress bar SVG generated: progress.svg');
 
   const recentReposList = recentRepos
     .map(repo =>

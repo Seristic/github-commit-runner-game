@@ -3,7 +3,7 @@
 <div style="background:#1e1e1e; border-radius:12px; padding:20px; max-width:700px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#eee; line-height:1.5;">
 
   <h2 style="color:#FF79C6;">🏳️‍⚧️ My Journey & Recent Milestones</h2>
-  <p>Hello! I’m <strong>Developer</strong>, a passionate developer and proud member of the trans community.</p>
+  <p>Hello! I’m <strong>Seristic</strong>, a passionate developer and proud member of the trans community.</p>
   <p>This profile is not just a showcase of code but a celebration of identity, resilience, and growth.</p>
 
   <h3 style="color:#FF79C6;">📅 Timeline of My Journey</h3>
