@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 // Instead of just 'README.md', do:
-const readmePath = path.resolve(process.cwd(), 'README.md'); // Absolute path to root README.md
+const readmePath = path.resolve(__dirname, '../README.md');
 
 const content = fs.readFileSync(readmePath, 'utf-8');
 
