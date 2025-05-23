@@ -19,11 +19,9 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        working-directory: src
         run: npm install
 
       - name: Run profile level updater
-        working-directory: src
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           GITHUB_USERNAME: Seristic
