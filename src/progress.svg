@@ -1,0 +1,8 @@
+
+  <svg width="300" height="50" xmlns="http://www.w3.org/2000/svg">
+    <rect width="300" height="50" fill="#1e1e2f" rx="10" ry="10"/>
+    <rect width="81" height="50" fill="#FF49C6" rx="10" ry="10"/>
+    <text x="150" y="30" font-size="24" font-family="Verdana" fill="#fff" text-anchor="middle" font-weight="bold">
+      Level 1 — XP: 108 / 400
+    </text>
+  </svg>
