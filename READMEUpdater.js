@@ -40,7 +40,6 @@ export function generateProgressMarkdown({
   const progressPercent = Math.min(100, Math.floor((currentXP / nextLevelXP) * 100));
   const xpToNext = nextLevelXP - currentXP;
 
-  const level = 0;
   const currentXP = 110;
   const requiredXP = 150;
   const percentage = Math.round((currentXP / requiredXP) * 100);
