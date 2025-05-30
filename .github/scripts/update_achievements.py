@@ -188,10 +188,13 @@ def update_readme_sections(readme_content, unlocked_achievement_ids, active_lang
         )
     new_achievements_block = "\n".join(achievements_lines)
     
+    # Use explicit markers for the achievements section
+    ACHIEVEMENTS_START_MARKER = "<!-- ACHIEVEMENTS_START -->"
+    ACHIEVEMENTS_END_MARKER = "<!-- ACHIEVEMENTS_END -->"
     readme_content = replace_section(
         readme_content,
-        "",     #
-        "", 
+        ACHIEVEMENTS_START_MARKER,
+        ACHIEVEMENTS_END_MARKER,
         new_achievements_block
     )
     print("DEBUG: Achievements section processing complete.")
