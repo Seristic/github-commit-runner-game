@@ -72,17 +72,6 @@ Applying technology to solve environmental challenges:
 
 ---
 
-## Cloud & DevOps Adventures ☁️
-
-Deploying and scaling applications efficiently:
-
-- **Cloud Platforms:** Microsoft Azure (Azure Functions, Azure DevOps), AWS (S3, EC2)
-- **Tools:** Docker, Git, CI/CD pipelines
-
-**Featured Project:** _Your Cloud/DevOps Project Link_ – Short description.
-
----
-
 ## My Achievements: Milestones Unlocked! 🏆
 
 Every line of code, every project, every contribution builds towards new achievements. Watch this space for my latest unlocked milestones!
@@ -124,8 +113,6 @@ My passion for technology is deeply rooted in a desire to contribute to a health
 Ready for a quick mental exercise? [Launch the Eco-Puzzle Challenge!](YOUR_GITHUB_USERNAME.github.io/your-puzzle-repo-name/)
 
 _Solve it to reveal a secret message!_
-
-> _(Remember to replace the URL above with the actual link to your puzzle!)_
 
 ---
 
