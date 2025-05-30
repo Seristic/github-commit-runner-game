@@ -119,9 +119,6 @@ def get_unlocked_achievements(user_stats, repos_data):
 
         # Check for contributions to other repos (not owned by user, not forks of user's repos)
         if repo['owner']['login'] != GITHUB_USERNAME and not repo['fork']:
-            # This is a basic check. A more robust check would involve
-            # checking the /repos/{owner}/{repo}/contributors endpoint
-            # for user's login. For now, we assume any non-owned, non-fork implies contribution.
             contributed_repos_count += 1 
 
     num_unique_languages = len(unique_languages)
@@ -153,36 +150,30 @@ def replace_section(full_content, start_marker, end_marker, new_block_content):
     Replaces content between start_marker and end_marker with new_block_content.
     Handles cases where markers might not be present.
     """
+    print(f"DEBUG: Attempting to replace section from '{start_marker}' to '{end_marker}'")
     parts_before_start = full_content.split(start_marker, 1)
     
     if len(parts_before_start) < 2:
-        # Start marker not found, return original content
         print(f"Warning: Start marker '{start_marker}' not found. Section not replaced.")
         return full_content
 
-    # The content after the first start_marker
     content_after_start = parts_before_start[1]
     
     parts_after_end = content_after_start.split(end_marker, 1)
     
     if len(parts_after_end) < 2:
-        # End marker not found after start_marker, return original content
         print(f"Warning: End marker '{end_marker}' not found after '{start_marker}'. Section not replaced.")
         return full_content
 
-    # Reconstruct the content:
-    # 1. Content before the start marker
-    # 2. Start marker itself
-    # 3. The new block content
-    # 4. End marker itself
-    # 5. Content after the end marker
-    return (
+    result = (
         parts_before_start[0] +
         start_marker + "\n" +
         new_block_content + "\n" +
         end_marker +
         parts_after_end[1]
     )
+    print(f"DEBUG: Section '{start_marker}' replaced successfully.")
+    return result
 
 def update_readme_sections(readme_content, unlocked_achievement_ids, active_languages, skills_config):
     """Updates both achievements and skill tree sections."""
@@ -203,39 +194,49 @@ def update_readme_sections(readme_content, unlocked_achievement_ids, active_lang
         "",
         new_achievements_block
     )
+    print("DEBUG: Achievements section processing complete.")
 
     # 2. Update Skill Tree Colors (within the SVG block)
-    # The SVG block itself is assumed to be *outside* explicit markers for now.
-    # We find the SVG and then manipulate its internal circles.
-    
-    # Regex to find the entire SVG block
     svg_pattern = re.compile(r'(<svg[^>]*>.*?<\/svg>)', re.DOTALL)
     svg_match = svg_pattern.search(readme_content)
 
     if svg_match:
         svg_content = svg_match.group(1)
-        original_svg_block = svg_match.group(0) # The full matched SVG string including attributes
-
-        DEFAULT_INACTIVE_COLOR = "#cccccc" # Fallback if not specified in config
+        original_svg_block = svg_match.group(0)
         
+        print(f"DEBUG: SVG block found. Length: {len(svg_content)}. First 100 chars: {svg_content[:100]}...")
+
+        if not svg_content.strip(): # Check if extracted content is empty or just whitespace
+            print("Warning: Extracted SVG content is empty or whitespace. Skipping skill tree coloring.")
+            return readme_content 
+
+        DEFAULT_INACTIVE_COLOR = "#cccccc"
+        
+        updated_svg_content = svg_content # Work on a copy
+
         for skill_data in skills_config['skills']:
             skill_id = skill_data['id']
-            keywords = [k.lower() for k in skill_data['keywords']] # Ensure keywords are lowercase
+            keywords = [k.lower() for k in skill_data['keywords']]
             active_color = skill_data.get('color_active', "#4CAF50")
             inactive_color = skill_data.get('color_inactive', DEFAULT_INACTIVE_COLOR)
             
             is_skill_active = any(keyword in active_languages for keyword in keywords)
             target_color = active_color if is_skill_active else inactive_color
             
-            # Use re.sub to update the fill color of the specific circle ID within the SVG content
-            # This regex is robust for various attributes before/after 'id' and 'fill'
             pattern_circle = re.compile(
                 rf'(<circle[^>]*id="{re.escape(skill_id)}"[^>]*?)fill="[^"]*"([^>]*?>)'
             )
-            svg_content = pattern_circle.sub(rf'\g<1>fill="{target_color}"\g<2>', svg_content, 1)
+            
+            # Use search first to check if the skill ID exists in the SVG
+            if pattern_circle.search(updated_svg_content):
+                updated_svg_content = pattern_circle.sub(rf'\g<1>fill="{target_color}"\g<2>', updated_svg_content, 1)
+                print(f"DEBUG: Successfully updated skill ID: {skill_id} to color: {target_color}")
+            else:
+                print(f"DEBUG: Skill ID '{skill_id}' not found in SVG. Skipping color update for this skill.")
         
         # Replace the old SVG block with the new, updated SVG block in the README
-        readme_content = readme_content.replace(original_svg_block, svg_content)
+        readme_content = readme_content.replace(original_svg_block, updated_svg_content)
+        print("DEBUG: SVG block replaced in README content.")
     else:
         print("Warning: SVG skill tree not found in README.md. Skill colors not updated.")
 
@@ -297,6 +298,9 @@ def main():
         exit(1)
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+        # Print the full traceback for better debugging
+        import traceback
+        traceback.print_exc()
         exit(1)
 
 if __name__ == "__main__":
