@@ -190,8 +190,8 @@ def update_readme_sections(readme_content, unlocked_achievement_ids, active_lang
     
     readme_content = replace_section(
         readme_content,
-        "", # <-- CORRECTED THIS LINE!
-        "",   # <-- CORRECTED THIS LINE!
+        "",
+        "",
         new_achievements_block
     )
     print("DEBUG: Achievements section processing complete.")
