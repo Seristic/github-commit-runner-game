@@ -1,0 +1,82 @@
+{
+  "skills": [
+    {
+      "id": "skill-core",
+      "keywords": ["python", "javascript", "java", "c++", "c#", "go", "ruby", "typescript"],
+      "color_active": "#4CAF50",
+      "color_inactive": "#cccccc"
+    },
+    {
+      "id": "skill-web",
+      "keywords": ["html", "css", "javascript", "typescript", "react", "vue", "angular", "node", "express", "flask", "django"],
+      "color_active": "#2196F3",
+      "color_inactive": "#cccccc"
+    },
+    {
+      "id": "skill-react",
+      "keywords": ["react", "javascript", "typescript"],
+      "color_active": "#61DAFB",
+      "color_inactive": "#cccccc"
+    },
+    {
+      "id": "skill-javascript",
+      "keywords": ["javascript", "typescript"],
+      "color_active": "#F7DF1E",
+      "color_inactive": "#cccccc"
+    },
+    {
+      "id": "skill-data-ai",
+      "keywords": ["python", "r", "jupyter", "pandas", "numpy", "scipy", "tensorflow", "pytorch", "keras", "machine learning", "data science"],
+      "color_active": "#FFC107",
+      "color_inactive": "#cccccc"
+    },
+    {
+      "id": "skill-python",
+      "keywords": ["python"],
+      "color_active": "#306998",
+      "color_inactive": "#cccccc"
+    },
+    {
+      "id": "skill-ml",
+      "keywords": ["tensorflow", "pytorch", "keras", "machine learning", "deep learning"],
+      "color_active": "#FF5722",
+      "color_inactive": "#cccccc"
+    },
+    {
+      "id": "skill-eco-tech",
+      "keywords": ["eco", "environment", "climate", "sustainability", "green", "conservation", "reforestation", "iot", "gis", "environmental data"],
+      "color_active": "#8BC34A",
+      "color_inactive": "#cccccc"
+    },
+    {
+      "id": "skill-iot",
+      "keywords": ["iot", "arduino", "raspberry pi", "embedded systems"],
+      "color_active": "#00BCD4",
+      "color_inactive": "#cccccc"
+    },
+    {
+      "id": "skill-gis",
+      "keywords": ["gis", "qgis", "arcgis", "mapbox", "leaflet"],
+      "color_active": "#795548",
+      "color_inactive": "#cccccc"
+    },
+    {
+      "id": "skill-cloud-devops",
+      "keywords": ["azure", "aws", "gcp", "docker", "kubernetes", "ci/cd", "devops"],
+      "color_active": "#9C27B0",
+      "color_inactive": "#cccccc"
+    },
+    {
+      "id": "skill-azure",
+      "keywords": ["azure", "azure functions", "azure devops"],
+      "color_active": "#0078D4",
+      "color_inactive": "#cccccc"
+    },
+    {
+      "id": "skill-docker",
+      "keywords": ["docker", "containerization"],
+      "color_active": "#2496ED",
+      "color_inactive": "#cccccc"
+    }
+  ]
+}
