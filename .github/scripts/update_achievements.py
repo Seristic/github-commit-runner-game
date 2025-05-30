@@ -12,7 +12,7 @@ GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
 
 # Base URL for achievement images (YOU MUST CREATE THESE IMAGES AND UPLOAD THEM TO A REPO)
 # Example: https://github.com/YOUR_USERNAME/your-images-repo/raw/main/
-ACHIEVEMENT_IMAGE_BASE_URL = f"https://github.com/{GITHUB_USERNAME}/your-profile-images-repo/raw/main/"
+ACHIEVEMENT_IMAGE_BASE_URL = f"https://github.com/{GITHUB_USERNAME}/your-profile-images-repo/raw/main/" # REMEMBER TO REPLACE 'your-profile-images-repo'
 
 # Define your achievement criteria and messages with image IDs
 ACHIEVEMENTS = [
@@ -57,8 +57,6 @@ def get_user_stats(username, token):
         for repo in repos:
             if not repo['fork']: # Only count commits to original repos, not forks
                 try:
-                    # Note: This endpoint is rate-limited and can be slow for many repos.
-                    # It also might not include all commits if user contributions are not explicitly listed.
                     contributors = github_api_request(f"https://api.github.com/repos/{username}/{repo['name']}/contributors?per_page=1", token)
                     for contributor in contributors:
                         if contributor['login'] == username:
@@ -149,65 +147,100 @@ def get_unlocked_achievements(user_stats, repos_data):
     return unlocked_ids, unique_languages # Also return unique languages for skill tree
 
 # --- README Update Logic ---
-def update_readme_achievements(readme_content, unlocked_achievement_ids):
-    """Updates the achievements section with unlocked/locked images."""
-    start_marker = ""
-    end_marker = ""
 
-    if start_marker not in readme_content or end_marker not in readme_content:
-        print("Error: Achievement markers not found in README.md.")
-        return readme_content
+def replace_section(full_content, start_marker, end_marker, new_block_content):
+    """
+    Replaces content between start_marker and end_marker with new_block_content.
+    Handles cases where markers might not be present.
+    """
+    parts_before_start = full_content.split(start_marker, 1)
+    
+    if len(parts_before_start) < 2:
+        # Start marker not found, return original content
+        print(f"Warning: Start marker '{start_marker}' not found. Section not replaced.")
+        return full_content
 
-    achievements_section = []
+    # The content after the first start_marker
+    content_after_start = parts_before_start[1]
+    
+    parts_after_end = content_after_start.split(end_marker, 1)
+    
+    if len(parts_after_end) < 2:
+        # End marker not found after start_marker, return original content
+        print(f"Warning: End marker '{end_marker}' not found after '{start_marker}'. Section not replaced.")
+        return full_content
+
+    # Reconstruct the content:
+    # 1. Content before the start marker
+    # 2. Start marker itself
+    # 3. The new block content
+    # 4. End marker itself
+    # 5. Content after the end marker
+    return (
+        parts_before_start[0] +
+        start_marker + "\n" +
+        new_block_content + "\n" +
+        end_marker +
+        parts_after_end[1]
+    )
+
+def update_readme_sections(readme_content, unlocked_achievement_ids, active_languages, skills_config):
+    """Updates both achievements and skill tree sections."""
+    
+    # 1. Update Achievements Section
+    achievements_lines = []
     for achievement in ACHIEVEMENTS:
         img_src = achievement["img_unlocked"] if achievement["id"] in unlocked_achievement_ids else achievement["img_locked"]
         full_img_url = f"{ACHIEVEMENT_IMAGE_BASE_URL}{img_src}"
-        achievements_section.append(
+        achievements_lines.append(
             f'* <img src="{full_img_url}" width="24" height="24" alt="{achievement["id"]}"> {achievement["message"]}'
         )
+    new_achievements_block = "\n".join(achievements_lines)
     
-    new_achievements_content = "\n" + "\n".join(achievements_section) + "\n"
-    
-    # Replace the existing content between markers
-    updated_content = re.sub(
-        f"{re.escape(start_marker)}.*?{re.escape(end_marker)}",
-        f"{start_marker}{new_achievements_content}{end_marker}",
+    readme_content = replace_section(
         readme_content,
-        flags=re.DOTALL
+        "",
+        "",
+        new_achievements_block
     )
-    return updated_content
 
-def update_readme_skill_tree(readme_content, active_languages, skills_config):
-    """Updates the skill tree SVG colors based on active languages."""
+    # 2. Update Skill Tree Colors (within the SVG block)
+    # The SVG block itself is assumed to be *outside* explicit markers for now.
+    # We find the SVG and then manipulate its internal circles.
     
-    # Define default and active colors from config or fallback
-    DEFAULT_INACTIVE_COLOR = "#cccccc" # Fallback if not specified in config
-    
-    # Create a mapping of skill ID to its active color and keywords
-    skill_map = {skill['id']: skill for skill in skills_config['skills']}
+    # Regex to find the entire SVG block
+    svg_pattern = re.compile(r'(<svg[^>]*>.*?<\/svg>)', re.DOTALL)
+    svg_match = svg_pattern.search(readme_content)
 
-    # Iterate through each skill in the config
-    for skill_data in skills_config['skills']:
-        skill_id = skill_data['id']
-        keywords = [k.lower() for k in skill_data['keywords']] # Ensure keywords are lowercase
-        active_color = skill_data.get('color_active', "#4CAF50") # Default green if not set
-        inactive_color = skill_data.get('color_inactive', DEFAULT_INACTIVE_COLOR)
+    if svg_match:
+        svg_content = svg_match.group(1)
+        original_svg_block = svg_match.group(0) # The full matched SVG string including attributes
+
+        DEFAULT_INACTIVE_COLOR = "#cccccc" # Fallback if not specified in config
         
-        # Check if any of the skill's keywords are present in the active languages
-        is_skill_active = any(keyword in active_languages for keyword in keywords)
+        for skill_data in skills_config['skills']:
+            skill_id = skill_data['id']
+            keywords = [k.lower() for k in skill_data['keywords']] # Ensure keywords are lowercase
+            active_color = skill_data.get('color_active', "#4CAF50")
+            inactive_color = skill_data.get('color_inactive', DEFAULT_INACTIVE_COLOR)
+            
+            is_skill_active = any(keyword in active_languages for keyword in keywords)
+            target_color = active_color if is_skill_active else inactive_color
+            
+            # Use re.sub to update the fill color of the specific circle ID within the SVG content
+            # This regex is robust for various attributes before/after 'id' and 'fill'
+            pattern_circle = re.compile(
+                rf'(<circle[^>]*id="{re.escape(skill_id)}"[^>]*?)fill="[^"]*"([^>]*?>)'
+            )
+            svg_content = pattern_circle.sub(rf'\g<1>fill="{target_color}"\g<2>', svg_content, 1)
         
-        target_color = active_color if is_skill_active else inactive_color
-        
-        # Find the circle element by ID and update its fill color
-        # This regex is robust for various attributes before/after 'id' and 'fill'
-        # It ensures we only modify the 'fill' attribute of the specific circle ID.
-        pattern = re.compile(
-            rf'(<circle[^>]*id="{re.escape(skill_id)}"[^>]*?)fill="[^"]*"([^>]*?>)'
-        )
-        
-        readme_content = pattern.sub(rf'\g<1>fill="{target_color}"\g<2>', readme_content, 1)
+        # Replace the old SVG block with the new, updated SVG block in the README
+        readme_content = readme_content.replace(original_svg_block, svg_content)
+    else:
+        print("Warning: SVG skill tree not found in README.md. Skill colors not updated.")
 
     return readme_content
+
 
 def main():
     readme_path = "README.md"
@@ -251,11 +284,8 @@ def main():
         print("Unlocked Achievement IDs:", unlocked_achievement_ids)
         print("Active Languages Detected:", active_languages)
         
-        # Update achievements
-        readme_content = update_readme_achievements(readme_content, unlocked_achievement_ids)
-
-        # Update skill tree colors
-        readme_content = update_readme_skill_tree(readme_content, active_languages, skills_config)
+        # Update both sections with the new, more robust function
+        readme_content = update_readme_sections(readme_content, unlocked_achievement_ids, active_languages, skills_config)
 
         with open(readme_path, "w", encoding="utf-8") as f:
             f.write(readme_content)
