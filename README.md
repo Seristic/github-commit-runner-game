@@ -1,91 +1,73 @@
-# Welcome, Adventurer! I'm Alyssa 🌱
+# Welcome, Adventurer! I'm Alyssa 🌱🏳️‍⚧️
 
-Embark on a journey through my code and contributions. I believe in crafting solutions that not only innovate but also nurture our planet. Let's explore the pathways of development and discovery together!
-
----
-
-## Your Quest Begins: Choose Your Path! 🗺️
-
-To uncover my story, select a path below. Each choice will lead you to different insights into my skills and passions:
-
-- **[Explore My Skill Tree](#my-skill-tree-growth--mastery-):** Discover the technologies I've mastered and am currently learning.
-- **[Uncover My Achievements](#my-achievements-milestones-unlocked-):** See the milestones I've reached on my coding journey.
-- **[Dive into My Environmental Projects](#environmental-projects-cultivating-change-):** Learn about my dedication to green tech and sustainability.
-- **[Take a Mini-Challenge](#mini-challenge-test-your-logic-):** Test your wits with a quick coding puzzle!
-- **[See What I'm Up To Right Now](#my-current-expedition-):** View my live coding/listening status.
+Embark on a vibrant journey through my code and contributions. I believe in crafting solutions that not only innovate but also nurture our planet and champion a more inclusive world. Let's explore the pathways of development, discovery, and diversity together!
 
 ---
 
-## My Skill Tree: Growth & Mastery 🌳
+## Your Quest Begins: Choose Your Path! 🗺️🌈
 
-My skills are ever-growing, like a flourishing forest. Each node represents a technology I've cultivated. A vibrant color means I'm actively using or mastering it!
+To uncover my story, select a path below. Each choice will lead you to different insights into my skills and passions, all woven with a thread of pride and purpose:
 
-> _**Note:** The following is a conceptual skill tree. For a visual version, see my portfolio site!_
-
-- **Core Programming Skills:** Python, JavaScript, (add others you know)
-- **Web Development:** React.js, HTML5, CSS3 (Tailwind CSS, Styled Components), Node.js (Express), Python (Flask), RESTful APIs
-- **Data Science & AI:** Python (Pandas, NumPy, Scikit-learn), TensorFlow/PyTorch, Climate data analysis, predictive modeling
-- **Eco-Tech:** IoT for environmental monitoring, Green Software Principles, GIS mapping
-- **Cloud & DevOps:** Microsoft Azure (Azure Functions, Azure DevOps), AWS (S3, EC2), Docker, Git, CI/CD pipelines
+- **[Explore My Skill Tree](#my-skill-tree-growth--mastery-🌳✨):** Discover the technologies I've cultivated and continue to grow.
+- **[Uncover My Achievements](#my-achievements-milestones-unlocked-🏆🌟):** See the milestones I've reached on my unique coding journey.
+- **[Dive into My Environmental Projects](#eco-tech--sustainability-initiatives-🌱🌍):** Learn about my dedication to green tech and a sustainable future for all.
+- **[Take a Mini-Challenge](#mini-challenge-test-your-logic-🧠🧩):** Test your wits with a quick puzzle, perhaps with a dash of advocacy!
+- **[See What I'm Up To Right Now](#my-current-expedition-🎮🎧✨):** View my live coding/listening status.
 
 ---
 
-## Core Programming Skills 🖥️
+## My Skill Tree: Growth & Mastery 🌳✨
 
-My foundation in programming includes:
+My skills are ever-growing, like a flourishing forest of possibilities. Each node represents a technology I've cultivated, reflecting my diverse interests and capabilities. A vibrant color means I'm actively using or mastering it!
 
-- **Languages:** Python, JavaScript, (add others you know)
-- **Concepts:** Data Structures, Algorithms, Object-Oriented Programming
-- **Philosophy:** Clean, readable, and efficient code.
+> _Note: The following is a conceptual skill tree. For a visual version, see my portfolio site!_
 
----
+### Core Programming Skills 🖥️💖
 
-## Web Development Journey 🌐
+- **Languages:** Python, JavaScript, Java, C++, HTML5, CSS3
+- **Concepts:** Data Structures, Algorithms, Object-Oriented Programming, RESTful APIs, Databases
+- **Philosophy:** Crafting clean, readable, and efficient code that empowers positive change.
 
-Building interactive and responsive web experiences:
+### Web Development Journey 🌐🏳️‍🌈
 
-- **Frontend:** React.js, HTML5, CSS3 (Tailwind CSS, Styled Components)
-- **Backend:** Node.js (Express), Python (Flask), RESTful APIs
+Building interactive and responsive web experiences that connect and empower:
 
-**Featured Project:** _Your Web App Project Link_ – Short description.
+- **Frontend:** React, HTML5, CSS3 (Tailwind CSS)
+- **Backend:** Node.js (Express)
+- **Other:** Discord.js (for bot development integrating web concepts, fostering community)
 
----
+#### Featured Project 1: My LEAN Website
 
-## Data Science & AI Explorations 🧠
+A welcoming online hub dedicated to supporting LGBTQ+ communities, offering resources, guidance, and a safe space for connection, empowerment, and mutual support.
 
-Leveraging data to uncover insights and build intelligent systems:
+- **Link:** Currently not public
 
-- **Languages & Tools:** Python (Pandas, NumPy, Scikit-learn), TensorFlow/PyTorch
-- **Areas of Interest:** Climate data analysis, predictive modeling
+#### Featured Project 2: World-Changing Accessibility Project (JavaScript)
 
-**Featured Project:** _Your Data/AI Project Link_ – Short description.
+EmpowerUI-lib is an open-source JavaScript library focused on making web interfaces more accessible and inclusive. It provides easy-to-use components and utilities that help developers build applications usable by everyone, with special attention to accessibility best practices and user empowerment.
 
----
+- **Link:** https://seristic.github.io/EmpowerUI-lib/
 
-## Eco-Tech & Sustainability Initiatives 🌱
+### Data Science & AI Explorations 🧠💡
 
-Applying technology to solve environmental challenges:
+Leveraging data to uncover insights and build intelligent systems, with an eye towards equitable and ethical applications:
 
-- **Focus Areas:** IoT for environmental monitoring, Green Software Principles, GIS mapping
+- Planned projects will be added here later.
 
-**Featured Project:** _Your Environmental Project Link_ – Short description.
+#### Featured Project: Your Data/AI Project
 
----
+- **Description:** _Short description._
+- **Link:** _[Link to project, if public]_
 
-## Cloud & DevOps Adventures ☁️
+### Eco-Tech & Sustainability Initiatives 🌱🌍
 
-Deploying and scaling applications efficiently:
-
-- **Cloud Platforms:** Microsoft Azure (Azure Functions, Azure DevOps), AWS (S3, EC2)
-- **Tools:** Docker, Git, CI/CD pipelines
-
-**Featured Project:** _Your Cloud/DevOps Project Link_ – Short description.
+My passion for technology is deeply rooted in a desire to contribute to a healthier planet, ensuring a vibrant future for everyone. This space highlights my commitment to applying technology for environmental solutions and justice.
 
 ---
 
-## My Achievements: Milestones Unlocked! 🏆
+## My Achievements: Milestones Unlocked! 🏆🌟
 
-Every line of code, every project, every contribution builds towards new achievements. Watch this space for my latest unlocked milestones!
+Every line of code, every project, every contribution builds towards new achievements. Watch this space for my latest unlocked milestones, celebrating every step of my unique journey!
 
 - **New Adventurer:** Profile README created!
 - **First Commit:** Made my mark on the codebase!
@@ -98,50 +80,32 @@ Every line of code, every project, every contribution builds towards new achieve
 
 ---
 
-## Environmental Projects: Cultivating Change 💚
+## Mini-Challenge: Test Your Logic! 🧠🧩
 
-My passion for technology is deeply rooted in a desire to contribute to a healthier planet. Here are some projects where I'm actively working towards environmental solutions:
+Ready for a quick mental exercise? Launch the Eco-Puzzle Challenge!
 
-### Project: Eco-Footprint Tracker
-
-- **Goal:** Help individuals understand and reduce their personal carbon emissions through an intuitive web interface.
-- **Impact:** Aims to raise awareness and encourage sustainable lifestyle choices.
-
-### Project: Smart Garden IoT System
-
-- **Goal:** Developing an IoT solution to optimize water usage for home gardening, preventing waste.
-- **Impact:** Promotes water conservation and efficient resource management.
-
-### Open Source Contribution: Green Software Foundation
-
-- **Goal:** Contributing to tools that help developers build more energy-efficient software applications.
-- **Impact:** Directly reduces the carbon footprint of digital services.
+Solve it to reveal a secret message, and perhaps a little more about building a better world for all!
 
 ---
 
-## Mini-Challenge: Test Your Logic! 🧠
+## My Current Expedition 🎮🎧✨
 
-Ready for a quick mental exercise? [Launch the Eco-Puzzle Challenge!](YOUR_GITHUB_USERNAME.github.io/your-puzzle-repo-name/)
+What I'm coding, listening to, or playing right now – always with a touch of magic and authenticity.
+![Alt text](https://spotify-recently-played-readme.vercel.app/api?user=cp0izq575xpa95eni3wahr496)
 
-_Solve it to reveal a secret message!_
-
-> _(Remember to replace the URL above with the actual link to your puzzle!)_
-
----
-
-## My Current Expedition 🎮🎧
-
-What I'm coding, listening to, or playing right now:
+[![Discord Presence](https://lanyard.cnrad.dev/api/133251002047528960?theme=dark&bg=212121&borderRadius=30px&showDisplayName=true)](https://discord.com/users/133251002047528960)
 
 ---
 
-## My GitHub Stats 📊
+## My GitHub Stats 📊💖
 
-<!-- Optionally embed your GitHub stats here -->
-
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=Seristic&show_icons=true&theme=radical&hide_rank=true" alt="Alyssa's GitHub Stats" style="border-radius: 10px; margin: 5px;" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Seristic&layout=compact&theme=radical" alt="Alyssa's Top Languages" style="border-radius: 10px; margin: 5px;" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Seristic&theme=radical&hide_border=true" alt="Alyssa's GitHub Streak" style="border-radius: 10px; margin: 5px;" />
+</p>
 ---
 
-## Connect with Me! 🤝
+## Connect with Me! 🤝🌈
 
-Let's connect and build a greener, more innovative future together.  
-Feel free to reach out!
+Let's connect and build a greener, more innovative, and truly inclusive future together. As a transgender woman, I'm especially keen to collaborate on projects that uplift and empower marginalized communities. Feel free to reach out and let's create something beautiful!
