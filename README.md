@@ -112,7 +112,7 @@ Solve it to reveal a secret message, and perhaps a little more about building a 
 What I'm coding, listening to, or playing right now – always with a touch of magic and authenticity.
 ![Alt text](https://spotify-recently-played-readme.vercel.app/api?user=cp0izq575xpa95eni3wahr496)
 
-[![Discord Presence](https://lanyard.cnrad.dev/api/133251002047528960?borderRadius=10px&showDisplayName=true)](https://discord.com/users/133251002047528960)
+[![Discord Presence](https://lanyard.cnrad.dev/api/133251002047528960?borderRadius=30px&showDisplayName=true&bg=212121&idleMessage=I%20am%20not%20currently%20doing%20anything.&theme=dark)](https://discord.com/users/133251002047528960)
 
 ---
 
