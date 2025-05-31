@@ -114,6 +114,10 @@ What I'm coding, listening to, or playing right now – always with a touch of m
 
 [![Discord Presence](https://lanyard.cnrad.dev/api/133251002047528960?borderRadius=30px&showDisplayName=true&bg=212121&idleMessage=I%20am%20not%20currently%20doing%20anything.&theme=dark)](https://discord.com/users/133251002047528960)
 
+<p align="center">
+  <img src="https://wakatime.com/badge/user/YOUR_WAKATIME_USERNAME/code-stats.svg" alt="WakaTime stats" style="border-radius: 10px; margin: 5px;" />
+</p>
+
 ---
 
 ## My GitHub Stats 📊💖
