@@ -69,14 +69,21 @@ My passion for technology is deeply rooted in a desire to contribute to a health
 
 Every line of code, every project, every contribution builds towards new achievements. Watch this space for my latest unlocked milestones, celebrating every step of my unique journey!
 
-- **New Adventurer:** Profile README created!
-- **First Commit:** Made my mark on the codebase!
-- **Rising Star:** Achieved 100+ total commits!
-- **Project Initiator:** Created 5+ repositories!
-- **Eco-Warrior Initiate:** Started my first environmental project!
-- **Knowledge Seeker:** Explored 3+ programming languages!
-- **Open Source Contributor:** Contributed to an external open-source project!
-- **Thousand Commits Explorer:** Surpassed 1,000 commits!
+New Adventurer: Profile README created!
+
+First Commit: Made my mark on the codebase!
+
+Rising Star: Achieved 100+ total commits!
+
+Project Initiator: Created 5+ repositories!
+
+Eco-Warrior Initiate: Started my first environmental project!
+
+Knowledge Seeker: Explored 3+ programming languages!
+
+Open Source Contributor: Contributed to an external open-source project!
+
+Thousand Commits Explorer: Surpassed 1,000 commits!
 
 ---
 
