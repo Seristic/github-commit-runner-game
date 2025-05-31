@@ -8,17 +8,17 @@ Embark on a vibrant journey through my code and contributions. I believe in craf
 
 To uncover my story, select a path below. Each choice will lead you to different insights into my skills and passions, all woven with a thread of pride and purpose:
 
-- **[Explore My Skill Tree](#my-skill-tree-growth--mastery-🌳✨):** Discover the technologies I've cultivated and continue to grow.
-- **[Uncover My Achievements](#my-achievements-milestones-unlocked-🏆🌟):** See the milestones I've reached on my unique coding journey.
-- **[Dive into My Environmental Projects](#eco-tech--sustainability-initiatives-🌱🌍):** Learn about my dedication to green tech and a sustainable future for all.
-- **[Take a Mini-Challenge](#mini-challenge-test-your-logic-🧠🧩):** Test your wits with a quick puzzle, perhaps with a dash of advocacy!
-- **[See What I'm Up To Right Now](#my-current-expedition-🎮🎧✨):** View my live coding/listening status.
+- **[Explore My Skill Tree](#my-skill-tree-growth--mastery-):** Discover the technologies I've mastered and am currently learning.
+- **[Uncover My Achievements](#my-achievements-milestones-unlocked-):** See the milestones I've reached on my coding journey.
+- **[Dive into My Environmental Projects](#environmental-projects-cultivating-change-):** Learn about my dedication to green tech and sustainability.
+- **[Take a Mini-Challenge](#mini-challenge-test-your-logic-):** Test your wits with a quick coding puzzle!
+- **[See What I'm Up To Right Now](#my-current-expedition-):** View my live coding/listening status.
 
 ---
 
-## My Skill Tree: Growth & Mastery 🌳✨
+## My Skill Tree: Growth & Mastery 🌳
 
-My skills are ever-growing, like a flourishing forest of possibilities. Each node represents a technology I've cultivated, reflecting my diverse interests and capabilities. A vibrant color means I'm actively using or mastering it!
+My skills are ever-growing, like a flourishing forest. Each node represents a technology I've cultivated. A vibrant color means I'm actively using or mastering it!
 
 > _Note: The following is a conceptual skill tree. For a visual version, see my portfolio site!_
 
@@ -50,24 +50,36 @@ EmpowerUI-lib is an open-source JavaScript library focused on making web interfa
 
 ### Data Science & AI Explorations 🧠💡
 
-Leveraging data to uncover insights and build intelligent systems, with an eye towards equitable and ethical applications:
+Leveraging data to uncover insights and build intelligent systems:
 
-- Planned projects will be added here later.
-
-#### Featured Project: Your Data/AI Project
-
-- **Description:** _Short description._
-- **Link:** _[Link to project, if public]_
-
-### Eco-Tech & Sustainability Initiatives 🌱🌍
-
-My passion for technology is deeply rooted in a desire to contribute to a healthier planet, ensuring a vibrant future for everyone. This space highlights my commitment to applying technology for environmental solutions and justice.
+- **Languages & Tools:** Python (Pandas, NumPy, Scikit-learn), TensorFlow/PyTorch
 
 ---
 
-## My Achievements: Milestones Unlocked! 🏆🌟
+## Eco-Tech & Sustainability Initiatives 🌱
 
-Every line of code, every project, every contribution builds towards new achievements. Watch this space for my latest unlocked milestones, celebrating every step of my unique journey!
+Applying technology to solve environmental challenges:
+
+- **Focus Areas:** IoT for environmental monitoring, Green Software Principles, GIS mapping
+
+**Featured Project:** _Your Environmental Project Link_ – Short description.
+
+---
+
+## Cloud & DevOps Adventures ☁️
+
+Deploying and scaling applications efficiently:
+
+- **Cloud Platforms:** Microsoft Azure (Azure Functions, Azure DevOps), AWS (S3, EC2)
+- **Tools:** Docker, Git, CI/CD pipelines
+
+**Featured Project:** _Your Cloud/DevOps Project Link_ – Short description.
+
+---
+
+## My Achievements: Milestones Unlocked! 🏆
+
+Every line of code, every project, every contribution builds towards new achievements. Watch this space for my latest unlocked milestones!
 
 New Adventurer: Profile README created!
 
