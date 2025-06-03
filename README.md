@@ -56,27 +56,6 @@ Leveraging data to uncover insights and build intelligent systems:
 
 ---
 
-## Eco-Tech & Sustainability Initiatives 🌱
-
-Applying technology to solve environmental challenges:
-
-- **Focus Areas:** IoT for environmental monitoring, Green Software Principles, GIS mapping
-
-**Featured Project:** _Your Environmental Project Link_ – Short description.
-
----
-
-## Cloud & DevOps Adventures ☁️
-
-Deploying and scaling applications efficiently:
-
-- **Cloud Platforms:** Microsoft Azure (Azure Functions, Azure DevOps), AWS (S3, EC2)
-- **Tools:** Docker, Git, CI/CD pipelines
-
-**Featured Project:** _Your Cloud/DevOps Project Link_ – Short description.
-
----
-
 ## My Achievements: Milestones Unlocked! 🏆
 
 Every line of code, every project, every contribution builds towards new achievements. Watch this space for my latest unlocked milestones!
