@@ -56,27 +56,6 @@ Leveraging data to uncover insights and build intelligent systems:
 
 ---
 
-## Eco-Tech & Sustainability Initiatives 🌱
-
-Applying technology to solve environmental challenges:
-
-- **Focus Areas:** IoT for environmental monitoring, Green Software Principles, GIS mapping
-
-**Featured Project:** _Your Environmental Project Link_ – Short description.
-
----
-
-## Cloud & DevOps Adventures ☁️
-
-Deploying and scaling applications efficiently:
-
-- **Cloud Platforms:** Microsoft Azure (Azure Functions, Azure DevOps), AWS (S3, EC2)
-- **Tools:** Docker, Git, CI/CD pipelines
-
-**Featured Project:** _Your Cloud/DevOps Project Link_ – Short description.
-
----
-
 ## My Achievements: Milestones Unlocked! 🏆
 
 Every line of code, every project, every contribution builds towards new achievements. Watch this space for my latest unlocked milestones!
@@ -97,6 +76,8 @@ Open Source Contributor: Contributed to an external open-source project!
 
 Thousand Commits Explorer: Surpassed 1,000 commits!
 
+**VS Code Extension Creator:** Developed and deployed a personal VS Code extension! (This is a new achievement you can add!)
+
 ---
 
 ## Mini-Challenge: Test Your Logic! 🧠🧩
@@ -107,9 +88,51 @@ Solve it to reveal a secret message, and perhaps a little more about building a 
 
 ---
 
+## 🌐 Ethical Hacking Simulator: Expose the Truth! 🚨
+
+Embark on a critical mission within a simulated terminal environment. This Python-based hacking puzzle challenges you to uncover confidential documents and expose the clandestine strategies of a fictional political party, Reform UK. Your goal: to reveal their hidden agendas against trans people, their financial backing, international connections, and the cynical dismissal of global crises like the war in Ukraine.
+
+**This simulator is designed to:**
+
+- **Highlight the importance of trans rights:** By exposing harmful policies and narratives.
+- **Champion democratic values:** By illustrating how disinformation and political manipulation can operate.
+- **Foster global solidarity:** By underscoring the interconnectedness of human rights and geopolitical issues.
+- **Inspire action:** Towards a more inclusive, just, and sustainable world for everyone.
+
+### 🎮 How to Play
+
+1.  **Navigate to the Simulator:**
+
+    ```bash
+    cd simulators/
+    ```
+
+2.  **Run the Game:**
+
+    ```bash
+    python hacking_puzzle.py
+    ```
+
+3.  **Follow the Prompts:** The game will guide you with instructions. Remember to use commands like `ls` (list directory), `cd` (change directory), `cat` (view file content), `access <target>` (to hack into systems), and `find <keyword>` (to search for files).
+
+### 📖 What You'll Uncover
+
+- **"Project Ostrich":** Their cynical strategy to avoid public confrontation while quietly implementing discriminatory policies.
+- **"Alpha-Omega Initiative":** A devastating plan to dismantle gender-affirming healthcare access, disguised as "NHS reform."
+- **"The Disinformation Nexus":** How their anti-trans propaganda is funded by shadowy entities and strategically disseminated.
+- **"The Global Web":** Their chilling connections to international anti-LGBTQ+ networks and illiberal movements, often aligning with anti-democratic sentiments and dismissive of global humanitarian needs.
+- **"The Human Cost":** Ultimately, you'll expose the party's dehumanizing views and cynical exploitation of individuals, triggering a massive simulated public leak.
+
+### ⚠️ Disclaimer
+
+This is a **fictional simulator** created for educational and advocacy purposes. It does not represent actual events, individuals, or organizations. Any resemblance to real entities is purely coincidental and serves to highlight the _types_ of issues and tactics encountered in real-world political discourse. The "Reform UK" in this simulator is a fictional entity, not to be confused with any existing political party.
+
+---
+
 ## My Current Expedition 🎮🎧✨
 
 What I'm coding, listening to, or playing right now – always with a touch of magic and authenticity.
+
 ![Alt text](https://spotify-recently-played-readme.vercel.app/api?user=cp0izq575xpa95eni3wahr496)
 
 [![Discord Presence](https://lanyard.cnrad.dev/api/133251002047528960?borderRadius=30px&showDisplayName=true&bg=212121&idleMessage=I%20am%20not%20currently%20doing%20anything.&theme=dark)](https://discord.com/users/133251002047528960)
@@ -121,9 +144,9 @@ What I'm coding, listening to, or playing right now – always with a touch of m
 ## My GitHub Stats 📊💖
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Seristic&show_icons=true&theme=radical&hide_rank=true" alt="Alyssa's GitHub Stats" style="border-radius: 10px; margin: 5px;" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Seristic&layout=compact&theme=radical" alt="Alyssa's Top Languages" style="border-radius: 10px; margin: 5px;" />
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Seristic&theme=radical&hide_border=true" alt="Alyssa's GitHub Streak" style="border-radius: 10px; margin: 5px;" />
+  <img src="https://github-readme-stats.vercel.app/api?username=Seristic&show_icons=true&theme=radical&hide_rank=true" alt="Alyssa's GitHub Stats" style="border-radius: 10px; margin: 5px;" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Seristic&layout=compact&theme=radical" alt="Alyssa's Top Languages" style="border-radius: 10px; margin: 5px;" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Seristic&theme=radical&hide_border=true" alt="Alyssa's GitHub Streak" style="border-radius: 10px; margin: 5px;" />
 </p>
 ---
 
