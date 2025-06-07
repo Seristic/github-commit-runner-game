@@ -133,7 +133,15 @@ This is a **fictional simulator** created for educational and advocacy purposes.
 
 What I'm coding, listening to, or playing right now – always with a touch of magic and authenticity.
 
-[![Current Activity Status](https://img.shields.io/badge/See%20What%20I'm%20Up%20To-Click%20Here!-ff69b4?style=for-the-badge&logo=github)](https://seristic.github.io/test/)
+<div align="center">
+  <div style="display: flex; align-items: flex-start; gap: 20px; padding: 20px; flex-wrap: wrap; justify-content: center;">
+    <img src="https://spotify-recently-played-readme.vercel.app/api?user=cp0izq575xpa95eni3wahr496" alt="Spotify Recently Played" style="border-radius: 8px; margin: 5px;" />
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <img src="https://lanyard.cnrad.dev/api/133251002047528960?borderRadius=30px&showDisplayName=true&bg=212121&idleMessage=I%20am%20not%20currently%20doing%20anything.&theme=dark" alt="Discord Status" style="border-radius: 8px; margin: 5px;" />
+      <img src="https://wakatime.com/badge/user/e5908274-55eb-45c5-93e4-f3277c04d440/project/e4fce1e1-e920-40db-9f79-b7e0e5140163.svg" alt="Wakatime Stats" style="margin: 5px;" />
+    </div>
+  </div>
+</div>
 
 ---
 
