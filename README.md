@@ -141,10 +141,10 @@ What I'm coding, listening to, or playing right now – always with a touch of m
     <img src="https://lanyard.cnrad.dev/api/133251002047528960?borderRadius=30px&showDisplayName=true&bg=212121&idleMessage=I%20am%20not%20currently%20doing%20anything.&theme=dark" width="40%" alt="Discord Status">
   </a>
   <br><br><br>  <a href="https://wakatime.com/">
-    <img src="https://wakatime.com/badge/user/e5908274-55eb-45c5-93e4-f3277c04d440/project/e4fce1e1-e920-40db-9f79-b7e0e5140163.svg" alt="Wakatime Stats">
-  </a>
-  <br><br><br><br><br><br>
+    <img src="https://wakatime.com/badge/user/e5908274-55eb-45c5-93e4-f3277c04d440/project/e4fce1e1-e920-40db-9f79-b7e0e5140163.svg" alt="Wakatime Stats">  </a>
 </div>
+
+<div style="clear: both; margin-bottom: 20px;"></div>
 
 ---
 
@@ -152,9 +152,9 @@ What I'm coding, listening to, or playing right now – always with a touch of m
 
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=Seristic&show_icons=true&theme=radical&hide_rank=true" alt="Alyssa's GitHub Stats" style="border-radius: 10px; margin: 5px;" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Seristic&layout=compact&theme=radical" alt="Alyssa's Top Languages" style="border-radius: 10px; margin: 5px;" />
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Seristic&theme=radical&hide_border=true" alt="Alyssa's GitHub Streak" style="border-radius: 10px; margin: 5px;" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Seristic&layout=compact&theme=radical" alt="Alyssa's Top Languages" style="border-radius: 10px; margin: 5px;" />  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Seristic&theme=radical&hide_border=true" alt="Alyssa's GitHub Streak" style="border-radius: 10px; margin: 5px;" />
 </p>
+
 ---
 
 ## Connect with Me! 🤝🌈
