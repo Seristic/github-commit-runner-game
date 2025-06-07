@@ -133,7 +133,7 @@ This is a **fictional simulator** created for educational and advocacy purposes.
 
 What I'm coding, listening to, or playing right now – always with a touch of magic and authenticity.
 
-<iframe href="https://seristic.github.io/test/"></iframe>
+<iframe src="https://seristic.github.io/test/"></iframe>
 
 ---
 

@@ -144,46 +144,61 @@ def change_directory(path):
         print(f"Error: Directory '{path}' not found.")
 
 def view_file(filename):
-    cur_dir = game_state['current_directory']
-    if cur_dir not in game_state['files']:
-        print(f"Error: Current directory '{cur_dir}' not found.")
-        return
-    contents = game_state['files'][cur_dir]
-    if filename not in contents:
-        print(f"Error: File '{filename}' not found in current directory.")
-        return
-    file_data = contents[filename]
-    if isinstance(file_data, dict):
-        print(f"Error: '{filename}' is a directory, not a file.")
-        return
-    # Special logic for files that need to be 'unlocked'
-    if filename == "project_ostrich_memo.txt" and "project_ostrich_memo.txt" not in game_state['unlocked_files']:
-        print(f"File '{filename}' is encrypted. You need a key or direct access to view it. (Hint: The 'access' command is for network entry.)")
-        return
-    # Display content if unlocked or a normal file
-    if filename in file_contents:
-        print("\n--- FILE CONTENT START ---")
-        print(file_contents[filename])
-        print("--- FILE CONTENT END ---\n")
-        if filename not in game_state['unlocked_files']:
-            game_state['unlocked_files'].append(filename)
-            trigger_next_stage()
+    """Views the content of a specified file."""
+    file_path = os.path.normpath(os.path.join(game_state['current_directory'], filename))
+
+    # Check if the file exists in the current directory's representation
+    if filename in game_state['files'].get(game_state['current_directory'], {}):
+        file_data = game_state['files'][game_state['current_directory']][filename]
+        if isinstance(file_data, dict):
+            print(f"Error: '{filename}' is a directory, not a file.")
+            return
+
+        # --- REVISED LOGIC FOR PROJECT OSTRICH MEMO ---
+        if filename == "project_ostrich_memo.txt":
+            # This file is accessible only after access_level 1 is achieved
+            if game_state['access_level'] < 1:
+                print(f"File '{filename}' is inaccessible from your current network privileges. You need to gain 'access' to the main Reform server first.")
+                return
+            # If access_level is 1 or higher, proceed to display content
+        # --- END REVISED LOGIC ---
+
+        # Display content if conditions are met or it's a normal file
+        if file_data in file_contents: # Check if it's a known content key
+            print("\n--- FILE CONTENT START ---")
+            print(file_contents[file_data])
+            print("--- FILE CONTENT END ---\n")
+            if filename not in game_state['unlocked_files']: # Mark as unlocked upon viewing
+                game_state['unlocked_files'].append(filename)
+                trigger_next_stage() # Check if viewing this file triggers the next puzzle
+        else:
+            print(f"Error: Could not retrieve content for '{filename}'. File might be empty or corrupted.")
     else:
-        print(f"Error: Could not retrieve content for '{filename}'. File might be empty or corrupted.")
+        print(f"Error: File '{filename}' not found in current directory.")
 
 def simulated_find(keyword):
+    """Simulates a 'find' command to locate files based on keywords."""
     if game_state['access_level'] < 2:
         print("You need higher access to use the 'find' command effectively.")
         print("Hint: You need to read 'project_ostrich_memo.txt' first to unlock this.")
         return
+
     print(f"Searching for '{keyword}' across accessible server directories...")
     time.sleep(2)
     found_files = []
+
+    # Iterate through all known directories and their contents
     for path, contents in game_state['files'].items():
-        if isinstance(contents, dict):
-            for item in contents:
-                if keyword.lower() in item.lower():
-                    found_files.append(os.path.normpath(os.path.join(path, item)).replace("\\", "/"))
+        if isinstance(contents, dict): # Ensure it's a directory
+            for item, item_content in contents.items():
+                # Search in filename
+                if isinstance(item_content, str) and keyword.lower() in item.lower():
+                    found_files.append(os.path.normpath(os.path.join(path, item)))
+                # NOW ALSO SEARCH IN FILE CONTENT if it's a known content key
+                elif isinstance(item_content, str) and item_content in file_contents and \
+                     keyword.lower() in file_contents[item_content].lower():
+                    found_files.append(os.path.normpath(os.path.join(path, item)))
+
     if found_files:
         print(f"Found files matching '{keyword}':")
         for f_path in found_files:
@@ -228,47 +243,109 @@ def attempt_initial_access():
         print("You already have access to the Reform server.")
 
 def trigger_next_stage():
+    # Stage 0 to Stage 1: project_ostrich_memo.txt viewed
     if "project_ostrich_memo.txt" in game_state['unlocked_files'] and game_state['access_level'] == 1:
-        print("\n--- NEW LEAD UNLOCKED ---")
-        print("The 'Project Ostrich' memo mentions 'Alpha-Omega Initiative' and 'Dr. Anya Sharma'.")
-        print("This suggests a deeper dive into their health policy plans.")
-        print("You need to find a way to search for files related to 'Alpha-Omega' or 'Sharma'.")
-        print("Hint: A new 'find' command has been activated for your current access level.")
-        game_state['access_level'] = 2
-        health_policy_path = "/servers/reform_server_1/health_policy_records/"
-        game_state['files'][health_policy_path] = {
-            "email_alpha_omega_initiative.txt": "email_alpha_omega_initiative.txt",
-            "alpha_omega_healthcare_draft.pdf": "alpha_omega_healthcare_draft.pdf",
-            "ukraine_medical_aid_proposal_draft.txt": "ukraine_medical_aid_proposal_draft.txt"
-        }
-        game_state['files']["/servers/reform_server_1/"]["health_policy_records/"] = game_state['files'][health_policy_path]
-        print("Use 'find <keyword>' to locate these files. Try 'find Alpha-Omega' or 'find Sharma'.")
-    elif "email_alpha_omega_initiative.txt" in game_state['unlocked_files'] and "alpha_omega_healthcare_draft.pdf" in game_state['unlocked_files'] and game_state['access_level'] == 2:
-        print("\n--- DEEPER INSIGHTS UNLOCKED ---")
-        print("The Alpha-Omega documents expose Reform's devastating healthcare plans.")
-        print("The emails mention 'discreet liaisons with independent research groups' and 'leveraging public concerns'.")
-        print("Your next objective: Trace the money and public relations strategy.")
-        print("Hint: Look for keywords like 'Heritage', 'Values', or 'PR' using the 'find' command.")
-        game_state['access_level'] = 3
-        funding_pr_path = "/servers/reform_server_1/strategic_partnerships_data/"
-        game_state['files'][funding_pr_path] = {
-            "uk_heritage_values_initiative_report.txt": "uk_heritage_values_initiative_report.txt",
-            "media_strategy_briefing.pdf": "media_strategy_briefing.pdf",
-            "donor_log_q1_2025.xlsx": "donor_log_q1_2025.xlsx"
-        }
-        game_state['files']["/servers/reform_server_1/"]["strategic_partnerships_data/"] = game_state['files'][funding_pr_path]
-        file_contents["uk_heritage_values_initiative_report.txt"] = """[CONFIDENTIAL REPORT - UK HERITAGE & VALUES INITIATIVE]
+        # Check if stage already progressed to avoid re-triggering messages/adding files
+        if game_state.get('current_stage', 0) < 1: # Check if current_stage is less than 1
+            game_state['current_stage'] = 1
+            game_state['access_level'] = 2 # Access to health policy files
+            health_policy_path = "/servers/reform_server_1/health_policy_records/"
+            game_state['files'][health_policy_path] = {
+                "email_alpha_omega_initiative.txt": "email_alpha_omega_initiative.txt",
+                "alpha_omega_healthcare_draft.pdf": "alpha_omega_healthcare_draft.pdf",
+                "ukraine_medical_aid_proposal_draft.txt": "ukraine_medical_aid_proposal_draft.txt"
+            }
+            game_state['files']["/servers/reform_server_1/"]["health_policy_records/"] = game_state['files'][health_policy_path]
+            print("\n--- NEW LEAD UNLOCKED ---")
+            print("The 'Project Ostrich' memo mentions 'Alpha-Omega Initiative' and 'Dr. Anya Sharma'.")
+            print("This suggests a deeper dive into their health policy plans.")
+            print("You need to find a way to search for files related to 'Alpha-Omega' or 'Sharma'.")
+            print("Hint: A new 'find' command has been activated for your current access level.")
+            print("Use 'find <keyword>' to locate these files. Try 'find Alpha-Omega' or 'find Sharma'.")
+
+    # Stage 1 to Stage 2: ALL three health policy files viewed
+    # Added 'ukraine_medical_aid_proposal_draft.txt' to the check
+    elif game_state.get('current_stage', 0) == 1 and all(f in game_state['unlocked_files'] for f in ["email_alpha_omega_initiative.txt", "alpha_omega_healthcare_draft.pdf", "ukraine_medical_aid_proposal_draft.txt"]):
+        # Check if stage already progressed
+        if game_state.get('current_stage', 0) < 2:
+            game_state['current_stage'] = 2
+            game_state['access_level'] = 3 # Access to strategic partnerships and donor info
+            funding_pr_path = "/servers/reform_server_1/strategic_partnerships_data/"
+            game_state['files'][funding_pr_path] = {
+                "uk_heritage_values_initiative_report.txt": "uk_heritage_values_initiative_report.txt",
+                "media_strategy_briefing.pdf": "media_strategy_briefing.pdf",
+                "donor_log_q1_2025.xlsx": "donor_log_q1_2025.xlsx"
+            }
+            game_state['files']["/servers/reform_server_1/"]["strategic_partnerships_data/"] = game_state['files'][funding_pr_path]
+            file_contents["uk_heritage_values_initiative_report.txt"] = """[CONFIDENTIAL REPORT - UK HERITAGE & VALUES INITIATIVE]
 ...
 [END OF REPORT]
 """
-        file_contents["media_strategy_briefing.pdf"] = """[CONFIDENTIAL - REFORM UK - PUBLIC RELATIONS STRATEGY BRIEFING]
+            file_contents["media_strategy_briefing.pdf"] = """[CONFIDENTIAL - REFORM UK - PUBLIC RELATIONS STRATEGY BRIEFING]
 ...
 [END OF BRIEFING]
 """
-        file_contents["donor_log_q1_2025.xlsx"] = """[CONFIDENTIAL - REFORM UK - DONOR LOG Q1 2025]
+            file_contents["donor_log_q1_2025.xlsx"] = """[CONFIDENTIAL - REFORM UK - DONOR LOG Q1 2025]
 ...
 NOTE: No significant donations or allocations for direct international humanitarian aid (e.g., Ukraine relief) logged in this period, contrasting sharply with 'values' rhetoric.
 """
+            print("\n--- DEEPER INSIGHTS UNLOCKED ---")
+            print("You've uncovered details on the 'Alpha-Omega Initiative' and their neglect of Ukraine.")
+            print("Now, pivot to their funding. The donor log mentions 'The Liberty & Progress Fund' and 'Global Liberty Fund'.")
+            print("Use the 'find' command to locate files related to these donors or 'international' connections.")
+            print("Try 'find Liberty' or 'find Global' or 'find international'.")
+
+    # Stage 2 to Stage 3: donor_log_q1_2025.xlsx viewed (THIS WAS MISSING!)
+    elif game_state.get('current_stage', 0) == 2 and "donor_log_q1_2025.xlsx" in game_state['unlocked_files']:
+        # Check if stage already progressed
+        if game_state.get('current_stage', 0) < 3:
+            game_state['current_stage'] = 3
+            game_state['access_level'] = 4 # Access to global network intelligence
+            # Add new directory and files for stage 3
+            game_state['files']["/servers/reform_server_1/global_network_intelligence/"] = {
+                "global_liberty_fund_memo.txt": "global_liberty_fund_memo.txt",
+                "european_values_conference_summary.pdf": "european_values_conference_summary.pdf",
+                "cross_border_propaganda_channels.txt": "cross_border_propaganda_channels.txt",
+            }
+            game_state['files']["/servers/reform_server_1/"]["global_network_intelligence/"] = game_state['files']["/servers/reform_server_1/global_network_intelligence/"]
+
+            file_contents["global_liberty_fund_memo.txt"] = """[CONFIDENTIAL MEMORANDUM - GLOBAL LIBERTY FUND]
+...
+[END OF MEMO]
+"""
+            file_contents["european_values_conference_summary.pdf"] = """[EUROPEAN VALUES CONFERENCE - SUMMARY REPORT]
+...
+[END OF REPORT]
+"""
+            file_contents["cross_border_propaganda_channels.txt"] = """[INTERNAL STRATEGY - CROSS-BORDER PROPAGANDA CHANNELS]
+...
+[END OF STRATEGY]
+"""
+
+            print("\n--- NEW LEAD UNLOCKED ---")
+            print("You've traced the financial backing and their shocking disregard for global crises.")
+            print("Your next target is their 'Global Network Intelligence'.")
+            print("Search for details on 'Global Liberty Fund' or 'European Values Conference' to expose their international web.")
+            print("Hint: You might need to change directories to find these new files.")
+
+    # Final Stage: ALL stage 3 files viewed (if you had this, make sure it's here too)
+    elif game_state.get('current_stage', 0) == 3 and all(f in game_state['unlocked_files'] for f in ["global_liberty_fund_memo.txt", "european_values_conference_summary.pdf", "cross_border_propaganda_channels.txt"]):
+        if game_state.get('current_stage', 0) < 4:
+            game_state['current_stage'] = 4 # Final stage
+            print("\n--- MISSION CRITICAL: FINAL TARGET IDENTIFIED ---")
+            print("You have uncovered the full extent of Reform UK's deceptive operations.")
+            print("The final piece of the puzzle is to expose their core leadership's involvement.")
+            print("Access their core server and find the 'MASTER_PLAN.txt' file.")
+            # Add any final access or directory here if needed
+            game_state['access_level'] = 5
+            # For example, if a new server or path is needed:
+            # game_state['files']["/servers/reform_core_server/"] = {"MASTER_PLAN.txt": "MASTER_PLAN.txt"}
+            # game_state['files']["/servers/"]["reform_core_server/"] = game_state['files']["/servers/reform_core_server/"]
+            file_contents["MASTER_PLAN.txt"] = """[ULTIMATE CONFIDENTIAL - REFORM UK - MASTER PLAN]
+...
+[END OF MASTER PLAN]
+"""
+
 
 def game_loop():
     print("\n[ INITIALIZING ETHICAL HACKING SIMULATOR ]")
@@ -289,6 +366,8 @@ def game_loop():
         if not command:
             continue
         running = handle_command(command)
+        # ADD THE DEBUG LINE HERE
+        print(f"DEBUG: Current Stage = {game_state.get('current_stage', 'Key Not Found')}")
         time.sleep(0.2)
 
 if __name__ == "__main__":
