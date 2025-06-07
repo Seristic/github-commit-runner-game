@@ -133,7 +133,7 @@ This is a **fictional simulator** created for educational and advocacy purposes.
 
 What I'm coding, listening to, or playing right now – always with a touch of magic and authenticity.
 
-<iframe src="https://seristic.github.io/test/"></iframe>
+[![Current Activity Status](https://img.shields.io/badge/See%20What%20I'm%20Up%20To-Click%20Here!-ff69b4?style=for-the-badge&logo=github)](https://seristic.github.io/test/)
 
 ---
 
