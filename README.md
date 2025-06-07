@@ -133,11 +133,7 @@ This is a **fictional simulator** created for educational and advocacy purposes.
 
 What I'm coding, listening to, or playing right now – always with a touch of magic and authenticity.
 
-![Alt text](https://spotify-recently-played-readme.vercel.app/api?user=cp0izq575xpa95eni3wahr496)
-
-[![Discord Presence](https://lanyard.cnrad.dev/api/133251002047528960?borderRadius=30px&showDisplayName=true&bg=212121&idleMessage=I%20am%20not%20currently%20doing%20anything.&theme=dark)](https://discord.com/users/133251002047528960)
-
-![Wakatime Stats](https://wakatime.com/badge/user/e5908274-55eb-45c5-93e4-f3277c04d440/project/e4fce1e1-e920-40db-9f79-b7e0e5140163.svg)
+<iframe href="https://seristic.github.io/test/"></iframe>
 
 ---
 
